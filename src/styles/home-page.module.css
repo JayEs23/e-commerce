@@ -1,0 +1,1025 @@
+.image {
+    border-radius: var(--br-3xs);
+    background: linear-gradient(259.87deg, #6e0beb, #cd3434);
+  }
+  .image,
+  .imageWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1091px;
+    height: 626px;
+  }
+  .oval,
+  .oval1 {
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--main-white);
+    mix-blend-mode: normal;
+  }
+  .oval {
+    width: 10px;
+    height: 10px;
+    opacity: 0.2;
+  }
+  .oval1 {
+    width: 16px;
+    height: 16px;
+  }
+  .ovalParent {
+    position: absolute;
+    top: 582px;
+    left: calc(50% - 57.26px);
+    height: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .image3Icon {
+    position: absolute;
+    top: 137px;
+    right: 0;
+    width: 679.52px;
+    height: 437.86px;
+    object-fit: cover;
+  }
+  .groupChild {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-gray-100);
+    width: 25px;
+    height: 60px;
+    transform: rotate(180deg);
+    transform-origin: 0 0;
+  }
+  .groupIcon {
+    position: absolute;
+    height: 21.67%;
+    width: 28.7%;
+    top: -60.83%;
+    right: 135.74%;
+    bottom: 139.17%;
+    left: -64.44%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .groupItem,
+  .rectangleParent {
+    position: absolute;
+    width: 25px;
+    height: 60px;
+  }
+  .rectangleParent {
+    top: 393px;
+    left: 25px;
+    transform: rotate(180deg);
+    transform-origin: 0 0;
+  }
+  .groupItem {
+    top: 0;
+    left: 0;
+    background-color: var(--color-gray-100);
+  }
+  .groupIcon1 {
+    position: absolute;
+    height: 21.67%;
+    width: 28.7%;
+    top: 39.17%;
+    right: 35.56%;
+    bottom: 39.17%;
+    left: 35.74%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .rectangleGroup {
+    position: absolute;
+    top: 333px;
+    left: 1065px;
+    width: 25px;
+    height: 60px;
+  }
+  .enjoy50Discount,
+  .flashSaleOn {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+  }
+  .flashSaleOn {
+    top: 0;
+    line-height: 74px;
+    width: 397px;
+  }
+  .enjoy50Discount {
+    top: 156px;
+    font-size: var(--font-size-5xl);
+    font-weight: 500;
+    color: #dadada;
+    width: 454px;
+  }
+  .flashSaleOnAllItemsParent {
+    width: 454px;
+    height: 185px;
+  }
+  .button,
+  .flashSaleOnAllItemsParent,
+  .getBestOffers {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .button {
+    background-color: #ca3e4d;
+    border: 1px solid var(--main-white);
+    box-sizing: border-box;
+    width: 224px;
+    height: 64px;
+  }
+  .getBestOffers {
+    letter-spacing: -0.02em;
+    line-height: 150%;
+    font-weight: 500;
+  }
+  .iconlyboldarrowRight {
+    position: absolute;
+    top: 0;
+    left: 160px;
+    width: 24px;
+    height: 24px;
+  }
+  .buttonParent,
+  .getBestOffersNowParent {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 184px;
+    height: 24px;
+  }
+  .buttonParent {
+    top: 217px;
+    left: 0;
+    width: 224px;
+    height: 64px;
+    text-align: justify;
+    font-size: var(--font-size-base);
+  }
+  .groupContainer {
+    position: absolute;
+    top: 233px;
+    left: 64px;
+    width: 454px;
+    height: 281px;
+  }
+  .groupParent,
+  .homePageInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1130.52px;
+    height: 626px;
+  }
+  .homePageInner {
+    left: 350px;
+    text-align: left;
+    font-size: 64px;
+    color: var(--main-white);
+  }
+  .instanceChild,
+  .instanceItem {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+  .instanceChild {
+    height: 100%;
+    bottom: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+  }
+  .instanceItem {
+    height: 72.62%;
+    bottom: 27.38%;
+    border-radius: var(--br-3xs) var(--br-3xs) 0 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .fentyBeautyLip {
+    position: absolute;
+    width: 92.28%;
+    top: 75%;
+    left: 3.36%;
+    line-height: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  .div,
+  .instanceInner {
+    position: absolute;
+    top: 89.52%;
+  }
+  .div {
+    width: 41.95%;
+    left: 54.7%;
+    font-size: var(--font-size-xl);
+    line-height: 24px;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+  }
+  .instanceInner {
+    height: 5.71%;
+    width: 25.17%;
+    right: 71.48%;
+    bottom: 4.76%;
+    left: 3.36%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .descriptionShouldBe {
+    position: absolute;
+    width: 93.63%;
+    top: 83.1%;
+    left: 3.36%;
+    font-size: var(--font-size-sm);
+    color: var(--color-darkgray);
+    text-align: left;
+    display: inline-block;
+  }
+  .groupDiv,
+  .rectangleContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 298px;
+    height: 420px;
+  }
+  .groupDiv {
+    left: 314px;
+  }
+  .instanceParent,
+  .rectangleParent1,
+  .rectangleParent2 {
+    position: absolute;
+    top: 0;
+    left: 628px;
+    width: 298px;
+    height: 420px;
+  }
+  .instanceParent,
+  .rectangleParent2 {
+    left: 942px;
+  }
+  .instanceParent {
+    top: 768px;
+    left: 100px;
+    width: 1240px;
+    font-size: var(--font-size-lg);
+  }
+  .groupInner {
+    position: absolute;
+    height: 9.52%;
+    width: 3.23%;
+    top: 2.38%;
+    right: 0.81%;
+    bottom: 88.1%;
+    left: 95.97%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .instanceContainer,
+  .instanceGroup,
+  .instanceParent1 {
+    position: absolute;
+    top: 1792px;
+    left: 100px;
+    width: 1240px;
+    height: 420px;
+    font-size: var(--font-size-lg);
+  }
+  .instanceContainer,
+  .instanceParent1 {
+    top: 1228px;
+  }
+  .instanceParent1 {
+    top: 2252px;
+  }
+  .discountedProducts,
+  .sponsoredProduct {
+    position: absolute;
+    top: 704px;
+    left: 100px;
+    font-size: var(--font-size-13xl);
+    line-height: 24px;
+    font-weight: 600;
+  }
+  .sponsoredProduct {
+    top: 1728px;
+  }
+  .instanceParent2,
+  .instanceParent3 {
+    position: absolute;
+    top: 2816px;
+    left: 100px;
+    width: 1240px;
+    height: 420px;
+    font-size: var(--font-size-lg);
+  }
+  .instanceParent3 {
+    top: 3276px;
+  }
+  .recommendedForYou {
+    position: absolute;
+    top: 2752px;
+    left: 100px;
+    font-size: var(--font-size-13xl);
+    line-height: 24px;
+    font-weight: 600;
+  }
+  .groupChild1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--dark);
+    width: 1440px;
+    height: 407px;
+  }
+  .myAccount {
+    color: var(--main-white);
+  }
+  .myAccount,
+  .myOrders {
+    position: relative;
+  }
+  .myAccountParent {
+    position: absolute;
+    top: 72px;
+    left: 564px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+  }
+  .followUsOn {
+    position: relative;
+    font-size: var(--font-size-base);
+    font-family: var(--font-montserrat);
+  }
+  .iconoirfacebook {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .iconoirfacebookParent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+  }
+  .helpCenter,
+  .inshopperParent {
+    color: var(--color-gainsboro-100);
+  }
+  .inshopperParent {
+    position: absolute;
+    top: 72px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-lgi);
+    font-size: var(--font-size-lg);
+    font-family: var(--font-monofett);
+  }
+  .helpCenter {
+    position: relative;
+    font-weight: 500;
+  }
+  .helpCenter1 {
+    position: relative;
+    display: inline-block;
+    width: 161px;
+  }
+  .helpCenterParent,
+  .informationParent {
+    position: absolute;
+    top: 72px;
+    left: 822px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+  }
+  .informationParent {
+    left: 308px;
+  }
+  .downloadOurMobile {
+    position: relative;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-gainsboro-100);
+  }
+  .groupChild2 {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 24px;
+    height: 28.5px;
+  }
+  .downloadItOn,
+  .googleStore {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .googleStore {
+    top: 15px;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--main-white);
+  }
+  .downloadItOnParent,
+  .groupParent1 {
+    position: absolute;
+    top: 0;
+    left: 33px;
+    width: 105px;
+    height: 35px;
+  }
+  .groupParent1 {
+    top: 16px;
+    left: 37px;
+    width: 138px;
+  }
+  .groupWrapper {
+    position: relative;
+    border-radius: var(--br-3xs);
+    border: 1px solid var(--color-silver-100);
+    box-sizing: border-box;
+    width: 212px;
+    height: 67px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .downloadItOnGroup,
+  .groupFrame,
+  .vectorIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95px;
+    height: 35px;
+  }
+  .groupFrame,
+  .vectorIcon {
+    top: 16px;
+    left: 73px;
+  }
+  .vectorIcon {
+    height: 34.31%;
+    width: 9.9%;
+    top: 32.84%;
+    right: 69.35%;
+    bottom: 32.86%;
+    left: 20.75%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .downloadOurMobileAppParent {
+    position: absolute;
+    top: 72px;
+    left: 1128px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+    font-size: var(--font-size-xs);
+    color: var(--color-silver-200);
+  }
+  .rectangleParent23 {
+    position: absolute;
+    top: 3776px;
+    left: 0;
+    width: 1440px;
+    height: 407px;
+    text-align: left;
+    color: var(--color-silver-100);
+  }
+  .groupChild3 {
+    background-color: var(--main-white);
+    box-shadow: 0 4px 44px rgba(0, 0, 0, 0.07);
+  }
+  .groupChild3,
+  .rectangleWrapper {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: 0;
+    width: 1440px;
+    height: 100px;
+  }
+  .inshopper1 {
+    position: absolute;
+    top: calc(50% - 25px);
+    left: 100px;
+    font-family: var(--font-monofett);
+  }
+  .button1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+    border: 1px solid var(--color-lightsteelblue);
+    box-sizing: border-box;
+    width: 397px;
+    height: 64px;
+  }
+  .searchForA {
+    position: absolute;
+    top: calc(50% - 14px);
+    left: 80px;
+    letter-spacing: -0.02em;
+    line-height: 150%;
+  }
+  .search,
+  .searchNormalIcon {
+    position: absolute;
+    top: 18px;
+    left: 40px;
+    width: 24px;
+    height: 24px;
+  }
+  .search {
+    top: 20px;
+    left: 482px;
+    width: 397px;
+    height: 64px;
+    text-align: justify;
+    font-size: var(--font-size-base);
+    color: var(--color-gray-200);
+  }
+  .groupChild4 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .div24 {
+    position: absolute;
+    top: 2px;
+    left: 34px;
+    font-weight: 500;
+  }
+  .groupWrapper2 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .groupWrapper1 {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+  .groupChild5 {
+    top: 1px;
+    left: 0;
+    width: 44px;
+    height: 44px;
+  }
+  .div25,
+  .groupChild5,
+  .notif {
+    position: absolute;
+  }
+  .notif {
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--primary);
+    width: 16px;
+    height: 16px;
+  }
+  .div25 {
+    top: 2px;
+    left: 5px;
+    font-weight: 500;
+  }
+  .notifParent {
+    position: absolute;
+    top: 0;
+    left: 29px;
+    width: 16px;
+    height: 16px;
+  }
+  .groupChild6,
+  .groupParent5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+  }
+  .groupChild6 {
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+    border: 1px solid var(--color-lightsteelblue);
+    box-sizing: border-box;
+    width: 148px;
+    height: 43.7px;
+    opacity: 0.8;
+  }
+  .arrowCaretDown {
+    position: absolute;
+    top: 0;
+    left: 92px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+  }
+  .arrowCaretDownParent {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    width: 116px;
+    height: 24px;
+  }
+  .rectangleParent24 {
+    position: relative;
+    width: 148px;
+    height: 43.7px;
+    font-size: var(--font-size-sm);
+    color: var(--dark);
+  }
+  .groupChild7 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+    border: 1px solid var(--color-lightsteelblue);
+    box-sizing: border-box;
+    width: 100px;
+    height: 44.44px;
+    opacity: 0.8;
+  }
+  .arrowCaretDown1 {
+    position: absolute;
+    top: 0;
+    left: 44px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+  }
+  .more {
+    position: absolute;
+    top: calc(50% - 11px);
+    left: 0;
+    font-weight: 500;
+  }
+  .arrowCaretDownGroup {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    width: 68px;
+    height: 24px;
+  }
+  .rectangleParent25 {
+    position: relative;
+    width: 100px;
+    height: 44.44px;
+    font-size: var(--font-size-sm);
+    color: var(--dark);
+  }
+  .groupParent3 {
+    position: absolute;
+    top: 29px;
+    left: 942px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-xl);
+    font-size: var(--font-size-5xs);
+    color: var(--main-white);
+  }
+  .groupParent2 {
+    position: absolute;
+    top: calc(50% - 2091.5px);
+    left: 0;
+    width: 1440px;
+    height: 100px;
+    text-align: left;
+    font-size: var(--font-size-15xl);
+    color: #000;
+    font-family: var(--font-poppins);
+  }
+  .groupChild8 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-mini);
+    background-color: var(--main-white);
+    width: 80px;
+    height: 44px;
+    opacity: 0.5;
+  }
+  .div26 {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+  .rectangleParent26,
+  .rectangleParent27,
+  .rectangleParent28,
+  .rectangleParent29 {
+    position: absolute;
+    top: 788px;
+    left: 305px;
+    width: 80px;
+    height: 44px;
+    color: var(--primary);
+  }
+  .rectangleParent27,
+  .rectangleParent28,
+  .rectangleParent29 {
+    left: 619px;
+  }
+  .rectangleParent28,
+  .rectangleParent29 {
+    top: 1248px;
+    left: 308px;
+  }
+  .rectangleParent29 {
+    left: 622px;
+  }
+  .rectangleParent30,
+  .rectangleParent31,
+  .rectangleParent32,
+  .rectangleParent33 {
+    position: absolute;
+    top: 1248px;
+    left: 936px;
+    width: 80px;
+    height: 44px;
+    color: var(--primary);
+  }
+  .rectangleParent31,
+  .rectangleParent32,
+  .rectangleParent33 {
+    left: 1250px;
+  }
+  .rectangleParent32,
+  .rectangleParent33 {
+    top: 788px;
+    left: 936px;
+  }
+  .rectangleParent33 {
+    left: 1250px;
+  }
+  .groupChild16 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+    width: 329px;
+    height: 626px;
+  }
+  .allProducts,
+  .healthAndBeauty,
+  .phoneAndTablets {
+    position: absolute;
+    left: 100px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+  .allProducts {
+    top: 120px;
+    color: var(--dark);
+  }
+  .healthAndBeauty,
+  .phoneAndTablets {
+    top: 174px;
+  }
+  .healthAndBeauty {
+    top: 248px;
+  }
+  .appliances,
+  .automobile,
+  .computing,
+  .electronics,
+  .fashion,
+  .homeAndOffice {
+    position: absolute;
+    top: 302px;
+    left: 100px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+  .appliances,
+  .automobile,
+  .computing,
+  .electronics,
+  .fashion {
+    top: 356px;
+  }
+  .appliances,
+  .automobile,
+  .electronics,
+  .fashion {
+    top: 410px;
+  }
+  .appliances,
+  .electronics,
+  .fashion {
+    top: 464px;
+  }
+  .appliances,
+  .electronics {
+    top: 518px;
+  }
+  .appliances {
+    top: 572px;
+  }
+  .rectangleParent34 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 329px;
+    height: 626px;
+    color: var(--color-slategray);
+  }
+  .homePageChild,
+  .homePageChild1,
+  .homePageChild2,
+  .homePageChild3,
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6,
+  .homePageItem {
+    position: absolute;
+    height: 0.96%;
+    width: 2.78%;
+    top: 43.08%;
+    right: 51.25%;
+    bottom: 55.96%;
+    left: 45.97%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .homePageChild1,
+  .homePageChild2,
+  .homePageChild3,
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6,
+  .homePageItem {
+    right: 73.06%;
+    left: 24.17%;
+  }
+  .homePageChild1,
+  .homePageChild2,
+  .homePageChild3,
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6 {
+    top: 54.08%;
+    bottom: 44.97%;
+  }
+  .homePageChild2,
+  .homePageChild3,
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6 {
+    right: 51.25%;
+    left: 45.97%;
+  }
+  .homePageChild3,
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6 {
+    right: 29.44%;
+    left: 67.78%;
+  }
+  .homePageChild4,
+  .homePageChild5,
+  .homePageChild6 {
+    right: 7.64%;
+    left: 89.58%;
+  }
+  .homePageChild5,
+  .homePageChild6 {
+    top: 43.08%;
+    right: 29.44%;
+    bottom: 55.96%;
+    left: 67.78%;
+  }
+  .homePageChild6 {
+    top: 67.56%;
+    right: 73.06%;
+    bottom: 31.48%;
+    left: 24.17%;
+  }
+  .homePageChild10,
+  .homePageChild11,
+  .homePageChild12,
+  .homePageChild13,
+  .homePageChild7,
+  .homePageChild8,
+  .homePageChild9 {
+    position: absolute;
+    height: 0.96%;
+    width: 2.78%;
+    top: 78.56%;
+    right: 73.06%;
+    bottom: 20.49%;
+    left: 24.17%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .homePageChild10,
+  .homePageChild11,
+  .homePageChild12,
+  .homePageChild13,
+  .homePageChild8,
+  .homePageChild9 {
+    right: 51.25%;
+    left: 45.97%;
+  }
+  .homePageChild10,
+  .homePageChild11,
+  .homePageChild12,
+  .homePageChild13,
+  .homePageChild9 {
+    right: 29.44%;
+    left: 67.78%;
+  }
+  .homePageChild10,
+  .homePageChild11,
+  .homePageChild12,
+  .homePageChild13 {
+    right: 7.64%;
+    left: 89.58%;
+  }
+  .homePageChild11,
+  .homePageChild12,
+  .homePageChild13 {
+    top: 67.56%;
+    right: 29.44%;
+    bottom: 31.48%;
+    left: 67.78%;
+  }
+  .homePageChild12,
+  .homePageChild13 {
+    right: 51.25%;
+    left: 45.97%;
+  }
+  .homePageChild13 {
+    right: 7.64%;
+    left: 89.58%;
+  }
+  .homePage {
+    position: relative;
+    background-color: var(--light);
+    width: 100%;
+    height: 4183px;
+    overflow: hidden;
+    text-align: justify;
+    font-size: var(--font-size-base);
+    color: var(--dark);
+    font-family: var(--font-montserrat);
+  }
+  
