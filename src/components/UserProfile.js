@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 const UserProfile = ({ user }) => {
@@ -16,7 +17,7 @@ const UserProfile = ({ user }) => {
 
   return (
     <div className="user-profile">
-      <img src={user.avatar} alt={user.name} />
+      <Image src={user.avatar} alt={user.name} />
       <h2>{isEditing ? <input type="text" value={name} onChange={(e) => setName(e.target.value)} /> : name}</h2>
       <p>{isEditing ? <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> : email}</p>
       {isEditing ? (

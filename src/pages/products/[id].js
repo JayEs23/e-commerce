@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getProductById } from '@/pages/api/products';
+import Image from 'next/image';
 
 const ProductDetailsPage = ({ product }) => {
   // Check if the product is defined before accessing its properties
@@ -24,7 +25,7 @@ const ProductDetailsPage = ({ product }) => {
     <div className="content font-sm  p-4">
       <div className="row ml-4 mr-4 border-rounded" style={{padding:"10px", backgroundColor:"#fafafa"}}>
         <div className="col-xl-5">
-          <img className="img-fluid w-100 h-400 pr-4" src={image} alt={name} />
+          <Image className="img-fluid w-100 h-400 pr-4" src={image} alt={name} />
         </div>
         <div className="col-xl-6">
           <h3 className="title font-weight-bold">{name}</h3>

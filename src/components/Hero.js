@@ -1,5 +1,7 @@
 // components/Hero.js
 
+import Image from "next/image";
+
 const Hero = () => {
   return (
       <div className="row hero h-400">
@@ -20,7 +22,7 @@ const Hero = () => {
         {/* Left Column for Sample Products Image */}
         <div className="col-md-6">
           <div className="hero-image ">
-            <img src="/heroproducts.png" className="img-fluid h-400 w-400" alt="Sample Products" loading="lazy"/>
+            <Image src="/heroproducts.png" className="img-fluid h-400 w-400" alt="Sample Products" loading="lazy"/>
           </div>
         </div>
 

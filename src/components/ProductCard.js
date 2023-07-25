@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProductCard = ({ product }) => {
   // Check if the product is defined before destructuring its properties
@@ -15,7 +16,7 @@ const ProductCard = ({ product }) => {
         {/* Wrap the card header in a Link */}
         <Link href={`/products/${slug}`}>
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <img className="img-fluid w-100 h-300" src="/product.png" alt="" loading="lazy" />
+            <Image className="img-fluid w-100 h-300" src="/product.png" alt="" loading="lazy" />
           </div>
         </Link>
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
