@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
         {/* Wrap the card header in a Link */}
         <Link href={`/products/${slug}`}>
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <Image className="img-fluid w-100 h-300" src="/product.png" alt="" loading="lazy" />
+            <Image className="img-fluid w-100 h-300" src="/product.png" width={100} height={100} alt="" loading="lazy" />
           </div>
         </Link>
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
