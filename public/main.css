@@ -1,12 +1,65 @@
 
-html {
-    font-size: 14px; /* Change this value to adjust the font size */
+html, body {
+    font-size: 14px;
+    max-width: 100% !important; /* Change this value as needed */
+    margin: 0 !important; /* Center the content horizontally */
+    padding: 0 !important;
+    height: 100%;
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+  html {
+    box-sizing: border-box;
   }
   
-  /* Optionally, you can set a max-width to limit the width of the content */
-body {
-    max-width: 1200px; /* Change this value as needed */
-    margin: 0 auto; /* Center the content horizontally */
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .page-container {
+    min-height: 100vh; /* Minimum height of the viewport (full screen height) */
+    min-width: 100vw;  /* Minimum width of the viewport (full screen width) */
+    padding: 0px; /* your padding value */
+    overflow: hidden;
+    flex: 1;
+    margin: 0px !important; /* Add some padding to keep content away from the edges */
+    box-sizing: border-box; /* Ensure padding is included in the container size */
+  }
+
+  .notification {
+    color: white;
+    text-decoration: none;
+    padding: 5px 6px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #b5b5b6;
+    border-radius: 50%;
+  }
+  
+  .font-sm{
+    font-size: 20px !important;
+  }
+  .text-notif:hover, .notification:hover {
+    background: #9881B8;
+    color: #fff !important;
+  }
+  .text-notif{
+    color:#9881B8;
+  }
+  .text-notif:hover{
+    color:#fff;
+  }
+  .notification .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 3px 5px;
+    border-radius: 16px;
+    background-color: #9881B8;
+    color: white;
   }
 .notif{
     width: 16px;
@@ -18,15 +71,89 @@ body {
 
 .header {
     background: #FFF;
-    box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.07);
-    width: 100vw; /* Set width to 100% of viewport width */
-    max-width: 1440px; /* Set maximum width to 1440 pixels */
+    box-shadow: 0px 4px 44px 0px rgba(114, 112, 112, 0.07);
+    width: 100%; /* Set width to 100% of viewport width */
+    /* max-width: 1440px; Set maximum width to 1440 pixels */
     height: 100px;
     flex-shrink: 0;
 }
 
 .footer-main{
-    width: 100vw !important;
+    width: inherit !important;
     flex-shrink: 0 !important;
     background: #1B0C2E !important;
+}
+
+.h-100{
+    height: 100px !important;
+}
+.h-200{
+    height: 200px !important;
+}
+.h-300{
+    height: 300px !important;
+}
+.h-300{
+    height: 300px !important;
+}
+.h-400{
+    height: 400px !important;
+}
+.h-500{
+    height: 500px !important;
+}
+
+.hero{
+    border-radius: 4px;
+
+    background: linear-gradient(229deg, #6E0BEB 0%, #CD3434 100%);
+}
+
+.btn-custom {
+    border-color: darkgray;
+    color: lightgray;
+  }
+  
+  /* Optional: If you want to remove the default box-shadow for the button */
+  .btn-custom:focus, .btn-custom:hover {
+    box-shadow: none;
+  }
+
+.search{
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--main-white);
+    border: 1px solid var(--color-lightsteelblue);
+    box-sizing: border-box;
+    width: 397px;
+    height: 50px;
+    
+}
+
+.bg-gray{
+  background-color: #f4f2f7 !important;
+}
+
+.custom-input {
+  /* Reset the default browser styles for appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Style the input element as desired */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none; /* Remove the default focus outline */
+  /* Add any other custom styles you want for the input */
+}
+
+/* Add a custom background image for the direction icons */
+.custom-input::-webkit-search-decoration,
+.custom-input::-webkit-search-cancel-button,
+.custom-input::-webkit-search-results-button,
+.custom-input::-webkit-search-results-decoration {
+  display: none;
 }

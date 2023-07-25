@@ -1,31 +1,65 @@
 import Head from 'next/head';
-import Image from 'next/image' ;
-import { Inter } from 'next/font/google';
+import { useEffect, useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
- 
- const inter = Inter({ subsets: ['latin'] });
+import Hero from '@/components/Hero';
+import ProductCard from '@/components/ProductCard';
+import HeroSidebar from '@/components/HeroSidebar';
+import { getFeaturedProducts } from '@/pages/api/products';
 
-export default function Home() { 
-  return ( 
-  <><Head>
+
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const featuredProducts = await getFeaturedProducts();
+      setProducts(featuredProducts);
+    }
+
+    if (products.length < 1) {
+      fetchProducts();
+    }
+  }, [products]);
+
+  return (
+    <>
+      <Head>
       <title>Inshopper Ecommerce</title>
       <meta name="description" content="" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=2.0" />
       <link rel="icon" href="/favicon.ico" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"></link>
-      <link rel="stylesheet" href="../../style.css" />
-      <link rel="stylesheet" href="../../main.css" />
-    </Head>
-    <main className="bg-main">
-      <Navbar />
 
-      <Footer />
-    </main>
-      
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</>
-      
-  ) }
-  
+      </Head>
+      <div className="page-container">
+        <Navbar />
+        <main className="bg-main">
+          <div className="row ml-2 mr-2 bg-light">
+            <div className="col-xl-3 d-none d-xl-block">
+              <HeroSidebar />
+            </div>
+            {/* Hero Column */}
+            <div className="col-xl-9 col-lg-12 h-400">
+              <Hero />
+            </div>
+          </div>
+          <div className="container-fluid pt-5">
+            <div className="mb-4">
+              <h2 className="px-5">Discounted Products</h2>
+            </div>
+            <div className="row px-xl-5 pb-3">
+              {/* Map through the products and pass the details to ProductCard */}
+              {products.map((product, index) => (
+                // <pre>{product}</pre>
+                <ProductCard key={index} product={product} />
+              ))}
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+}
