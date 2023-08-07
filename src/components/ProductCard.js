@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
             <p>{description}</p>
           </div>
         </div>
-        <div className="card-footer d-flex justify-content-between bg-light">
+        <div className="card-footer d-flex justify-content-between bg-white">
           {/* Replace this SVG with your specific logic */}
           <svg width="75" height="24" viewBox="0 0 75 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Group 1000001535">

@@ -1,14 +1,18 @@
-const API_BASE_URL = 'https://api.example.com'; 
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import apiConfig from './apiConfig';
 
-export const fetchProducts = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/products`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return [];
+const api = axios.create({
+  baseURL: apiConfig.baseURL,
+});
+
+api.interceptors.request.use((config) => {
+  const authToken = Cookies.get('authToken');
+  if (authToken) {
+    config.headers['X-CSRFToken'] = "feSKEvRaA7kfWh6TGrmGZtCdAC5NGpVQxTtsUUAy5Ri06ZeQPW8GIyoGEBwJxUYF";
+    config.headers.Authorization = `token ${authToken}`;
   }
-};
+  return config;
+});
 
-// Add more API call functions for managing user-related data, orders, etc.
+export default api;

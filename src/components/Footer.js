@@ -1,70 +1,145 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable @next/next/no-html-link-for-pages */
+/* eslint-disable @next/next/no-img-element */
+
 import Image from "next/image";
-import DownloadStore from "./DownloadStore";
+
 const Footer = () => {
     return (
       <>
-      <footer className=" d-flex flex-column mt-0 pt-2 footer-main">
-        <div >
-            <div className="row px-xl-5 pt-5">
-                <div className="col-lg-2 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <h1 className="mb-2 display-0 font-weight-semi-bold">
-                        <span className="">
-                            <Image src="/inshopperlogo-dark.png" width="160" height="40" loading="lazy" alt="Inshopper Logo" />
-                        </span>
-                    </h1>
-                    <p className="ml-4 text-white">Follow us on:</p>
-                    <p className="ml-4">
-                        <i className="font-weight-bold fa fa-facebook-f text-info mr-3"></i>
-                        <i className="font-weight-bold fa fa-instagram text-warning mr-3"></i>
-                        <i className="font-weight-bold fa fa-twitter text-white mr-3"></i>
+        <footer className="footer-section bg-dark on-dark">
+          <div className="container">
+            <div className="section-space-sm">
+              <div className="row">
+                <div className="col-lg-2 col-md-9 me-auto">
+                  <div className="footer-item mb-5 mb-lg-0">
+                    <a href="../../../" className="footer-logo-link logo-link">
+                      <img
+                        className="logo-dark logo-img"
+                        src="../../inshopperlogo-dark.png"
+                        alt="logo"
+                      />
+                      <img
+                        className="logo-light logo-img"
+                        src="../../inshopperlogo-dark.png"
+                        alt="logo"
+                      />
+                    </a>
+                    <p className="my-4 footer-para">
+                      Follow us on:
                     </p>
+                    <ul className="styled-icon">
+                      <li>
+                        <a href="#">
+                          <em className="icon ni ni-facebook-f"></em>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <em className="icon ni ni-instagram"></em>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <em className="icon ni ni-twitter"></em>
+                        </a>
+                      </li>
+                     
+                    </ul>
+                  </div>
                 </div>
-                <div className="col-lg-10 col-md-12">
-                    <div className="row">
-                        <div className="col-md-2 mb-5">
-                            <h5 className="font-weight-bold text-white mb-4">Information</h5>
-                            <div className="d-flex flex-column justify-content-start">
-                                <a className="text-white mb-2" href="#">About Us</a>
-                                <a className="text-white mb-2" href="#">Terms and Services</a>
-                                <a className="text-white mb-2" href="#">Pricing</a>
-                                <a className="text-white mb-2" href="#">Privacy Policy</a>
-                            </div>
-                        </div>
-                        <div className="col-md-3 mb-5">
-                            <h5 className="font-weight-bold text-white mb-4">My Account</h5>
-                            <div className="d-flex flex-column justify-content-start">
-                                <a className="text-white mb-2" href="#">My Orders</a>
-                                <a className="text-white mb-2" href="#">Ratings and review</a>
-                                <a className="text-white mb-2" href="#">Saved Items</a>
-                                <a className="text-white mb-2" href="#">Recently viewed</a>
-                                <a className="text-white mb-2" href="#">Recently searched</a>
-                                <a className="text-white mb-2" href="#">Saved Cards</a>
-                            </div>
-                        </div>
-                        <div className="col-md-3 mb-5">
-                            <h5 className="font-weight-bold text-white mb-4">Help Center</h5>
-                            <div className="d-flex flex-column justify-content-start">
-                                <a className="text-white mb-2" href="#">Support@inshopper.com</a>
-                                <a className="text-white mb-2" href="#">Help Center</a>
-                                <a className="text-white mb-2" href="#">Contact Us</a>
-                                <a className="text-white mb-2" href="#">FAQs</a>
-                            </div>
-                        </div>
-                        <div className="col-md-3 mb-5">
-                            <p className=" text-white mb-4">Download our mobile app</p>
-                            <div className="d-flex flex-column justify-content-start">
-                                <a className="text-white mb-2" href="#"> <DownloadStore playstore="Google Play" /></a>
-                                <a className="text-white mb-2" href="#"> <DownloadStore applestore="apple" /></a>
-                               
-                            </div>
-                        </div>
+                <div className="col-lg-10">
+                  <div className="row g-gs">
+                    <div className="col-lg-3 col-md-3 col-sm-3">
+                      <div className="footer-item">
+                        <h5 className="mb-4">Information</h5>
+                        <ul className="list-item list-item-s1">
+                          <li>
+                            <a href="https://www.inshopper.io">About Us</a>
+                          </li>
+                          <li>
+                            <a href="#">Terms and services</a>
+                          </li>
+                          <li>
+                            <a href="#">Pricing</a>
+                          </li>
+                          <li>
+                            <a href="#">Privacy Policy</a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
+                    <div className="col-lg-3 col-md-3 col-sm-3">
+                      <div className="footer-item">
+                        <h5 className="mb-4">My Account</h5>
+                        <ul className="list-item list-item-s1">
+                          <li>
+                            <a href="../../cart"> My Orders</a>
+                          </li>
+                          <li>
+                            <a href="#">Ratings and Reviews</a>
+                          </li>
+                          <li>
+                            <a href="../../products/saved">Saved Items</a>
+                          </li>
+                          <li>
+                            <a href="../../products/viewed">Recently Viewed</a>
+                          </li>
+                          <li>
+                            <a href="../../products/searched">Recently searched</a>
+                          </li>
+                          <li>
+                            <a href="#">Saved Cards</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-sm-3">
+                      <div className="footer-item">
+                        <h5 className="mb-4">Help Center</h5>
+                        <ul className="list-item list-item-s1">
+                          <li>
+                            <a href="https://www.inshopper.io">Support</a>
+                          </li>
+                          <li>
+                            <a href="#">Help Center</a>
+                          </li>
+                          <li>
+                            <a href="#">Contact Us</a>
+                          </li>
+                          <li>
+                            <a href="#">FAQs</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-sm-3">
+                      <div className="footer-item">
+                        <h5 className="mb-4">Download our Mobile app</h5>
+                        <ul className="list-item list-item-s1">
+                          <li>
+                            <a href="https://www.inshopper.io"><Image alt="download" width="180" height="80" src="/assets/images/thumb/app-store.png" /></a>
+                          </li>
+                          <li>
+                            <a href="#"><Image alt="download" width="180" height="80" src="/assets/images/thumb/google-play.png" /></a>
+                          </li>
+                          
+                        </ul>
+                      </div>
+                    </div>
+                    
+                  </div>
                 </div>
+              </div>
             </div>
-            
-        </div>
-    </footer>
-    </> 
+           
+          </div>
+        </footer>
+        {/* <script src="../../assets/js/bundle.js" async></script> */}
+        {/* <script src="../../assets/js/scripts.js" async></script> */}
+      </>
     );
-};
-export default Footer;
+  };
+  
+  export default Footer;
+  

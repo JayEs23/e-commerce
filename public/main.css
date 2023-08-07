@@ -1,14 +1,10 @@
 
 html, body {
     font-size: 14px;
-    max-width: 100% !important; /* Change this value as needed */
     margin: 0 !important; /* Center the content horizontally */
     padding: 0 !important;
     height: 100%;
-    display: flex;
     font-family: "Poppins", sans-serif;
-    flex-direction: column;
-    min-height: 100vh;
     margin: 0;
   }
   html {
@@ -20,7 +16,16 @@ html, body {
   }
 
   .page-container {
-    min-height: 100vh; /* Minimum height of the viewport (full screen height) */
+    min-height: 100vh !important; /* Minimum height of the viewport (full screen height) */
+    min-width: 60vw;  /* Minimum width of the viewport (full screen width) */
+    padding: 0px; /* your padding value */
+    overflow: hidden;
+    flex: 1;
+    margin: 0px !important; /* Add some padding to keep content away from the edges */
+    box-sizing: border-box; /* Ensure padding is included in the container size */
+  }
+  .page-container .content {
+    min-height: 100vh !important; /* Minimum height of the viewport (full screen height) */
     min-width: 100vw;  /* Minimum width of the viewport (full screen width) */
     padding: 0px; /* your padding value */
     overflow: hidden;
@@ -32,7 +37,7 @@ html, body {
   .notification {
     color: white;
     text-decoration: none;
-    padding: 5px 6px;
+    padding: 4px;
     position: relative;
     display: inline-block;
     border: 1px solid #b5b5b6;
@@ -103,10 +108,9 @@ html, body {
     height: 500px !important;
 }
 
-.hero{
-    border-radius: 4px;
-
-    background: linear-gradient(229deg, #6E0BEB 0%, #CD3434 100%);
+.hero-main{
+    border-radius: 4px !important;
+    background: linear-gradient(229deg, #6E0BEB 0%, #CD3434 100%) !important;
 }
 
 .btn-custom {
@@ -156,4 +160,111 @@ html, body {
 .custom-input::-webkit-search-results-button,
 .custom-input::-webkit-search-results-decoration {
   display: none;
+}
+
+.btn-nav{
+  border-radius: var(--br-3xs);
+  background-color:#fff;
+  border: 1px solid rgba(195,212,233,.4);
+  box-sizing: border-box;
+  width: 148px;
+  height: 43.7px;
+  opacity: .8;
+}
+
+.cart-item {
+  display: flex;
+  border-radius: 4px;
+  padding: 10px;
+  min-height: 200px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.cart-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  margin-right: 0px;
+  margin-left: 0px !important;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.cart-item-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.cart-item-amount {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fd5a33;
+  margin-bottom: 10px;
+}
+
+.cart-item-quantity input {
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.cart-item-actions button {
+  margin-right: 10px;
+}
+
+.cart-summary {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.cart-summary-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.cart-summary-subtotal {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.cart-summary-discount {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.cart-summary-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fd5a33;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.cart-summary-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #fd5a33;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cart-summary-button:hover {
+  background-color: #e6441a;
 }

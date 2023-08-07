@@ -1,0 +1,47 @@
+[
+    {
+      "id": 1,
+      "product": {
+        "id": 101,
+        "name": "Product 1",
+        "description": "I recently purchased this laptop and I must say it has exceeded my expectations. The performance is outstanding, allowing me to smoothly run multiple applications simultaneously without any lag or slowdown. The processor and RAM combination really delivers in terms of speed and efficiency.        ",
+        "price": 50.0,
+        "image": "../../../product1.png"
+      },
+      "quantity": 2
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": 102,
+        "name": "Product 2",
+        "description": "Description for Product 2",
+        "price": 35.0,
+        "image": "../../../product2.png"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "product": {
+        "id": 103,
+        "name": "Product 3",
+        "description": "Description for Product 3",
+        "price": 25.0,
+        "image": "../../../product3.png"
+      },
+      "quantity": 3
+    },
+    {
+      "id": 4,
+      "product": {
+        "id": 104,
+        "name": "Product 4",
+        "description": "Description for Product 4",
+        "price": 15.0,
+        "image": "../../../product4.png"
+      },
+      "quantity": 2
+    }
+  ]
+  
