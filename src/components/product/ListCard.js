@@ -5,7 +5,7 @@ const ListCard = ({ product, showBuyButton }) => {
   return (
     <div className="row cart-item bg-gray">
       <div className="col-md-2">
-        <img src={product.image} alt={product.name} className="img-fluid cart-item-image border-rounded" style={{objectFit:"fill !important"}} />
+        <Image width={150} height={150} src={product.image} alt={product.name} className="img-fluid cart-item-image border-rounded" style={{objectFit:"fill !important"}} />
       </div>
       <div className="col-md-5 d-flex flex-column justify-content-between cart-item-details mt-4">
         <div>

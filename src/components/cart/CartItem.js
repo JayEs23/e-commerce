@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Image from 'next/image';
 const CartItem = ({ product }) => {
   return (
     <div className="row cart-item bg-light mb-4 p-4">
       <div className="col-md-3">
-        <img src={product.image} alt={product.name} className="img-fluid cart-item-image" />
+        <Image width={150} height={150} src={product.image} alt={product.name} className="img-fluid cart-item-image" />
       </div>
       <div className="col-md-5 d-flex flex-column justify-content-between cart-item-details">
         <div>

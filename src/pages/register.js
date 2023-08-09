@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import axios from 'axios';
@@ -65,7 +66,7 @@ const RegisterPage = () => {
           <div className="container">
             <div className="row align-items-center justify-content-center">
               <div className="col-lg-6 mb-lg-0 d-none d-lg-block">
-                <img
+                <Image width={150} height={150}
                   src="../../assets/images/thumb/remote.png"
                   alt=""
                   className="img-fluid"
