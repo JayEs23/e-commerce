@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import axios from 'axios';
@@ -188,7 +189,8 @@ const RegisterPage = () => {
                     By signing up, you agree to our Terms and conditions and
                     Privacy Policy
                   </p>
-                  <p class="mt-3 form-text">Already have an account ? <a href="/login" class="btn-link">Login</a></p>
+                  <p class="mt-3 form-text">Already have an account ? 
+                  <Link href="/login" class="btn-link">Login</Link></p>
 
                 </form>
               </div>

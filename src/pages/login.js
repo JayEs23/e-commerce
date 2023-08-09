@@ -112,7 +112,7 @@ const Login = () => {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Logging in...' : 'Login'}
+                    {isLoading ? 'Logging in &apos' : 'Login'}
                   </button>
                   <p className="mt-3">
                     Don't have an account?{' '}
