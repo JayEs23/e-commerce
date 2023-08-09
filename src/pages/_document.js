@@ -12,11 +12,11 @@ class CustomDocument extends Document {
           {/* Add Bootstrap and other stylesheets */}
           <link
           rel="stylesheet"
-          href="../../assets/css/vendor.bundled751.css?ver=100"
+          href="../../assets/css/vendor.bundle.css"
         />
-        <link rel="stylesheet" href="../../assets/css/styled751.css" />
-        <link rel="stylesheet" href="../../assets/css/introd751.css" />
-        <link rel="stylesheet" href="../../assets/css/main.css" />
+        <link rel="stylesheet" href="../../assets/css/style.css" />
+        <link rel="stylesheet" href="../../assets/css/intro.css" />
+        {/* <link rel="stylesheet" href="../../assets/css/main.css" /> */}
           <link rel="stylesheet" href="../../main.css" />
 
           {/* Font Awesome 4.7 CSS */}
@@ -28,7 +28,7 @@ class CustomDocument extends Document {
 
           {/* Add custom JavaScript scripts */}
           <Script src="../../assets/js/bundle.js" />
-        {/* <Script src="../../assets/js/scripts.js" /> */}
+        <Script src="../../assets/js/scripts.js" />
         
         </body>
       </Html>

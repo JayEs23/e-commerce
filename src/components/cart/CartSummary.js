@@ -24,7 +24,8 @@ const CartSummary = ({ cartData }) => {
         <div className="col-md-6">Total:</div>
         <div className="col-md-6 text-md-end">{subtotal.toLocaleString('en-NG', { style: 'currency', currency: 'NGN' })}</div>
       </div>
-      <div className="row"><button className="btn btn-primary">Checkout</button>
+      <div className="row">
+        <button className="btn btn-primary">Checkout</button>
         <div className="col-md-12 text-md-end">
           
         </div>

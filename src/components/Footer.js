@@ -135,8 +135,6 @@ const Footer = () => {
            
           </div>
         </footer>
-        {/* <script src="../../assets/js/bundle.js" async></script> */}
-        {/* <script src="../../assets/js/scripts.js" async></script> */}
       </>
     );
   };
