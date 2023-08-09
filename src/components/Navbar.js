@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Navbar = ({ publicKey, truncateKey, handleDisconnect }) => {
@@ -8,8 +9,8 @@ const Navbar = ({ publicKey, truncateKey, handleDisconnect }) => {
         <div className="container">
           <div className="header-wrap">
             <div className="header-logo">
-              <a href="/" className="logo-link">
-                <img
+              <Link href="/" className="logo-link">
+                <Image
                 width="150"
                 height="100"
                   className="logo-dark logo-img"
@@ -17,14 +18,14 @@ const Navbar = ({ publicKey, truncateKey, handleDisconnect }) => {
                   alt="logo"
                 />
                 
-                <img
+                <Image
                 width="150"
                 height="100"
                   className="logo-light logo-img"
                   src="/inshopperlogo-dark.png"
                   alt="logo"
                 />
-              </a>
+              </Link>
             </div>
             <div className="header-mobile-action">
               <div className="header-search-mobile dropdown me-2">
