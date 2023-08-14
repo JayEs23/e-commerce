@@ -122,7 +122,7 @@ const Login = () => {
                     {loginText}
                   </button>
                   <p className="mt-3">
-                    Don't have an account?
+                    Don&apos;t have an account?
                     <Link href="/register" className="btn-link">
                       Register
                     </Link>

@@ -16,13 +16,15 @@ export default function Markeplace() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetchProducts(); // Fetch Products on component mount
-  }, []);
-
-  const fetchProducts = async () => {
+    
+    const fetchProducts = async () => {
     const response = await productApi.getFeaturedProducts();
     setProducts(response);
   };
+    fetchProducts(); // Fetch Products on component mount
+  }, []);
+
+ 
   return (
     <>
       <div className="page-container">
