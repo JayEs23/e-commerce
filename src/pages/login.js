@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import apiConfig from '@/utils/apiConfig';
-import Head from 'next/head';
-import Image from 'next/image';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
-import Link from 'next/link';
-import useAuth from '@/hooks/useAuth';
+import React, { useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
 
 const Login = () => {
   const { isAuthenticated, login } = useAuth();
-  const loginEndpoint = 'authentication/login/';
+  const loginEndpoint = "authentication/login/";
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const loginText = isLoading ? 'Logging in' : 'Login';
+  const loginText = isLoading ? "Logging in" : "Login";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,12 +31,12 @@ const Login = () => {
   };
 
   if (isAuthenticated) {
-    router.push('/account/dashboard');
+    router.push("/account/dashboard");
   }
 
   const handleLogin = async (token) => {
-    Cookies.set('authToken', token);
-    router.push('/account/dashboard');
+    Cookies.set("authToken", token);
+    router.push("/account/dashboard");
   };
 
   const handleSubmit = async (e) => {
@@ -46,17 +44,13 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      setError('');
+      setError("");
 
-      const response = await axios.post(
-        `${apiConfig.baseURL}${loginEndpoint}`,
-        formData
-      );
+      const response = api.post(loginEndpoint, formData);
       const token = response.data.token;
       handleLogin(token);
     } catch (error) {
-
-      setError('Login failed. Please check your credentials.');
+      setError("Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
     }

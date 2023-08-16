@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import useAuth from '@/hooks/useAuth';
-import { useRouter } from 'next/router';
-import apiConfig from '@/utils/apiConfig';
-import axios from 'axios';
-import Link from 'next/link';
+import React, { useState } from "react";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/router";
+import apiConfig from "@/utils/apiConfig";
+import axios from "axios";
+import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const LoginModal = () => {
-  const {isAuthenticated, login} = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const [showModal, setShowModal] = useState(false);
+
+  const data = useSession();
+
+  console.log(data);
+
   const router = useRouter();
-  const loginEndpoint = 'authentication/login/';
-  
+  const loginEndpoint = "authentication/login/";
+
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const loginText = isLoading ? "Logging in" : "Login";
 
@@ -28,13 +34,12 @@ const LoginModal = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setIsLoading(true);
-      setError('');
+      setError("");
 
       const response = await axios.post(
         `${apiConfig.baseURL}${loginEndpoint}`,
@@ -46,7 +51,7 @@ const LoginModal = () => {
       // You can redirect the user to another page after successful login if needed
     } catch (error) {
       console.log(error);
-      setError('Login failed. Please check your credentials.');
+      setError("Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
     }
@@ -69,17 +74,26 @@ const LoginModal = () => {
 
       {/* Login Modal */}
       {showModal && (
-        <div className="modal d-sm-block" tabIndex="-1" role="dialog" style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+        <div
+          className="modal d-sm-block"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h3 className="modal-title">Login to Inshopper</h3>
-                <button type="button" className="btn-close icon-btn" onClick={handleModalClose}>
+                <button
+                  type="button"
+                  className="btn-close icon-btn"
+                  onClick={handleModalClose}
+                >
                   <span>&times;</span>
                 </button>
               </div>
               <div className="modal-body">
-              <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <div className="form-group form-floating mb-4">
                     <input
                       type="text"
@@ -112,10 +126,24 @@ const LoginModal = () => {
                   >
                     {loginText}
                   </button>
+
+                  <button
+                    className="outline-btn btn mt-5 w-100"
+                    onClick={() => signIn()}
+                  >
+                    Login with Google
+                  </button>
+
+                  <button
+                    className="outline-btn btn mt-5 w-100"
+                    onClick={() => signOut()}
+                  >
+                    Logout
+                  </button>
                   <p className="mt-3">
-                    Don`&lsquo;`t have an account? 
+                    Don`&lsquo;`t have an account?
                     <Link href="/register" className="btn-link">
-                       Register
+                      Register
                     </Link>
                   </p>
                 </form>

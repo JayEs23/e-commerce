@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import CartItem from './CartItem';
+import React, { useState, useEffect } from "react";
+import CartItem from "@/components/cart/CartItem";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     // Fetch cart items from the API route
-    fetch('/api/cart')
-      .then(response => response.json())
-      .then(data => setCartItems(data));
+    fetch("/api/cart")
+      .then((response) => response.json())
+      .then((data) => setCartItems(data));
   }, []);
 
   return (
@@ -17,7 +17,7 @@ const Cart = () => {
         <h2>Your Cart</h2>
         <p>Total Items: {cartItems.length}</p>
         <div className="cart-items">
-          {cartItems.map(item => (
+          {cartItems.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
         </div>
