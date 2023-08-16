@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import CartItem from '@/components/product/ListCard';
-import ListCard from '@/components/product/ListCard';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CartItem from "@/components/product/ListCard";
+import ListCard from "@/components/product/ListCard";
 
 const SearchedProducts = () => {
   const [searchData, setSearchData] = useState([]);
@@ -11,29 +11,34 @@ const SearchedProducts = () => {
   useEffect(() => {
     // Fetch cart data from your API
     // Example: Fetch from '/api/cart'
-    fetch('/api/cart')
+    fetch("/api/cart")
       .then((response) => response.json())
       .then((data) => setSearchData(data))
-      .catch((error) => console.error('Error fetching cart data:', error));
+      .catch((error) => console.error("Error fetching cart data:", error));
   }, []);
 
   return (
     <>
-    <Head>
+      <Head>
         <title>Inshopper Ecommerce - Recent Search</title>
       </Head>
       <div className="page-container bg-gray">
-        <Navbar />
+        <Header />
         <div className="content font-sm p-4">
           <div className="row mt-4 p-4">
             <div className="col-lg-10 mx-auto card p-4">
-              <div className="card-title"><h3>Recently Searched</h3></div>
+              <div className="card-title">
+                <h3>Recently Searched</h3>
+              </div>
               {/* Display the list of products in the cart */}
               {searchData.map((cartItem) => (
-                <ListCard key={cartItem.id} product={cartItem.product} showBuyButton={false} />
+                <ListCard
+                  key={cartItem.id}
+                  product={cartItem.product}
+                  showBuyButton={false}
+                />
               ))}
             </div>
-            
           </div>
         </div>
         <Footer />
