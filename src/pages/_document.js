@@ -36,7 +36,7 @@ export default function Document() {
         </div>
 
         <script src="../../assets/js/bundle.js" defer></script>
-<script src="../../assets/js/scripts.js" defer></script>
+        <script src="../../assets/js/scripts.js" defer></script>
 
       </body>
     </Html>
