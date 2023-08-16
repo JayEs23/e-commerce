@@ -107,7 +107,7 @@ const Orders = ({ Orders }) => {
               <div class="activity-tab-wrap">
               {userOrders.length > 0 ? (
                     userOrders.map((order) => (
-                    <OrderItem order={order} />
+                    <OrderItem key={order.OrderNumber} order={order} />
                     ))
                 ) : (
 

@@ -36,7 +36,7 @@ const OrderItem = ({ order }) => {
             <div class="card-body d-flex align-items-center">
 
                 <div class=" flex-shrink-0">
-                    <img src="{order.productImage}" alt="{order.productName}" class="img-fluid" />
+                    <Image width={100} height={100} src="{order.productImage}" alt="{order.productName}" class="img-fluid" />
                 </div>
                 <div class="flex-grow-1 ms-2">
                     <h6 class="card-s1-title mb-1">{order.productName}</h6>

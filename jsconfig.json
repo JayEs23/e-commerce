@@ -3,9 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/": ["./src/pages/components/"],
-      "@/utils/": ["./src/utils/"],
-      "@/api/": ["./src/pages/api/"]
+      "@/components/*": ["./src/pages/components/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/api/*": ["./src/pages/api/*"]
     }
   }
 }
