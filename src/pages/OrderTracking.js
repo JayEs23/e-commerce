@@ -2,7 +2,7 @@ import React from "react";
 
 const OrderTracking = () => {
 
-    render(
+    return(
       <><p>OrderTracking</p></>
     );
 };
