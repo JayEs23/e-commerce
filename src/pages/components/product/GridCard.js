@@ -2,7 +2,7 @@ import React from "react";
 
 const GridCard = () => {
 
-    render(
+    return(
       <><p>GridCard</p></>
     );
 };
