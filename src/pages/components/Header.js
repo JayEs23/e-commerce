@@ -190,7 +190,7 @@ const Header = () => {
       </div>
     </header>
     <div
-      class="modal "
+      class="modal fade"
       id="moreModal"
       tabindex="-1"
       aria-hidden="true"
