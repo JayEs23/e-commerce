@@ -62,7 +62,7 @@ const Header = () => {
     };
 
     fetchRegister();
-  }, []);
+  }, [data]);
 
   console.log(isAuthenticated);
 
