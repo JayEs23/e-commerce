@@ -5,6 +5,10 @@ import AddToCartButton from './cart/AddToCartButton';
 import Bargain from './product/Bargain';
 
 const SearchItemCard = ({ product }) => {
+  if (!product) {
+    return <div>No product details available.</div>;
+  }
+  
   const {
     product_name,
     description,
