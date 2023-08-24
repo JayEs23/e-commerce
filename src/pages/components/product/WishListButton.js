@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 
 const WishlistButton = ({ product, inWishlist, onToggleWishlist }) => {
-  if (!product) {
-    return null;
-  }
   const [isInWishlist, setIsInWishlist] = useState(inWishlist);
 
   const handleWishlistToggle = () => {
@@ -11,14 +8,14 @@ const WishlistButton = ({ product, inWishlist, onToggleWishlist }) => {
     setIsInWishlist(!isInWishlist);
   };
 
-  return (
+  return product ? (
     <button
       className={`icon-btn wishlist-button ${isInWishlist ? 'active' : ''}`}
       onClick={handleWishlistToggle}
     >
-        <em className="ni ni-heart"></em>
+      <em className="ni ni-heart"></em>
     </button>
-  );
+  ) : null;
 };
 
 export default WishlistButton;
