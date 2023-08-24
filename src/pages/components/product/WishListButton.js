@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 const WishlistButton = ({ product, inWishlist, onToggleWishlist }) => {
+  if (!product) {
+    return null;
+  }
   const [isInWishlist, setIsInWishlist] = useState(inWishlist);
 
   const handleWishlistToggle = () => {
