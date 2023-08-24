@@ -20,6 +20,7 @@ export function formatDate(dateString) {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
+
   };
   
   return date.toLocaleString('en-US', options);
