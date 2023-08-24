@@ -12,8 +12,6 @@ const LoginModal = () => {
 
   const data = useSession();
 
-  console.log(data);
-
   const router = useRouter();
   const loginEndpoint = "authentication/login/";
 
@@ -63,6 +61,15 @@ const LoginModal = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const handleGoogleLogin = () => {
+    signIn("google");
+    console.log(data);
+  };
+
+  const handleFacebookLogin = () => {
+    signIn("facebook");
   };
 
   return (
@@ -129,9 +136,18 @@ const LoginModal = () => {
 
                   <button
                     className="outline-btn btn mt-5 w-100"
-                    onClick={() => signIn()}
+                    onClick={handleGoogleLogin}
+                    type=""
                   >
                     Login with Google
+                  </button>
+
+                  <button
+                    className="outline-btn btn mt-5 w-100"
+                    onClick={handleFacebookLogin}
+                    type=""
+                  >
+                    Login with Facebook
                   </button>
 
                   <button
