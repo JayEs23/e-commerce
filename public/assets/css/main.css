@@ -1,0 +1,313 @@
+
+html, body {
+  font-size: 14px;
+  margin: 0 !important; /* Center the content horizontally */
+  padding: 0 !important;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.page-container {
+  min-height: 100vh !important; /* Minimum height of the viewport (full screen height) */
+  min-width: 60vw;  /* Minimum width of the viewport (full screen width) */
+  padding: 0px; /* your padding value */
+  overflow: hidden;
+  flex: 1;
+  margin: 0px !important; /* Add some padding to keep content away from the edges */
+  box-sizing: border-box; /* Ensure padding is included in the container size */
+}
+.page-container .content {
+  min-height: 100vh !important; /* Minimum height of the viewport (full screen height) */
+  min-width: 100vw;  /* Minimum width of the viewport (full screen width) */
+  padding: 0px; /* your padding value */
+  flex: 1;
+  margin: 0px !important; /* Add some padding to keep content away from the edges */
+  box-sizing: border-box; /* Ensure padding is included in the container size */
+}
+
+.notification {
+  color: white;
+  text-decoration: none;
+  padding: 4px;
+  position: relative;
+  display: inline-block;
+  border: 1px solid #b5b5b6;
+  border-radius: 50%;
+}
+
+.font-sm{
+  font-size: 20px !important;
+  font-weight: bolder !important;
+}
+.text-notif:hover, .notification:hover {
+  background: #9881B8;
+  color: #fff !important;
+}
+.text-notif{
+  color:#9881B8;
+}
+.text-notif:hover{
+  color:#fff;
+}
+.notification .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  padding: 3px 5px;
+  border-radius: 16px;
+  background-color: #9881B8;
+  color: white;
+}
+.notif{
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: var(--primary, #9881B8);
+}
+
+.header {
+  background: #FFF;
+  box-shadow: 0px 4px 44px 0px rgba(114, 112, 112, 0.07);
+  width: 100%; /* Set width to 100% of viewport width */
+  /* max-width: 1440px; Set maximum width to 1440 pixels */
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.footer-main{
+  width: inherit !important;
+  flex-shrink: 0 !important;
+  background: #1B0C2E !important;
+}
+
+.h-100{
+  height: 100px !important;
+}
+.h-200{
+  height: 200px !important;
+}
+.h-300{
+  height: 300px !important;
+}
+.h-300{
+  height: 300px !important;
+}
+.h-400{
+  height: 400px !important;
+}
+.h-500{
+  height: 500px !important;
+}
+
+.hero-main{
+  border-radius: 4px !important;
+  background: linear-gradient(229deg, #6E0BEB 0%, #CD3434 100%) !important;
+}
+
+.btn-custom {
+  border-color: darkgray;
+  color: lightgray;
+}
+
+/* Optional: If you want to remove the default box-shadow for the button */
+.btn-custom:focus, .btn-custom:hover {
+  box-shadow: none;
+}
+
+.search{
+  top: 0;
+  left: 0;
+  border-radius: var(--br-3xs);
+  background-color: var(--main-white);
+  border: 1px solid var(--color-lightsteelblue);
+  box-sizing: border-box;
+  width: 397px;
+  height: 50px;
+  
+}
+
+.bg-gray{
+background-color: #f4f2f7 !important;
+}
+
+.custom-input {
+/* Reset the default browser styles for appearance */
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+
+/* Style the input element as desired */
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+outline: none; /* Remove the default focus outline */
+/* Add any other custom styles you want for the input */
+}
+
+/* Add a custom background image for the direction icons */
+.custom-input::-webkit-search-decoration,
+.custom-input::-webkit-search-cancel-button,
+.custom-input::-webkit-search-results-button,
+.custom-input::-webkit-search-results-decoration {
+display: none;
+}
+
+.btn-nav{
+border-radius: var(--br-3xs);
+background-color:#fff;
+border: 1px solid rgba(195,212,233,.4);
+box-sizing: border-box;
+width: 148px;
+height: 43.7px;
+opacity: .8;
+}
+
+.cart-item {
+display: flex;
+border-radius: 4px;
+padding: 10px;
+min-height: 200px;
+margin-bottom: 20px;
+margin-left: 10px;
+}
+
+.cart-item-image {
+width: 100%;
+height: 100%;
+object-fit: fill;
+margin-right: 0px;
+margin-left: 0px !important;
+}
+
+.cart-item-details {
+flex: 1;
+}
+
+.cart-item-title {
+font-size: 1.2rem;
+margin-bottom: 5px;
+}
+
+.cart-item-description {
+font-size: 0.9rem;
+color: #666;
+margin-bottom: 5px;
+}
+
+.cart-item-amount {
+font-size: 1.1rem;
+font-weight: bold;
+color: #fd5a33;
+margin-bottom: 10px;
+}
+
+.cart-item-quantity input {
+width: 40px;
+padding: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+text-align: center;
+}
+
+.cart-item-actions button {
+margin-right: 10px;
+}
+
+.cart-summary {
+background-color: #f5f5f5;
+padding: 20px;
+}
+
+.cart-summary-title {
+font-size: 1.2rem;
+margin-bottom: 15px;
+}
+
+.cart-summary-subtotal {
+font-size: 1.1rem;
+margin-bottom: 10px;
+}
+
+.cart-summary-discount {
+font-size: 0.9rem;
+color: #666;
+margin-bottom: 10px;
+}
+
+.cart-summary-total {
+font-size: 1.2rem;
+font-weight: bold;
+color: #fd5a33;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+
+.cart-summary-button {
+display: block;
+width: 100%;
+padding: 10px;
+background-color: #fd5a33;
+color: #fff;
+font-weight: bold;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.cart-summary-button:hover {
+background-color: #e6441a;
+}
+
+.text-truncate {
+display: -webkit-box;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+-webkit-line-clamp: 6; /* Number of lines to show */
+max-height: 3 * 1.2 * 1rem; /* 1.2rem line height for each line */
+}
+
+.wishlist-button {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: #e8dff7;
+border: 0px solid #ccc;
+border-radius: 50%;
+padding: 8px;
+color: white;
+transition: background-color 0.3s, color 0.3s;
+cursor: pointer;
+}
+
+.wishlist-button.active {
+background-color: #9881B8; /* Your primary color */
+color: white;
+}
+
+header{
+position: sticky !important;
+}
+
+.truncate-text{
+display: -webkit-box;
+text-overflow: ellipsis;
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+}
+
+.outline-btn {
+  border: 1px solid #b5b5b6;
+}
