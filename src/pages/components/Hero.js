@@ -10,9 +10,9 @@ const Hero = () => {
         <div className="col-md-6 d-flex align-items-stretch">
           <div className="text-white py-5">
             <div className="hero-content text-center">
-              <h1 className="display-4 text-white font-weight-bold">Flash Sale on all Items.</h1>
+              <h1 className="display-2 text-white">Flash Sale on all Items.</h1>
               <p className="lead">Enjoy 50% discount on all Items</p>
-              <button className="btn btn-outline-light btn-lg btn-rounded">
+              <button className="btn btn-outline-light btn-lg">
                 Get the best offers now <i className="fa fa-arrow-right"></i>
               </button>
             </div>

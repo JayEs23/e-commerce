@@ -109,7 +109,65 @@ const SearchPage = () => {
                 /> */}
                 <div className="row mt-3">
                   <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
-                    search sidebar goes here
+                    <div className="card">
+                    <div class="accordion pt-4" id="sideAccordion">
+                      <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="true" aria-controls="collapseOne">
+                            Category
+                          </button>
+                        </h2>
+                        <div id="category" class="accordion-collapse collapse show border-0" data-bs-parent="#sideAccordion">
+                          <div class="accordion-body border-0">
+                          </div>
+                        </div>
+                      </div>
+                        <div class="accordion-item border-0">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                              Brand
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div class="accordion-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item border-0">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#colors" aria-expanded="false" aria-controls="collapseThree">
+                              Colors
+                            </button>
+                          </h2>
+                          <div id="colors" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div class="accordion-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#price" aria-expanded="false" aria-controls="collapseThree">
+                              Price
+                            </button>
+                          </h2>
+                          <div id="price" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div class="accordion-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#reviews" aria-expanded="false" aria-controls="collapseThree">
+                              Reviews
+                            </button>
+                          </h2>
+                          <div id="reviews" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div class="accordion-body">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="col-md-9 rounded d-block">
                     <div className="row ">

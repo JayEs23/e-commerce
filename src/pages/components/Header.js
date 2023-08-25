@@ -30,39 +30,39 @@ const Header = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    const fetchRegister = async () => {
-      api
-        .post("authentication/register/", {
-          email: data?.user?.email,
-          password: data?.user?.email + data?.user?.id,
-          auth_provider: "google",
-        })
-        .then((response) => response.json)
-        .then((response) => {
-          if (
-            response.status === 400 ||
-            response.message ==
-              "custom user with this email address already exists."
-          ) {
-            const response = api.post("authentication/login/", {
-              email: data?.user?.email,
-              password: data?.user?.email + data?.user?.id,
-            });
-            console.log(response);
-          }
-        })
-        .catch(() => {
-          const response = api.post("authentication/login/", {
-            email: data?.user?.email,
-            password: data?.user?.email + data?.user?.id,
-          });
-          console.log(response);
-        });
-    };
+  // useEffect(() => {
+  //   const fetchRegister = async () => {
+  //     api
+  //       .post("authentication/register/", {
+  //         email: data?.user?.email,
+  //         password: data?.user?.email + data?.user?.id,
+  //         auth_provider: "google",
+  //       })
+  //       .then((response) => response.json)
+  //       .then((response) => {
+  //         if (
+  //           response.status === 400 ||
+  //           response.message ==
+  //             "custom user with this email address already exists."
+  //         ) {
+  //           const response = api.post("authentication/login/", {
+  //             email: data?.user?.email,
+  //             password: data?.user?.email + data?.user?.id,
+  //           });
+  //           console.log(response);
+  //         }
+  //       })
+  //       .catch(() => {
+  //         const response = api.post("authentication/login/", {
+  //           email: data?.user?.email,
+  //           password: data?.user?.email + data?.user?.id,
+  //         });
+  //         console.log(response);
+  //       });
+  //   };
 
-    fetchRegister();
-  }, [data]);
+  //   fetchRegister();
+  // }, [data]);
 
   console.log(isAuthenticated);
 

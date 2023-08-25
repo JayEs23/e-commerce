@@ -25,12 +25,12 @@ const SearchItemCard = ({ product }) => {
         {/* Wrap the card header in a Link */}
         <Link href={`/products/${slug}`}>
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <Image className="img-fluid w-100 h-200" src={primary_image} width={100} height={100} alt={product_name} loading="lazy" />
+            <Image className="img-fluid w-100" style={{height:"230px",objectFit:"cover"}} src={primary_image} width={100} height={100} alt={product_name} />
           </div>
         </Link>
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
           <div className="row">
-              <h6 className="text-truncate mb-3">{product_name}</h6>
+              <h6 className="text-truncate font-sm mb-3">{product_name}</h6>
               <div className="d-flex justify-content-left">
                 <p className="text-truncate">{description}</p>
               </div>
@@ -46,8 +46,8 @@ const SearchItemCard = ({ product }) => {
                 </g>
               </svg>
             </div>
-            <div className="col-8">
-              <span className="text-primary justify-content-right p-0 text-nowrap">
+            <div className="col-7">
+              <span className="text-primary justify-content-end font-sm p-0 text-nowrap">
                 {parseFloat(product_price).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}
               </span>
             </div>
