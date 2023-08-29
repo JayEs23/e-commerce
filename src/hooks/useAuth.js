@@ -21,10 +21,14 @@ const useAuth = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await api.get('authentication/user_profile/');
-      setUserProfile(response.data);
+      setUserProfile(response?.data);
+      Cookies.set("profile",response?.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching user profile:', error);
+      if(error?.response?.data?.details === "Invalid token."){
+        logout();
+      }
     }
   };
 
@@ -35,6 +39,7 @@ const useAuth = () => {
   };
 
   const logout = () => {
+    alert("Loging out");
     Cookies.remove('authToken');
     setIsAuthenticated(false);
     setUserProfile(null);

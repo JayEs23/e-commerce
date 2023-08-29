@@ -44,6 +44,14 @@ const Sidebar = ({userProfile}) => {
             ))}
           </ul>
         </div>
+        <p className="mx-4 mt-4">My Settings</p>
+        <ul className="user-nav">
+          <li  key="../../account/address" className={router.pathname === "/account/address" ? 'active' : ''}>
+                  <a href="../../account/address">
+                    Address box
+                  </a>
+              </li>
+          </ul>
       </div></>
   );
 };

@@ -44,7 +44,7 @@ function mobileNavResize() {
   navbar = document.querySelector("." + _navbar),
   navbar_toggle = document.querySelector(".menu-toggler"),
   menu_toggle = document.querySelectorAll(".menu-toggle");
-  console.log(navbar_toggle);
+  // console.log(navbar_toggle);
   window.innerWidth <= 1201
     ? navbar.classList.add("mobile-menu")
     : (navbar.classList.remove("mobile-menu", "active"),

@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import api from '@/utils/api';
 import Link from 'next/link';
@@ -10,7 +12,7 @@ const Orders = ({ Orders }) => {
       orderNumber: "ORD12345",
       datePlaced: "2023-07-15",
       totalAmount: 150.99,
-      productImage: "../../product.png",
+      productImage: "/product.png",
       productName: "Product 1",
       productDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       productAmount: 50.99,

@@ -17,8 +17,10 @@ const Header = () => {
 
   useEffect(() => {
     const fetchuserProfileData = async () => {
+      if(!isAuthenticated) return;
       try {
         const response = await api.get("authentication/user_profile");
+        console.log("Profile",response.data);
         setUserProfile(response.data);
       } catch (error) {
         console.error(error);
@@ -82,7 +84,7 @@ const Header = () => {
               <div className="header-logo mx-4">
                 <a href="/" className="logo-link">
                   <Image
-                    width={200}
+                    width={170}
                     height={200}
                     className="img-fluid logo-dark logo-img"
                     src="/inshopperlogo-light.png"
@@ -90,7 +92,7 @@ const Header = () => {
                   />
 
                   <Image
-                    width={200}
+                    width={170}
                     height={200}
                     className="img-fluid logo-light logo-img"
                     src="/inshopperlogo-dark.png"
@@ -156,10 +158,10 @@ const Header = () => {
                       <li>
                         <a
                           href="#"
-                          className="dropdown-item card-generic-item theme-toggler"
+                          className="dropdown-item card-generic-item "
                           title="Toggle Dark/Light mode"
                         >
-                          <em className="ni ni-moon me-2"></em> Dark Mode
+                          <em className="ni ni-cart me-2"></em> Dark Mode
                         </a>
                       </li>
                       <li>
@@ -240,7 +242,7 @@ const Header = () => {
                         <li>
                           <a
                             className="dropdown-item card-generic-item"
-                            href="../user/profile"
+                            href="../account/profile"
                           >
                             <em className="ni ni-user me-2"></em> Profile
                           </a>
@@ -248,7 +250,7 @@ const Header = () => {
                         <li>
                           <a
                             className="dropdown-item card-generic-item"
-                            href="../../user/dashboard"
+                            href="../../account/dashboard"
                           >
                             <em className="ni ni-dashboard me-2"></em> Dashboard
                           </a>
@@ -257,10 +259,10 @@ const Header = () => {
                         <li>
                           <a
                             href="#"
-                            className="dropdown-item card-generic-item theme-toggler"
-                            title="Toggle Dark/Light mode"
+                            className="dropdown-item card-generic-item"
+                            title="Orders"
                           >
-                            <em className="ni ni-moon me-2"></em> Dark Mode
+                            <em className="ni ni-cart me-2"></em> Orders
                           </a>
                         </li>
                         <li>
@@ -271,7 +273,7 @@ const Header = () => {
                             className="dropdown-item card-generic-item"
                             onClick={logout}
                           >
-                            <em className="ni ni-power me-2"></em> Disconnect
+                            <em className="ni ni-power me-2"></em> logout
                           </a>
                         </li>
                       </ul>
