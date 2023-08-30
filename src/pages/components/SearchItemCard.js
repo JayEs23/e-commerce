@@ -4,7 +4,7 @@ import Image from 'next/image';
 import AddToCartButton from './cart/AddToCartButton';
 import Bargain from './product/Bargain';
 
-const SearchItemCard = ({ product }) => {
+const SearchItemCard = ({ product, cartData }) => {
   if (!product) {
     return <div>No product details available.</div>;
   }
@@ -58,7 +58,7 @@ const SearchItemCard = ({ product }) => {
           
         </div>
         <div className="row mt-4">
-        <Bargain product={product} />
+        <Bargain product={product} cart={cartData}/>
         <AddToCartButton item={product} />
           {/* <div className="row mt-2 p-0 mx-auto">
             <AddToCartButton item={product} />

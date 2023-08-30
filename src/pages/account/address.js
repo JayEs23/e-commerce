@@ -40,7 +40,9 @@ const AddressPage = () => {
     try {
       const response = await api.post('/customer/shipping-address/', formData);
       onAdd(response.data); // Call the provided onAdd function to update the list
-      // Clear the form data after successful submission
+      handleEdit(false);
+      fetchAddresses();
+      alert("Edited");
       setFormData({
         first_name: '',
         last_name: '',
@@ -53,6 +55,7 @@ const AddressPage = () => {
         delivery_address: '',
         billing_address: '',
       });
+
     } catch (error) {
       console.error('Error adding new address:', error);
     }
@@ -74,6 +77,7 @@ const AddressPage = () => {
     try {
       const response = await api.get('authentication/user_profile');
       setUserProfile(response.data);
+      console.log("User Profile",response.data);
     } catch (error) {
       console.error('Error fetching user profile:', error);
     } finally {
