@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, InputGroup, FormControl, Tooltip } from 'react-bootstrap';
 import api from '@/utils/api';
-import { addToCartEndpoint } from '@/utils/apiConfig';
 
 const AddToCartButton = ({ item }) => {
   const [showInput, setShowInput] = useState(false);
@@ -22,7 +21,7 @@ const AddToCartButton = ({ item }) => {
     setIsLoading(true);
 
     try {
-      const response = await api.post(addToCartEndpoint, {
+      const response = await api.post("/order/cart", {
         productId: item.id,
         quantity: quantity,
       });

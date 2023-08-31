@@ -62,7 +62,7 @@ export default function Home() {
                   <Sidebar userProfile={userData} />
                 </div>
                 <div className="col-lg-8 bg-white">
-                  {!editing ?(
+                  {!editing && userData ?(
                     <AccountDashboard profile={userData} handleEdit={handleEdit} />
                   ):(
                     <ProfileForm userProfile={userData} updateProfileFunction={updateProfile}/>
