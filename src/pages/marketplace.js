@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Markeplace() {
   const productApi = ProductApi();
   const [products, setProducts] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     
@@ -24,12 +25,16 @@ export default function Markeplace() {
     fetchProducts(); // Fetch Products on component mount
   }, [productApi]);
 
+  useEffect(() => {
+
+  },[])
  
+
   return (
     <>
       <div className="page-container">
         <Header />
-        <div className="content">
+        <div className="content bg-gray">
           <div className="hero-wrap">
             <div className="hero-content text-start py-0">
               <div className="row bg-gray">
@@ -46,7 +51,7 @@ export default function Markeplace() {
             <div className="container">
               <div className="filter-box">
                 <div className="mb-4">
-                  <h2 className="px-5">Discounted Products</h2>
+                  <h2 className="px-5"> Products</h2>
                 </div>
 
               </div>
@@ -64,7 +69,28 @@ export default function Markeplace() {
               </div>
             </div>
           </section>
-          
+          <section className="explore-section bg-gray mb-4">
+            <div className="container">
+              <div className="filter-box">
+                <div className="mb-4">
+                  <h2 className="px-5"> Products</h2>
+                </div>
+
+              </div>
+              <div className="gap-2x"></div>
+              <div className=" row g-gs">
+              {products.length === 0 ? (
+                  <div className="col-md-12">
+                    <h4 className="text-danger text-center">No Products available</h4>
+                  </div>
+                ) : (
+                  products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                )}
+              </div>
+            </div>
+          </section>
         </div>
 
       </div>

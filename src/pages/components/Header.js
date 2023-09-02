@@ -17,18 +17,18 @@ const Header = () => {
 
   useEffect(() => {
     const fetchuserProfileData = async () => {
-      if(!isAuthenticated) return;
       try {
         const response = await api.get("authentication/user_profile");
         console.log("Profile",response.data);
         setUserProfile(response.data);
       } catch (error) {
         console.error(error);
+        setUserProfile([]);
       }
     };
 
     fetchuserProfileData();
-  }, []);
+  }, [userProfile]);
 
   console.log(data);
 

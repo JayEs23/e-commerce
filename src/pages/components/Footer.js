@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-img-element */
-
+//src/pages/components/Footer.js
 import Image from "next/image";
 
 const Footer = () => {

@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import Cookies from "js-cookie";
 
+const fetchUserProfile = async () => {
+  try {
+    const response = await api.get('authentication/user_profile/');
+    setUserProfile(response?.data);
+    Cookies.set("profile",response?.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    if(error?.response?.data?.details === "Invalid token."){
+      logout();
+    }
+  }
+};
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
@@ -16,21 +29,9 @@ const useAuth = () => {
     };
 
     checkAuthStatus();
-  }, []);
+  }, [fetchUserProfile]);
 
-  const fetchUserProfile = async () => {
-    try {
-      const response = await api.get('authentication/user_profile/');
-      setUserProfile(response?.data);
-      Cookies.set("profile",response?.data);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-      if(error?.response?.data?.details === "Invalid token."){
-        logout();
-      }
-    }
-  };
+  
 
   const login = (token) => {
     Cookies.set('authToken', token);

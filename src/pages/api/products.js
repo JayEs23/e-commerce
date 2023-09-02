@@ -3,22 +3,22 @@ import api from '@/utils/api'; // Make sure this import is correct
 import productsData from '../../../public/products.json';
 
 const ProductApi = () => {
-  const [products,setProducts] = useState(productsData || []);
+  const [products,setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if(products.length > 1) return;
-  //     try {
-  //       const response = await api.get('product/all_products/');
-  //       const data = await response.data;
-  //       setProducts(data);
-  //     } catch (error) {
-  //       console.error('Error fetching products:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      if(products.length > 1) return;
+      try {
+        const response = await api.get('product/all_products/');
+        const data = await response.data;
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
-  //   fetchData();
-  // }, [products]);
+    fetchData();
+  }, [products]);
 
   // Helper function to filter featured products
   // const getFeaturedProducts = async () => {

@@ -16,7 +16,7 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
   
   return (
     <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
-      <div className="card product-item border-0 mb-4">
+      <div className="card product-item border-0 mb-4 p-2">
         <Link href={`/products/${slug}`}>
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             <img className="img-fluid w-100 h-300" src={`${image_one}`}  alt="" loading="lazy" />

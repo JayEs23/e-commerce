@@ -21,23 +21,20 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await productApi.getProductById(id);
-      setProduct(response);
-
-      // fetchProducts(); //
-      // try {
-      //   const response = await api.get(`/product/product/${id}/`);
-      //   const productData = await response.data;
-      //   setProduct(productData);
-      // } catch (error) {
-      //   console.error('Error fetching product by ID:', error);
-      // }
+      try {
+        // Use the productApi module to get product by ID
+        const productData = await productApi.getProductById(id);
+        console.log("Data",productData);
+        setProduct(productData);
+      } catch (error) {
+        console.error('Error fetching product by ID:', error);
+      }  
     };
 
     if (id && !product) {
       fetchProduct();
     }
-  }, [id,productApi,product]);
+  }, [id,productApi]);
 
   // if (!product) {
   //   return (
@@ -84,10 +81,10 @@ const ProductDetailsPage = () => {
                 <p>Size</p>
                 <input className="form-control" type="number" placeholder="3" style={{backgroundColor:"inherit", border:"1px solid gray", borderRadius:"4px"}} />
               </div>
-              {/* <div className="col-2 pt-2">
+              <div className="col-2 pt-2">
                 <p>Quantity</p>
-                <input className="form-control" type="number" placeholder="3" style={{backgroundColor:"inherit", border:"1px solid gray", borderRadius:"4px"}} />
-              </div> */}
+                <input className="form-control" type="number" placeholder="1" style={{backgroundColor:"inherit", border:"1px solid gray", borderRadius:"4px"}} />
+              </div>
             </div>
 
               

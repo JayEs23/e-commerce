@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
-import { Button, InputGroup, FormControl, Spinner, Modal } from 'react-bootstrap';
 import api from "@/utils/api";
+import AddToCartButton from '../cart/AddToCartButton';
+import { Toast } from 'react-bootstrap';
 
 const Bargain = ({ product, cart }) => {
   const [bargainMode, setBargainMode] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [bargainAmount, setBargainAmount] = useState('');
+  const [bargainAmount, setBargainAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(product?.product_price);
-  const [isBargaining, setIsBargaining] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showAmount, setShowAmount] = useState(null);
   const [cartData, setCartData] = useState(cart ?? []);
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState('success');
 
   const handleBargainButtonClick = () => {
     setBargainMode(true);
+    setShowAmount(false);
+    setShowToast(true);
+    setToastType('success');
+
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   const handleQuantityChange = (event) => {
@@ -25,8 +36,14 @@ const Bargain = ({ product, cart }) => {
     setBargainAmount(event.target.value);
   };
 
-  const handleContinueClick = () => {
-    setShowModal(true);
+  const handleContinueClick = (id) => {
+    alert(id);
+    if(id == 1){
+      setShowAmount(true);
+    }else if(id == 2){
+      setShowModal(true);
+    }
+    
   };
 
   const handleCloseModal = () => {
@@ -34,8 +51,6 @@ const Bargain = ({ product, cart }) => {
   };
 
   const handleSendBargain = () => {
-    setIsBargaining(true);
-
     // Replace with your actual API call logic
     const requestData = {
       quantity: quantity,
@@ -48,65 +63,106 @@ const Bargain = ({ product, cart }) => {
 
     api.post("/order/cart_items/", requestData)
       .then(() => {
-        setIsBargaining(false);
         setBargainMode(false);
-        setBargainAmount('');
         setShowModal(false);
+        setQuantity(1);
+        setBargainAmount('');
       })
       .catch((error) => {
         console.error('Error sending bargain request:', error);
-        setIsBargaining(false);
       });
   };
 
   return (
-    <div className="col-md-12 bargain-container px-4">
+    <><div className="col-12 bargain-container px-4">
       {bargainMode ? (
-        <div className="bargain-input">
-          <InputGroup>
-            <FormControl
+        <div className=" row justify-content-between">
+          {showAmount == false ?(<>
+          <div className="col-3 mx-2 py-4">
+            <input
               type="number"
               placeholder="Enter quantity"
+              className="form-control form-control-md"
               value={quantity}
+              inputMode="numeric"
+              style={{
+                appearance: 'textfield', // For Safari support
+                '-moz-appearance': 'textfield', // For Firefox support
+                width: '100%',
+                padding: '8px',
+                background: 'red !important', // Set the background color
+                border: '1px solid #ccc', // Set the border style
+                borderRadius: '4px', // Set the border radius
+                fontSize: '14px', // Set the font size
+              }}
               onChange={handleQuantityChange}
             />
-          </InputGroup>
-          <p>Total Price: {totalPrice}</p>
-          <InputGroup>
-            <FormControl
+          </div>
+          <div className="col-7 py-4 mx-2 justify-content-end"><h4 className="text-primary my-2">{parseFloat(totalPrice).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</h4></div>
+          <div className="col-11 mx-2">
+            <button className="btn btn-primary w-100" onClick={() =>handleContinueClick(1)}>
+              Continue
+            </button>
+          </div></>):(
+            <>
+            <div className="col-11 mx-2 my-2">
+            <input
               type="number"
               placeholder="Bargain amount"
+              className="form-control form-control-md"
               value={bargainAmount}
               onChange={handleBargainAmountChange}
+
             />
-          </InputGroup>
-          <Button variant="primary-outline" onClick={handleContinueClick}>
-            Continue
-          </Button>
+          </div>
+          <div className="col-11 mx-2">
+            <button className="btn btn-primary w-100" onClick={() =>handleContinueClick(2)}>
+              Continue
+            </button>
+          </div>
+            </>
+          )}
+          
+          
         </div>
       ) : (
-        <Button variant="secondary" className="btn-primary-50 w-100 text-sm" onClick={handleBargainButtonClick}>
+        <button className="btn btn-secondary btn-lg w-100 px-0 mr-4" onClick={handleBargainButtonClick}>
           Bargain
-        </Button>
+        </button>
       )}
 
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Bargain</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to send this bargain request?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleSendBargain}>
-            Send Bargain
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Confirm Bargain</h4>
+              <span className="close" onClick={handleCloseModal}>&times;</span>
+            </div>
+            <div className="modal-body">
+              <p>Are you sure you want to send this bargain request?</p>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-cancel" onClick={handleCloseModal}>Cancel</button>
+              <button className="btn-send" onClick={handleSendBargain}>Send Bargain</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+    <div className="col-12 bargain-container ">
+    {showAmount == null && (
+      <AddToCartButton item={product} />
+    )}
+    </div>
+    <Toast show={showToast} className="" onClose={() => setShowToast(false)} delay={3000} autohide>
+    <Toast.Header>
+      <strong className="me-auto">Bargain Placed</strong>
+      <button type="button" className="btn-close" onClick={() => setShowToast(false)}></button>
+    </Toast.Header>
+    <Toast.Body>Your bargain has been placed successfully.</Toast.Body>
+  </Toast>
+    </>
+    
   );
 };
 

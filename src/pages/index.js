@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
+//src/page/index.js
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
@@ -62,7 +63,7 @@ export default function Home() {
                   largest nft marketplace
                 </h6> */}
                 <h1 className="hero-title text-primary">
-                  The Online sales and shopping platform
+                  The Online sales & shopping platform
                 </h1>
                 <p className="mb-4">
                   Embrace the Joy of online shopping and indulge in our exclusive deals. Start your retail journey today.
