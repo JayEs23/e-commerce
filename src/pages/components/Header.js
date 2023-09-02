@@ -156,7 +156,7 @@ const Header = () => {
                         </a>
                       </li>
 
-                      <li>
+                      {/* <li>
                         <a
                           href="#"
                           className="dropdown-item card-generic-item "
@@ -164,7 +164,7 @@ const Header = () => {
                         >
                           <em className="ni ni-cart me-2"></em> Dark Mode
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -213,14 +213,23 @@ const Header = () => {
                   <li>
                     <a
                       href="#"
-                      className="theme-toggler"
-                      title="Toggle Dark/Light mode"
+                      className="icon-btn"
+                      title=""
                     >
                       <span>
-                        <em className="ni ni-moon icon theme-toggler-show"></em>
-                        <em className="ni ni-sun icon theme-toggler-hide"></em>
+                        <em className="ni ni-bell icon"></em>
                       </span>
-                      <span className="theme-toggler-text">Dark Mode</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="icon-btn"
+                      title=""
+                    >
+                      <span>
+                        <em className="ni ni-cart icon"></em>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -284,30 +293,28 @@ const Header = () => {
                   <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
+                  {isAuthenticated && (<>
                   <li className="menu-item has-sub">
                     <a href="#" className="menu-link menu-toggle text-nowrap">
                       My Account
                     </a>
                     <div className="menu-sub">
                       <ul className="menu-list">
-                        {/* <li className="menu-item">
-                          <a href="index.html" className="menu-link">
-                            Home Page 1
+                        <li className="menu-item">
+                          <a href="" className="menu-link">
+                          <em className="ni ni-user-fill icon"></em> &nbsp;
+                            Profile
                           </a>
                         </li>
-                        <li className="menu-item">
-                          <a href="index-2.html" className="menu-link">
-                            Home Page 2
+                       <li className="menu-item">
+                          <a href="" className="menu-link">
+                          <em className="ni ni-list-fill icon"></em> &nbsp;
+                            Orders
                           </a>
                         </li>
-                        <li className="menu-item">
-                          <a href="index-3.html" className="menu-link">
-                            Home Page 3
-                          </a>
-                        </li> */}
                       </ul>
                     </div>
-                  </li>
+                  </li></>)}
                   <li className="menu-item has-sub">
                     <a
                       href="#"
