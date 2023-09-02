@@ -33,7 +33,7 @@ const Header = () => {
   console.log(data);
 
   useEffect(() => {
-    if(isAuthenticated) return;
+    // if(isAuthenticated) return;
     const fetchRegister = async () => {
       api
         .post("authentication/register/", {

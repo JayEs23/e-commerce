@@ -34,7 +34,7 @@ const ProductDetailsPage = () => {
     if (id && !product) {
       fetchProduct();
     }
-  }, [id,productApi]);
+  }, [id,product,productApi]);
 
   // if (!product) {
   //   return (
