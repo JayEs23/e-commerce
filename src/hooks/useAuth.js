@@ -20,6 +20,13 @@ const useAuth = () => {
     }
   }, [logout]); // Include logout as a dependency
 
+  const logout = useCallback(() => {
+    alert("Logging out");
+    Cookies.remove('authToken');
+    setIsAuthenticated(false);
+    setUserProfile(null);
+  }, []); // No dependencies for logout
+
   useEffect(() => {
     const checkAuthStatus = () => {
       const storedAuthToken = Cookies.get('authToken');
@@ -36,13 +43,6 @@ const useAuth = () => {
     Cookies.set('authToken', token);
     setIsAuthenticated(true);
     fetchUserProfile();
-  };
-
-  const logout = () => {
-    alert("Logging out");
-    Cookies.remove('authToken');
-    setIsAuthenticated(false);
-    setUserProfile(null);
   };
 
   return { isAuthenticated, userProfile, login, logout, fetchUserProfile };
