@@ -12,7 +12,7 @@ const CartPage = () => {
 
   useEffect(() =>{
     const fetchAddresses = async () =>{
-      if(!Cookies("authToken")) return;
+      if(!Cookies.get("authToken")) return;
       try {
         response = await api.get("customer/shipping-address");
         setAddress(reponse.data);

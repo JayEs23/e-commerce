@@ -18,13 +18,14 @@ const NotificationModal = () => {
 
 
   const handleModalOpen = () => {
-    alert("nna");
     setShowModal(true);
   };
 
   const handleModalClose = () => {
     setShowModal(false);
   };
+
+  
 
 
   return (
@@ -62,7 +63,30 @@ const NotificationModal = () => {
                 </button>
               </div>
               <div className="modal-body">
-                
+                <div class="card-follow d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="avatar flex-shrink-0 me-2 bg-danger-light">
+                          <em className="ni ni-check-thick text-danger p-4"></em>
+                        </a>
+                        <div class="flex-grow-1">
+                            <p class="fw-semibold fs-14 lh"><a href="#" class="text-black">Order Cancelled</a></p>
+                            <span class="d-block fw-medium fs-15">Order has been Cancelled</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn ">Now</button>
+                </div>
+                <div class="card-follow d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="avatar flex-shrink-0 me-2 bg-success-light">
+                          <em className="ni ni-check-thick text-success p-4"></em>
+                        </a>
+                        <div class="flex-grow-1">
+                            <p class="fw-semibold fs-14 lh"><a href="#" class="text-black">Bargain Accepted</a></p>
+                            <span class="d-block fw-medium fs-15">Order has been Cancelled</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn ">Now</button>
+                </div>
               </div>
             </div>
           </div>

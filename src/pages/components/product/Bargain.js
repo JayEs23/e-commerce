@@ -6,7 +6,7 @@ import { Toast } from 'react-bootstrap';
 const Bargain = ({ product, cart }) => {
   const [bargainMode, setBargainMode] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [bargainAmount, setBargainAmount] = useState(0);
+  const [bargainAmount, setBargainAmount] = useState("");
   const [totalPrice, setTotalPrice] = useState(product?.product_price);
   const [showModal, setShowModal] = useState(false);
   const [showAmount, setShowAmount] = useState(null);
@@ -17,9 +17,6 @@ const Bargain = ({ product, cart }) => {
   const handleBargainButtonClick = () => {
     setBargainMode(true);
     setShowAmount(false);
-    setShowToast(true);
-    setToastType('success');
-
 
     setTimeout(() => {
       setShowToast(false);
@@ -37,7 +34,6 @@ const Bargain = ({ product, cart }) => {
   };
 
   const handleContinueClick = (id) => {
-    alert(id);
     if(id == 1){
       setShowAmount(true);
     }else if(id == 2){
@@ -48,6 +44,7 @@ const Bargain = ({ product, cart }) => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setBargainMode(false);
   };
 
   const handleSendBargain = () => {
@@ -67,6 +64,7 @@ const Bargain = ({ product, cart }) => {
         setShowModal(false);
         setQuantity(1);
         setBargainAmount('');
+        showToast(true);
       })
       .catch((error) => {
         console.error('Error sending bargain request:', error);
@@ -74,11 +72,11 @@ const Bargain = ({ product, cart }) => {
   };
 
   return (
-    <><div className="col-12 bargain-container px-4">
+    <><div className="col-md-12">
       {bargainMode ? (
         <div className=" row justify-content-between">
           {showAmount == false ?(<>
-          <div className="col-3 mx-2 py-4">
+          <div className="col-3 mx-2 ">
             <input
               type="number"
               placeholder="Enter quantity"
@@ -98,62 +96,67 @@ const Bargain = ({ product, cart }) => {
               onChange={handleQuantityChange}
             />
           </div>
-          <div className="col-7 py-4 mx-2 justify-content-end"><h4 className="text-primary my-2">{parseFloat(totalPrice).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</h4></div>
+          <div className="col-7 py-4 mx-2 justify-content-end">
+            <h4 className="text-primary my-2">{parseFloat(totalPrice).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</h4>
+          </div>
           <div className="col-11 mx-2">
             <button className="btn btn-primary w-100" onClick={() =>handleContinueClick(1)}>
               Continue
             </button>
           </div></>):(
             <>
-            <div className="col-11 mx-2 my-2">
-            <input
-              type="number"
-              placeholder="Bargain amount"
-              className="form-control form-control-md"
-              value={bargainAmount}
-              onChange={handleBargainAmountChange}
+            <div className="col-11 mx-2">
+              <input
+                type="number"
+                placeholder="Bargain amount"
+                className="form-control form-control-md"
+                value={bargainAmount}
+                onChange={handleBargainAmountChange}
 
-            />
-          </div>
-          <div className="col-11 mx-2">
-            <button className="btn btn-primary w-100" onClick={() =>handleContinueClick(2)}>
-              Continue
-            </button>
-          </div>
+              />
+            </div>
+            <div className="col-11 mx-2">
+              <button className="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#confirmModal"  onClick={() =>handleContinueClick(2)}>
+                Continue
+              </button>
+            </div>
             </>
           )}
           
           
         </div>
       ) : (
-        <button className="btn btn-secondary btn-lg w-100 px-0 mr-4" onClick={handleBargainButtonClick}>
-          Bargain
-        </button>
+        <div className="col-lg-11 mx-0">
+          <button className="btn btn-secondary btn-lg w-100 px-4" style={{minWidth:"100%", margin:"4px"}} onClick={handleBargainButtonClick}>
+            Bargain
+          </button>
+        </div>
       )}
 
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Confirm Bargain</h4>
-              <span className="close" onClick={handleCloseModal}>&times;</span>
-            </div>
-            <div className="modal-body">
-              <p>Are you sure you want to send this bargain request?</p>
-            </div>
-            <div className="modal-footer">
-              <button className="btn-cancel" onClick={handleCloseModal}>Cancel</button>
-              <button className="btn-send" onClick={handleSendBargain}>Send Bargain</button>
+      {showModal &&( 
+        <div class="modal d-block" id="confirmModal" tabIndex="-1" role="dialog" aria-hidden="true" style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                  <img src="images/thumb/exclamation-circle-solid.svg" alt="" class="mb-3" />
+                  <h4 class="modal-title mb-2">Bargain !</h4>
+                  <h6 class="modal-text text-danger">Are you sure you want bargain {parseFloat(bargainAmount).toLocaleString("en-NG", { style: "currency", currency: "NGN" })} for {quantity} of this product?</h6>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" onClick={handleCloseModal}>Cancel</button>
+                <button type="button" class="btn btn-sm btn-success" onClick={handleSendBargain}>Yes, Send Bargain</button></div>
             </div>
           </div>
         </div>
+
       )}
+       
+        
     </div>
-    <div className="col-12 bargain-container ">
-    {showAmount == null && (
+    {!bargainMode && (
       <AddToCartButton item={product} />
     )}
-    </div>
+    
     <Toast show={showToast} className="" onClose={() => setShowToast(false)} delay={3000} autohide>
     <Toast.Header>
       <strong className="me-auto">Bargain Placed</strong>
