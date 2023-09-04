@@ -30,41 +30,41 @@ const Header = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    const fetchRegister = async () => {
-      api
-        .post("authentication/register/", {
-          email: data?.user?.email,
-          password: data?.user?.email + data?.user?.id,
-          auth_provider: "google",
-        })
-        .then((response) => response.json)
-        .then((response) => {
-          if (
-            response.status === 400 ||
-            response.message ==
-              "custom user with this email address already exists."
-          ) {
-            const response = api.post("authentication/login/", {
-              email: data?.user?.email,
-              password: data?.user?.email + data?.user?.id,
-            });
-            console.log(response);
-          }
-        })
-        .catch(() => {
-          const response = api.post("authentication/login/", {
-            email: data?.user?.email,
-            password: data?.user?.email + data?.user?.id,
-          });
-          console.log(response);
-        });
-    };
+  // useEffect(() => {
+  //   const fetchRegister = async () => {
+  //     api
+  //       .post("authentication/register/", {
+  //         email: data?.user?.email,
+  //         password: data?.user?.email + data?.user?.id,
+  //         auth_provider: "google",
+  //       })
+  //       .then((response) => response.json)
+  //       .then((response) => {
+  //         if (
+  //           response.status === 400 ||
+  //           response.message ==
+  //             "custom user with this email address already exists."
+  //         ) {
+  //           const response = api.post("authentication/login/", {
+  //             email: data?.user?.email,
+  //             password: data?.user?.email + data?.user?.id,
+  //           });
+  //           console.log(response);
+  //         }
+  //       })
+  //       .catch(() => {
+  //         const response = api.post("authentication/login/", {
+  //           email: data?.user?.email,
+  //           password: data?.user?.email + data?.user?.id,
+  //         });
+  //         console.log(response);
+  //       });
+  //   };
 
-    fetchRegister();
-  }, []);
+  //   fetchRegister();
+  // }, []);
 
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -166,10 +166,7 @@ const Header = () => {
                         <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <a
-                          className="dropdown-item card-generic-item"
-                          href="#"
-                        >
+                        <a className="dropdown-item card-generic-item" href="#">
                           <em className="ni ni-power me-2"></em> Logout
                         </a>
                       </li>
@@ -322,7 +319,12 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div className="modal fade" id="moreModal" tabIndex="-1" aria-hidden="true">
+      <div
+        className="modal fade"
+        id="moreModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
         <div className="modal-dialog modal-dialog-top">
           <div className="modal-content">
             <div className="modal-header">
