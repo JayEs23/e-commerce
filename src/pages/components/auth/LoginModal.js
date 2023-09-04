@@ -45,7 +45,7 @@ const LoginModal = () => {
       window.location.reload();
       // You can redirect the user to another page after successful login if needed
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       setError('Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
@@ -63,8 +63,8 @@ const LoginModal = () => {
   return (
     <>
       {/* Button to open the login modal */}
-      <button className="icon-btn mx-4" onClick={handleModalOpen}>
-        <em className="ni ni-user-c"></em>
+      <button className="btn btn-primary mx-4" onClick={handleModalOpen}>
+        Login
       </button>
 
       {/* Login Modal */}
@@ -115,7 +115,8 @@ const LoginModal = () => {
                   <p className="mt-3">
                     Don`&lsquo;`t have an account? 
                     <Link href="/register" className="btn-link">
-                       Register
+
+                       Sign Up
                     </Link>
                   </p>
                 </form>

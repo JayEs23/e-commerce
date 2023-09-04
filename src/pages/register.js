@@ -37,7 +37,7 @@ const RegisterPage = () => {
     setSuccessMessage("");
     setIsLoading(true); // Start loading
     try {
-      const response = api.post("authentication/register/", formData);
+      const response = await api.post("authentication/register/", formData);
 
       if (response.status === 200) {
         setSuccessMessage("Registration successful!"); // Set success message

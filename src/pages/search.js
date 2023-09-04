@@ -13,6 +13,8 @@ const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState(search || '');
   const [searchResults, setSearchResults] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  const [cart,setCart]= useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,6 +28,21 @@ const SearchPage = () => {
     };
 
     fetchData();
+  }, []);
+  
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await api.get('order/cart/');
+        const data = await response.data;
+        console.log("VCart Data",data);
+        setCart(data);
+      } catch (error) {
+        console.error('Error fetching cart:', error);
+      }
+    };
+
+    fetchCart();
   }, []);
 
   const handleSortChange = (e) => {
@@ -173,7 +190,7 @@ const SearchPage = () => {
                     <div className="row ">
                     {searchResults.length > 0 ? (
                       searchResults.map((product) => (
-                        <SearchItemCard key={product.id} product={product} />
+                        <SearchItemCard key={product.id} product={product} cartData={cart} />
                       ))
                     ) : (
 

@@ -19,50 +19,53 @@ const Header = () => {
     const fetchuserProfileData = async () => {
       try {
         const response = await api.get("authentication/user_profile");
+        console.log("Profile",response.data);
         setUserProfile(response.data);
       } catch (error) {
         console.error(error);
+        setUserProfile([]);
       }
     };
 
     fetchuserProfileData();
-  }, []);
+  }, [userProfile]);
 
   console.log(data);
 
-  // useEffect(() => {
-  //   const fetchRegister = async () => {
-  //     api
-  //       .post("authentication/register/", {
-  //         email: data?.user?.email,
-  //         password: data?.user?.email + data?.user?.id,
-  //         auth_provider: "google",
-  //       })
-  //       .then((response) => response.json)
-  //       .then((response) => {
-  //         if (
-  //           response.status === 400 ||
-  //           response.message ==
-  //             "custom user with this email address already exists."
-  //         ) {
-  //           const response = api.post("authentication/login/", {
-  //             email: data?.user?.email,
-  //             password: data?.user?.email + data?.user?.id,
-  //           });
-  //           console.log(response);
-  //         }
-  //       })
-  //       .catch(() => {
-  //         const response = api.post("authentication/login/", {
-  //           email: data?.user?.email,
-  //           password: data?.user?.email + data?.user?.id,
-  //         });
-  //         console.log(response);
-  //       });
-  //   };
+  useEffect(() => {
+    // if(isAuthenticated) return;
+    const fetchRegister = async () => {
+      api
+        .post("authentication/register/", {
+          email: data?.user?.email,
+          password: data?.user?.email + data?.user?.id,
+          auth_provider: "google",
+        })
+        .then((response) => response.json)
+        .then((response) => {
+          if (
+            response.status === 400 ||
+            response.message ==
+              "custom user with this email address already exists."
+          ) {
+            const response = api.post("authentication/login/", {
+              email: data?.user?.email,
+              password: data?.user?.email + data?.user?.id,
+            });
+            console.log(response);
+          }
+        })
+        .catch(() => {
+          const response = api.post("authentication/login/", {
+            email: data?.user?.email,
+            password: data?.user?.email + data?.user?.id,
+          });
+          console.log(response);
+        });
+    };
 
-  //   fetchRegister();
-  // }, [data]);
+    //fetchRegister();
+  }, [data]);
 
   // console.log(isAuthenticated);
 
@@ -82,7 +85,7 @@ const Header = () => {
               <div className="header-logo mx-4">
                 <a href="/" className="logo-link">
                   <Image
-                    width={200}
+                    width={170}
                     height={200}
                     className="img-fluid logo-dark logo-img"
                     src="/inshopperlogo-light.png"
@@ -90,7 +93,7 @@ const Header = () => {
                   />
 
                   <Image
-                    width={200}
+                    width={170}
                     height={200}
                     className="img-fluid logo-light logo-img"
                     src="/inshopperlogo-dark.png"
@@ -153,15 +156,15 @@ const Header = () => {
                         </a>
                       </li>
 
-                      <li>
+                      {/* <li>
                         <a
                           href="#"
-                          className="dropdown-item card-generic-item theme-toggler"
+                          className="dropdown-item card-generic-item "
                           title="Toggle Dark/Light mode"
                         >
-                          <em className="ni ni-moon me-2"></em> Dark Mode
+                          <em className="ni ni-cart me-2"></em> Dark Mode
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -207,14 +210,23 @@ const Header = () => {
                   <li>
                     <a
                       href="#"
-                      className="theme-toggler"
-                      title="Toggle Dark/Light mode"
+                      className="icon-btn"
+                      title=""
                     >
                       <span>
-                        <em className="ni ni-moon icon theme-toggler-show"></em>
-                        <em className="ni ni-sun icon theme-toggler-hide"></em>
+                        <em className="ni ni-bell icon"></em>
                       </span>
-                      <span className="theme-toggler-text">Dark Mode</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="icon-btn"
+                      title=""
+                    >
+                      <span>
+                        <em className="ni ni-cart icon"></em>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -237,7 +249,7 @@ const Header = () => {
                         <li>
                           <a
                             className="dropdown-item card-generic-item"
-                            href="../user/profile"
+                            href="../account/profile"
                           >
                             <em className="ni ni-user me-2"></em> Profile
                           </a>
@@ -245,7 +257,7 @@ const Header = () => {
                         <li>
                           <a
                             className="dropdown-item card-generic-item"
-                            href="../../user/dashboard"
+                            href="../../account/dashboard"
                           >
                             <em className="ni ni-dashboard me-2"></em> Dashboard
                           </a>
@@ -253,11 +265,11 @@ const Header = () => {
 
                         <li>
                           <a
-                            href="#"
-                            className="dropdown-item card-generic-item theme-toggler"
-                            title="Toggle Dark/Light mode"
+                            href="../../account/orders"
+                            className="dropdown-item card-generic-item"
+                            title="Orders"
                           >
-                            <em className="ni ni-moon me-2"></em> Dark Mode
+                            <em className="ni ni-cart me-2"></em> Orders
                           </a>
                         </li>
                         <li>
@@ -268,7 +280,7 @@ const Header = () => {
                             className="dropdown-item card-generic-item"
                             onClick={logout}
                           >
-                            <em className="ni ni-power me-2"></em> Disconnect
+                            <em className="ni ni-power me-2"></em> logout
                           </a>
                         </li>
                       </ul>
@@ -278,6 +290,7 @@ const Header = () => {
                   <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
+                  {isAuthenticated && (<>
                   <li className="menu-item has-sub">
                     <a href="#" className="menu-link menu-toggle text-nowrap">
                       My Account
@@ -285,23 +298,20 @@ const Header = () => {
                     <div className="menu-sub">
                       <ul className="menu-list">
                         <li className="menu-item">
-                          <a href="index.html" className="menu-link">
-                            Home Page 1
+                          <a href="" className="menu-link">
+                          <em className="ni ni-user-fill icon"></em> &nbsp;
+                            Profile
                           </a>
                         </li>
-                        <li className="menu-item">
-                          <a href="index-2.html" className="menu-link">
-                            Home Page 2
-                          </a>
-                        </li>
-                        <li className="menu-item">
-                          <a href="index-3.html" className="menu-link">
-                            Home Page 3
+                       <li className="menu-item">
+                          <a href="" className="menu-link">
+                          <em className="ni ni-list-fill icon"></em> &nbsp;
+                            Orders
                           </a>
                         </li>
                       </ul>
                     </div>
-                  </li>
+                  </li></>)}
                   <li className="menu-item has-sub">
                     <a
                       href="#"

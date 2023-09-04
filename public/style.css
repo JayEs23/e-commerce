@@ -2415,9 +2415,12 @@
   }
   
   .btn-secondary {
-    color: #212529;
-    background-color: #EDF1FF;
-    border-color: #EDF1FF;
+    color: #9881B8 !important;
+    /* background-color: #EDF1FF;
+    border-color: #EDF1FF; */
+    border-radius: 4px !important;
+    border: 1px solid #9881B8 !important;
+    background: #EAE6F1 !important;
   }
   
   .btn-secondary:hover {

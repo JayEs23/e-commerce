@@ -4,7 +4,7 @@ import Image from 'next/image';
 import AddToCartButton from './cart/AddToCartButton';
 import Bargain from './product/Bargain';
 
-const SearchItemCard = ({ product }) => {
+const SearchItemCard = ({ product, cartData }) => {
   if (!product) {
     return <div>No product details available.</div>;
   }
@@ -24,8 +24,8 @@ const SearchItemCard = ({ product }) => {
       <div className="card product-item border-0 mb-4">
         {/* Wrap the card header in a Link */}
         <Link href={`/products/${slug}`}>
-          <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <Image className="img-fluid w-100" style={{height:"230px",objectFit:"cover"}} src={primary_image} width={100} height={100} alt={product_name} />
+          <div className="card-header position-relative overflow-hidden bg-transparent border p-0">
+            <Image className="img-fluid w-100 border-0" style={{height:"230px",objectFit:"contain"}} src={primary_image} loading="lazy" width={100} height={100} alt={product_name} />
           </div>
         </Link>
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
@@ -58,11 +58,9 @@ const SearchItemCard = ({ product }) => {
           
         </div>
         <div className="row mt-4">
-        <Bargain product={product} />
-        <AddToCartButton item={product} />
-          {/* <div className="row mt-2 p-0 mx-auto">
-            <AddToCartButton item={product} />
-          </div> */}
+        <Bargain product={product} cart={cartData}/>
+        {/* <AddToCartButton item={product} /> */}
+         
         </div>
       </div>
     </div>
