@@ -1,6 +1,9 @@
 import React,{useState} from "react";
 
 const ProfileForm = ({ userProfile, updateProfileFunction }) => {
+  if (!userProfile) {
+    return <div>Loading...</div>; 
+  }
   const {
     email,
     password,
