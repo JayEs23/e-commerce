@@ -3272,7 +3272,7 @@ textarea.form-control {
     padding-bottom: 60px;
 }
 .hero-content {
-    padding: 2rem 0;
+    /* padding: 2rem 0; */
     position: relative;
     z-index: 3;
 }

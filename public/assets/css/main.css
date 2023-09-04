@@ -45,6 +45,7 @@ html {
 
 .font-sm{
   font-size: 20px !important;
+  font-weight: bolder !important;
 }
 .text-notif:hover, .notification:hover {
   background: #9881B8;
@@ -305,4 +306,8 @@ text-overflow: ellipsis;
 overflow: hidden;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 2;
+}
+
+.outline-btn {
+  border: 1px solid #b5b5b6;
 }

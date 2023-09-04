@@ -62,7 +62,11 @@ const Header = () => {
   //   };
 
   //   fetchRegister();
+<<<<<<< HEAD
   // }, []);
+=======
+  // }, [data]);
+>>>>>>> e53604013a8a41a8ec7314544668d11fec3ba2d7
 
   // console.log(isAuthenticated);
 

@@ -2,6 +2,9 @@ import Image from 'next/image';
 import React from 'react';
 
 const ListCard = ({ product, showBuyButton }) => {
+  if (!product) {
+    return <div>No product details available.</div>;
+  }
   return (
     <div className="row cart-item bg-gray">
       <div className="col-md-2">

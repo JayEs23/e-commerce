@@ -12,10 +12,10 @@ const categories = [
   
   const HeroSidebar = () => {
     return (
-      <div className="hero-sidebar border-0 mb-4">
-        <ul className="list-group">
+      <div className=" row hero-sidebar h-500">
+        <ul className="list-group pt-4 px-4">
           {categories.map((category, index) => (
-            <li className="list-group-item mx-2 p-2 py-3 px-2 border-0" key={index}>
+            <li className="list-group-item p-2 py-3 px-2 border-0" key={index}>
               {category}
             </li>
           ))}

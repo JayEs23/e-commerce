@@ -4,6 +4,9 @@ import React from 'react';
 //@next/next/no-img-element
 
 const OrderItem = ({ order }) => {
+    if (!order) {
+    return <div>No orders available.</div>;
+    }
   return (
     <><div className="card card-creator-s2 mb-4 p-2">
         <div className="row ">
