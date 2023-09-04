@@ -168,7 +168,7 @@ const Header = () => {
                       <li>
                         <a
                           className="dropdown-item card-generic-item"
-                          href="index.html"
+                          href="#"
                         >
                           <em className="ni ni-power me-2"></em> Logout
                         </a>
@@ -281,34 +281,34 @@ const Header = () => {
                   <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
-                  <li class="menu-item has-sub">
-                    <a href="#" class="menu-link menu-toggle text-nowrap">
+                  <li className="menu-item has-sub">
+                    <a href="#" className="menu-link menu-toggle text-nowrap">
                       My Account
                     </a>
-                    <div class="menu-sub">
-                      <ul class="menu-list">
-                        <li class="menu-item">
-                          <a href="index.html" class="menu-link">
+                    <div className="menu-sub">
+                      <ul className="menu-list">
+                        <li className="menu-item">
+                          <a href="index.html" className="menu-link">
                             Home Page 1
                           </a>
                         </li>
-                        <li class="menu-item">
-                          <a href="index-2.html" class="menu-link">
+                        <li className="menu-item">
+                          <a href="index-2.html" className="menu-link">
                             Home Page 2
                           </a>
                         </li>
-                        <li class="menu-item">
-                          <a href="index-3.html" class="menu-link">
+                        <li className="menu-item">
+                          <a href="index-3.html" className="menu-link">
                             Home Page 3
                           </a>
                         </li>
                       </ul>
                     </div>
                   </li>
-                  <li class="menu-item has-sub">
+                  <li className="menu-item has-sub">
                     <a
                       href="#"
-                      class="btn menu-link menu-toggle"
+                      className="btn menu-link menu-toggle"
                       data-bs-toggle="modal"
                       data-bs-target="#moreModal"
                     >
@@ -322,21 +322,21 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div class="modal " id="moreModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-top">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title mx-4">More</h3>
+      <div className="modal fade" id="moreModal" tabIndex="-1" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-top">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title mx-4">More</h3>
               <button
                 type="button"
-                class="btn-close icon-btn"
+                className="btn-close icon-btn"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                <em class="ni ni-cross"></em>
+                <em className="ni ni-cross"></em>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <div className="row card m-2">
                 <a href="" className="btn btn-primary text-nowrap">
                   Start a live chat
@@ -379,7 +379,7 @@ const Header = () => {
                       <li>
                         <p className="text-dark">
                           <b>Country</b>{" "}
-                          <span class="badge text-primary justify-content-end">
+                          <span className="badge text-primary justify-content-end">
                             Nigeria
                           </span>
                         </p>
@@ -387,7 +387,7 @@ const Header = () => {
                       <li>
                         <p className="text-dark">
                           <b>Language</b>{" "}
-                          <span class="badge text-primary justify-content-end">
+                          <span className="badge text-primary justify-content-end">
                             English
                           </span>
                         </p>

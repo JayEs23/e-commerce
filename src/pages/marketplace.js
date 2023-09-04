@@ -22,7 +22,7 @@ export default function Markeplace() {
     setProducts(response);
   };
     fetchProducts(); // Fetch Products on component mount
-  }, []);
+  }, [productApi]);
 
  
   return (

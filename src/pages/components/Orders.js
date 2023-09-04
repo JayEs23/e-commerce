@@ -69,13 +69,13 @@ const Orders = ({ Orders }) => {
         setUserOrders(response.data);
         console.log(response.data);
       } catch (error) {
-        setUserOrders(orderItems);
+        //setUserOrders(orderItems);
         console.error('Error fetching user Orders:', error);
       }
     };
 
     fetchUserOrders();
-  }, [userOrders,orderItems]);
+  }, [userOrders]);
 
   const handleLogout = () => {
     Cookies.remove('authToken');
