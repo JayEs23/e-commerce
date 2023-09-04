@@ -1,9 +1,7 @@
 import React,{useState} from "react";
 
 const ProfileForm = ({ userProfile, updateProfileFunction }) => {
-  if (!userProfile) {
-    return <div>Loading...</div>; 
-  }
+  
   const {
     email,
     password,
@@ -16,7 +14,7 @@ const ProfileForm = ({ userProfile, updateProfileFunction }) => {
     postal_code,
     country,
     address,
-  } = userProfile;
+  } = userProfile ?? {};
   const [formData, setFormData] = useState(userProfile);
   const [errors, setErrors] = useState({});
 
