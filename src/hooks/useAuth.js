@@ -6,6 +6,13 @@ const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
 
+  const logout = useCallback(() => {
+    Cookies.remove('authToken');
+    setIsAuthenticated(false);
+    setUserProfile(null);
+  }, []); // No dependencies for logout
+
+
   const fetchUserProfile = useCallback(async () => {
     try {
       const response = await api.get('authentication/user_profile/');
@@ -16,16 +23,14 @@ const useAuth = () => {
       console.error('Error fetching user profile:', error);
       if (error?.response?.data?.details === "Invalid token.") {
         logout();
+      }else{
+        setIsAuthenticated(false);
+        logout();
       }
     }
   }, [logout]); // Include logout as a dependency
 
-  const logout = useCallback(() => {
-    alert("Logging out");
-    Cookies.remove('authToken');
-    setIsAuthenticated(false);
-    setUserProfile(null);
-  }, []); // No dependencies for logout
+  
 
   useEffect(() => {
     const checkAuthStatus = () => {
@@ -37,7 +42,7 @@ const useAuth = () => {
     };
 
     checkAuthStatus();
-  }, [fetchUserProfile]); // Include fetchUserProfile as a dependency
+  }, []); // Include fetchUserProfile as a dependency
 
   const login = (token) => {
     Cookies.set('authToken', token);

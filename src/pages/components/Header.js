@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
+import NotificationModal from "./notificationModal";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -27,11 +28,8 @@ const Header = () => {
       }
     };
 
-    fetchuserProfileData();
+    // fetchuserProfileData();
   }, [userProfile]);
-
-  console.log(data);
-
   useEffect(() => {
     // if(isAuthenticated) return;
     const fetchRegister = async () => {
@@ -66,8 +64,6 @@ const Header = () => {
 
     //fetchRegister();
   }, [data]);
-
-  console.log(isAuthenticated);
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -211,15 +207,7 @@ const Header = () => {
               <nav className="header-menu menu nav mobile-menu">
                 <ul className="menu-btns">
                   <li>
-                    <a
-                      href="#"
-                      className="icon-btn"
-                      title=""
-                    >
-                      <span>
-                        <em className="ni ni-bell icon"></em>
-                      </span>
-                    </a>
+                    <NotificationModal />
                   </li>
                   <li>
                     <a
@@ -295,7 +283,7 @@ const Header = () => {
                 <ul className="menu-list ms-lg-auto">
                   {isAuthenticated && (<>
                   <li className="menu-item has-sub">
-                    <a href="#" className="menu-link menu-toggle text-nowrap">
+                    <a href="#" className="menu-link menu-toggle outline-btn py-1">
                       My Account
                     </a>
                     <div className="menu-sub">
@@ -318,7 +306,7 @@ const Header = () => {
                   <li className="menu-item has-sub">
                     <a
                       href="#"
-                      className="btn menu-link menu-toggle"
+                      className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
                       data-bs-toggle="modal"
                       data-bs-target="#moreModal"
                     >
@@ -332,7 +320,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div className="modal fade" id="moreModal" tabIndex="-1" aria-hidden="true">
+      <div className="modal" id="moreModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-top">
           <div className="modal-content">
             <div className="modal-header">

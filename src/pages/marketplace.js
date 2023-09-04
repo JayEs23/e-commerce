@@ -13,21 +13,63 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Markeplace() {
   const productApi = ProductApi();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
 
-  useEffect(() => {
-    
-    const fetchProducts = async () => {
-    const response = await productApi.getFeaturedProducts();
-    setProducts(response);
+  const getWishlistFromApi = async () => {
+    try {
+      const response = await api.get('product/wishlist'); // Replace with your API endpoint
+      const wishlistData = await response.data;
+      return wishlistData;
+    } catch (error) {
+      console.error('Error fetching wishlist data:', error);
+      return [];
+    }
   };
-    fetchProducts(); // Fetch Products on component mount
-  }, [productApi]);
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      if(products) return;
+      try {
+        alert("uwee");
+        const response = await api.get('product/all_products/');
+        const data = await response.data;
+        console.log("products",data);
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
-  },[])
+    fetchProducts();
+  }, [products]);
+
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      const initialWishlist = await getWishlistFromApi();
+      setWishlist(initialWishlist);
+    };
+  
+    fetchWishlist();
+  }, []);
+  
+  const toggleWishlist = async (productId) => {
+    let updatedWishlist;
+    if (wishlist.includes(productId)) {
+      updatedWishlist = wishlist.filter((id) => id !== productId);
+    } else {
+      updatedWishlist = [...wishlist, productId];
+    }
+  
+    try {
+      // Send an API request to update the wishlist data
+      await api.post('product/wishlist', { wishlist: productId }); // Replace with your API endpoint and data structure
+      setWishlist(updatedWishlist);
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+    }
+  };
+  
  
 
   return (
@@ -42,7 +84,7 @@ export default function Markeplace() {
                   <HeroSidebar />
                 </div>
                 <div className="col-xl-9 col-lg-12 h-500">
-                  <Hero />
+                  {/* <Hero /> */}
                 </div>
               </div>  
             </div>
@@ -57,12 +99,12 @@ export default function Markeplace() {
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-              {products.length === 0 ? (
+              {products?.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">No Products available</h4>
                   </div>
                 ) : (
-                  products.map((product) => (
+                  products?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))
                 )}
@@ -79,12 +121,12 @@ export default function Markeplace() {
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-              {products.length === 0 ? (
+              {products?.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">No Products available</h4>
                   </div>
                 ) : (
-                  products.map((product) => (
+                  products?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))
                 )}

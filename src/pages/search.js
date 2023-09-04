@@ -9,8 +9,7 @@ import { getAllProducts } from '@/pages/api/products';
 
 const SearchPage = () => {
   const router = useRouter();
-  const { search } = router.query;
-  const [searchQuery, setSearchQuery] = useState(search || '');
+  const [searchQuery, setSearchQuery] = useState(router.query.search);
   const [searchResults, setSearchResults] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [cart,setCart]= useState([]);
@@ -18,7 +17,7 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get('product/all_products/');
+        const response = await api.get(`product/all_products/?product_name=${searchQuery}&description=${searchQuery}`);
         const data = await response.data;
         console.log(data);
         setSearchResults(data);
@@ -28,7 +27,7 @@ const SearchPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [searchQuery]);
   
   useEffect(() => {
     const fetchCart = async () => {
@@ -97,7 +96,7 @@ const SearchPage = () => {
                 <div className="section-title d-flex justify-content-between align-center">
                   <div className="section-title-left">
                     <span>{searchResults.length} items Found</span>
-                    <h2>Search Result - {searchQuery}</h2>
+                    <h2>Search Result for - {searchQuery}</h2>
                   </div>
                   <div className="section-title-right d-flex flex-column card pt-2 px-2 text-dark ">
                     <div className="d-flex m-0">
@@ -127,59 +126,59 @@ const SearchPage = () => {
                 <div className="row mt-3">
                   <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
                     <div className="card">
-                    <div class="accordion pt-4" id="sideAccordion">
-                      <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="true" aria-controls="collapseOne">
+                    <div className="accordion pt-4" id="sideAccordion">
+                      <div className="accordion-item border-0">
+                        <h2 className="accordion-header">
+                          <button className="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="true" aria-controls="collapseOne">
                             Category
                           </button>
                         </h2>
-                        <div id="category" class="accordion-collapse collapse show border-0" data-bs-parent="#sideAccordion">
-                          <div class="accordion-body border-0">
+                        <div id="category" className="accordion-collapse collapse show border-0" data-bs-parent="#sideAccordion">
+                          <div className="accordion-body border-0">
                           </div>
                         </div>
                       </div>
-                        <div class="accordion-item border-0">
-                          <h2 class="accordion-header">
-                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <div className="accordion-item border-0">
+                          <h2 className="accordion-header">
+                            <button className="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                               Brand
                             </button>
                           </h2>
-                          <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
-                            <div class="accordion-body">
+                          <div id="collapseTwo" className="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div className="accordion-body">
                             </div>
                           </div>
                         </div>
-                        <div class="accordion-item border-0">
-                          <h2 class="accordion-header">
-                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#colors" aria-expanded="false" aria-controls="collapseThree">
+                        <div className="accordion-item border-0">
+                          <h2 className="accordion-header">
+                            <button className="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#colors" aria-expanded="false" aria-controls="collapseThree">
                               Colors
                             </button>
                           </h2>
-                          <div id="colors" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
-                            <div class="accordion-body">
+                          <div id="colors" className="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div className="accordion-body">
                             </div>
                           </div>
                         </div>
-                        <div class="accordion-item">
-                          <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#price" aria-expanded="false" aria-controls="collapseThree">
+                        <div className="accordion-item">
+                          <h2 className="accordion-header">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#price" aria-expanded="false" aria-controls="collapseThree">
                               Price
                             </button>
                           </h2>
-                          <div id="price" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
-                            <div class="accordion-body">
+                          <div id="price" className="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div className="accordion-body">
                             </div>
                           </div>
                         </div>
-                        <div class="accordion-item">
-                          <h2 class="accordion-header">
-                            <button class="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#reviews" aria-expanded="false" aria-controls="collapseThree">
+                        <div className="accordion-item">
+                          <h2 className="accordion-header">
+                            <button className="accordion-button bg-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#reviews" aria-expanded="false" aria-controls="collapseThree">
                               Reviews
                             </button>
                           </h2>
-                          <div id="reviews" class="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
-                            <div class="accordion-body">
+                          <div id="reviews" className="accordion-collapse collapse show" data-bs-parent="#sideAccordion">
+                            <div className="accordion-body">
                             </div>
                           </div>
                         </div>

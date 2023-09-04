@@ -1,32 +1,36 @@
 // components/Hero.js
 
 import Image from "next/image";
+import Slider from 'react-slick';
+
 
 const Hero = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
-      <div className="row hero-main">
-        
-        {/* Right Column for Text Content */}
-        <div className="col-md-6 d-flex align-items-stretch">
-          <div className="text-white py-5">
-            <div className="hero-content text-center">
-              <h1 className="display-2 text-white">Flash Sale on all Items.</h1>
-              <p className="lead">Enjoy 50% discount on all Items</p>
-              <button className="btn btn-outline-light btn-lg">
-                Get the best offers now <i className="fa fa-arrow-right"></i>
-              </button>
-            </div>
+        <Slider {...settings}>
+        <div>
+            <h3>1</h3>
           </div>
-        </div>
-
-        {/* Left Column for Sample Products Image */}
-        <div className="col-md-6 d-none d-lg-block">
-          <div className="hero-image ">
-            <Image src="/heroproducts.png" className="img-fluid" width={4000} height={400} alt="Sample Products" loading="lazy"/>
+          <div>
+            <h3>2</h3>
           </div>
-        </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+          <div>
+            <h3>5</h3>
+          </div>
+        </Slider>        
 
-      </div>
   );
 };
 

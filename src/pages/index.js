@@ -85,7 +85,37 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <Mint /> */}
+      <section class="fun-fact-section bg-gray section-space">
+    <div class="container">
+        <div class="row g-gs">
+            <div class="col-md-4 col-lg-4 col-sm-6">
+                <div class="card card-counter text-center">
+                    <div class="card-body card-body-s1">
+                        <img src="images/thumb/icon-employees.svg" alt="" class="mb-3" />
+                        <h3 class="mb-1">Over 400+</h3>
+                        <p>Total Members</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-6">
+                <div class="card card-counter text-center">
+                    <div class="card-body card-body-s1">
+                        <img src="images/thumb/icon-users.svg" alt="" class="mb-3" />
+                        <h3 class="mb-1">Over 40+</h3><p>Total Countries</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="card card-counter text-center">
+                    <div class="card-body card-body-s1">
+                        <img src="images/thumb/icon-nfts.svg" alt="" class="mb-3" />
+                        <h3 class="mb-1">Over 1000+</h3><p>Total NFTs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
       <Footer />
     </>
   );

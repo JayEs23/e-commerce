@@ -6,11 +6,14 @@ const ProductApi = () => {
   const [products,setProducts] = useState([]);
 
   useEffect(() => {
+    
     const fetchData = async () => {
-      if(products.length > 1) return;
+      if(products) return;
       try {
+        alert("uwee");
         const response = await api.get('product/all_products/');
         const data = await response.data;
+        console.log("products",data);
         setProducts(data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -34,7 +37,6 @@ const ProductApi = () => {
 
   const getFeaturedProducts = () => {
     let result = productsData.filter((product) => product.featured);
-    console.log(result);
    return result;
    };
   const getProductBySlug = (slug) => {

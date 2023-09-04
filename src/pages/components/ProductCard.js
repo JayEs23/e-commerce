@@ -11,20 +11,20 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
     return null; // You can render a placeholder or loading state here if needed
   }
 
-  const { product_name, description, product_price, id,image_one } = product;
+  const { product_name, description, product_price, id,image_one, primary_image } = product;
   const slug = product.id;
   
   return (
     <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
       <div className="card product-item border-0 mb-4 p-2">
         <Link href={`/products/${slug}`}>
-          <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <img className="img-fluid w-100 h-300" src={`${image_one}`}  alt="" loading="lazy" />
+          <div className="card-header product-img position-relative overflow-hidden bg-transparent p-0">
+            <img className="img-fluid w-100 h-300" src={`${primary_image}`}  alt="" loading="lazy" />
           </div>
         </Link>
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
           <h6 className="text-truncate mb-3">{product_name}</h6>
-          <div className="d-flex justify-content-left">
+          <div className="d-flex justify-content-left h-50">
             <p className="truncate-text">{description}</p>
           </div>
         </div>
