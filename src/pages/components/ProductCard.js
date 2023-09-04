@@ -6,9 +6,8 @@ import Image from 'next/image';
 import WishlistButton from './product/WishListButton';
 
 const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
-  // Check if the product is defined before destructuring its properties
   if (!product) {
-    return null; // You can render a placeholder or loading state here if needed
+    return null; // 
   }
 
   const { product_name, description, product_price, id,image_one, primary_image } = product;

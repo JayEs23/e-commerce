@@ -6,19 +6,20 @@ import Footer from './components/Footer';
 import api from '@/utils/api';
 import SearchItemCard from './components/SearchItemCard';
 import { getAllProducts } from '@/pages/api/products';
+import Cookies from 'js-cookie';
 
 const SearchPage = () => {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState(router.query.search);
+  const query = router.query.search;
+  const [searchQuery, setSearchQuery] = useState(query || '');
   const [searchResults, setSearchResults] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [cart,setCart]= useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.get(`product/all_products/?product_name=${searchQuery}&description=${searchQuery}`);
-        const data = await response.data;
+        const data = await response.data.data;
         console.log(data);
         setSearchResults(data);
       } catch (error) {
@@ -30,10 +31,12 @@ const SearchPage = () => {
   }, [searchQuery]);
   
   useEffect(() => {
+
     const fetchCart = async () => {
+      if(!Cookies.get("authToken")) return;
       try {
         const response = await api.get('order/cart/');
-        const data = await response.data;
+        const data = await response.data.data;
         console.log("VCart Data",data);
         setCart(data);
       } catch (error) {
@@ -95,7 +98,7 @@ const SearchPage = () => {
               <div className="col-12 mt-4">
                 <div className="section-title d-flex justify-content-between align-center">
                   <div className="section-title-left">
-                    <span>{searchResults.length} items Found</span>
+                    <span>{searchResults.length || 0} products Found</span>
                     <h2>Search Result for - {searchQuery}</h2>
                   </div>
                   <div className="section-title-right d-flex flex-column card pt-2 px-2 text-dark ">
