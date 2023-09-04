@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
-import NotificationModal from "./notificationModal";
+import NotificationModal from "./NotificationModal";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
