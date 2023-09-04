@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductCard from "./components/ProductCard";
-import api from '@/utils/api';
-import ProductApi from '@/pages/api/products';
-import HeroSidebar from './components/HeroSidebar';
-import Hero from './components/Hero';
+import api from "@/utils/api";
+import ProductApi from "@/pages/api/products";
+import HeroSidebar from "./components/HeroSidebar";
+import Hero from "./components/Hero";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,26 +18,26 @@ export default function Markeplace() {
 
   const getWishlistFromApi = async () => {
     try {
-      const response = await api.get('product/wishlist'); // Replace with your API endpoint
+      const response = await api.get("product/wishlist"); // Replace with your API endpoint
       const wishlistData = await response.data;
       return wishlistData;
     } catch (error) {
-      console.error('Error fetching wishlist data:', error);
+      console.error("Error fetching wishlist data:", error);
       return [];
     }
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
-      if(products) return;
+      if (products) return;
       try {
         alert("uwee");
-        const response = await api.get('product/all_products/');
+        const response = await api.get("product/all_products/");
         const data = await response.data;
-        console.log("products",data);
-        setProducts(data);
+        console.log("products", data);
+        setProducts(data?.data);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -49,10 +49,10 @@ export default function Markeplace() {
       const initialWishlist = await getWishlistFromApi();
       setWishlist(initialWishlist);
     };
-  
+
     fetchWishlist();
   }, []);
-  
+
   const toggleWishlist = async (productId) => {
     let updatedWishlist;
     if (wishlist.includes(productId)) {
@@ -60,17 +60,15 @@ export default function Markeplace() {
     } else {
       updatedWishlist = [...wishlist, productId];
     }
-  
+
     try {
       // Send an API request to update the wishlist data
-      await api.post('product/wishlist', { wishlist: productId }); // Replace with your API endpoint and data structure
+      await api.post("product/wishlist", { wishlist: productId }); // Replace with your API endpoint and data structure
       setWishlist(updatedWishlist);
     } catch (error) {
-      console.error('Error updating wishlist:', error);
+      console.error("Error updating wishlist:", error);
     }
   };
-  
- 
 
   return (
     <>
@@ -83,10 +81,8 @@ export default function Markeplace() {
                 <div className="col-xl-3 d-none d-xl-block">
                   <HeroSidebar />
                 </div>
-                <div className="col-xl-9 col-lg-12 h-500">
-                  {/* <Hero /> */}
-                </div>
-              </div>  
+                <div className="col-xl-9 col-lg-12 h-500">{/* <Hero /> */}</div>
+              </div>
             </div>
           </div>
           <section className="explore-section bg-gray mb-4">
@@ -95,13 +91,14 @@ export default function Markeplace() {
                 <div className="mb-4">
                   <h2 className="px-5"> Products</h2>
                 </div>
-
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-              {products?.length === 0 ? (
+                {products?.length === 0 ? (
                   <div className="col-md-12">
-                    <h4 className="text-danger text-center">No Products available</h4>
+                    <h4 className="text-danger text-center">
+                      No Products available
+                    </h4>
                   </div>
                 ) : (
                   products?.map((product) => (
@@ -117,13 +114,14 @@ export default function Markeplace() {
                 <div className="mb-4">
                   <h2 className="px-5"> Products</h2>
                 </div>
-
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-              {products?.length === 0 ? (
+                {products?.length === 0 ? (
                   <div className="col-md-12">
-                    <h4 className="text-danger text-center">No Products available</h4>
+                    <h4 className="text-danger text-center">
+                      No Products available
+                    </h4>
                   </div>
                 ) : (
                   products?.map((product) => (
@@ -134,12 +132,7 @@ export default function Markeplace() {
             </div>
           </section>
         </div>
-
       </div>
-      
-      
-      
-      
 
       <Footer />
     </>
