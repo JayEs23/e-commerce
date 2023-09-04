@@ -150,12 +150,12 @@ const LoginModal = () => {
                     Login with Facebook
                   </button>
 
-                  <button
+                  {/* <button
                     className="outline-btn btn mt-5 w-100"
                     onClick={() => signOut()}
                   >
                     Logout
-                  </button>
+                  </button> */}
                   <p className="mt-3">
                     Don`&lsquo;`t have an account?
                     <Link href="/register" className="btn-link">

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
+import NotificationModal from "./NotificationModal";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -19,7 +20,7 @@ const Header = () => {
     const fetchuserProfileData = async () => {
       try {
         const response = await api.get("authentication/user_profile");
-        console.log("Profile",response.data);
+        console.log("Profile", response.data);
         setUserProfile(response.data);
       } catch (error) {
         console.error(error);
@@ -27,11 +28,8 @@ const Header = () => {
       }
     };
 
-    fetchuserProfileData();
+    // fetchuserProfileData();
   }, [userProfile]);
-
-  console.log(data);
-
   useEffect(() => {
     // if(isAuthenticated) return;
     const fetchRegister = async () => {
@@ -66,8 +64,6 @@ const Header = () => {
 
     //fetchRegister();
   }, [data]);
-
-  // console.log(isAuthenticated);
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -208,22 +204,10 @@ const Header = () => {
               <nav className="header-menu menu nav mobile-menu">
                 <ul className="menu-btns">
                   <li>
-                    <a
-                      href="#"
-                      className="icon-btn"
-                      title=""
-                    >
-                      <span>
-                        <em className="ni ni-bell icon"></em>
-                      </span>
-                    </a>
+                    <NotificationModal />
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className="icon-btn"
-                      title=""
-                    >
+                    <a href="#" className="icon-btn" title="">
                       <span>
                         <em className="ni ni-cart icon"></em>
                       </span>
@@ -290,32 +274,38 @@ const Header = () => {
                   <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
-                  {isAuthenticated && (<>
-                  <li className="menu-item has-sub">
-                    <a href="#" className="menu-link menu-toggle text-nowrap">
-                      My Account
-                    </a>
-                    <div className="menu-sub">
-                      <ul className="menu-list">
-                        <li className="menu-item">
-                          <a href="" className="menu-link">
-                          <em className="ni ni-user-fill icon"></em> &nbsp;
-                            Profile
-                          </a>
-                        </li>
-                       <li className="menu-item">
-                          <a href="" className="menu-link">
-                          <em className="ni ni-list-fill icon"></em> &nbsp;
-                            Orders
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li></>)}
+                  {isAuthenticated && (
+                    <>
+                      <li className="menu-item has-sub">
+                        <a
+                          href="#"
+                          className="menu-link menu-toggle outline-btn py-1"
+                        >
+                          My Account
+                        </a>
+                        <div className="menu-sub">
+                          <ul className="menu-list">
+                            <li className="menu-item">
+                              <a href="" className="menu-link">
+                                <em className="ni ni-user-fill icon"></em>{" "}
+                                &nbsp; Profile
+                              </a>
+                            </li>
+                            <li className="menu-item">
+                              <a href="" className="menu-link">
+                                <em className="ni ni-list-fill icon"></em>{" "}
+                                &nbsp; Orders
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </>
+                  )}
                   <li className="menu-item has-sub">
                     <a
                       href="#"
-                      className="btn menu-link menu-toggle"
+                      className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
                       data-bs-toggle="modal"
                       data-bs-target="#moreModal"
                     >
@@ -329,12 +319,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div
-        className="modal fade"
-        id="moreModal"
-        tabIndex="-1"
-        aria-hidden="true"
-      >
+      <div className="modal" id="moreModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-top">
           <div className="modal-content">
             <div className="modal-header">

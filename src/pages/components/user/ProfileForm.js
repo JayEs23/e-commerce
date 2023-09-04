@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 
 const ProfileForm = ({ userProfile, updateProfileFunction }) => {
+  
   const {
     email,
     password,
@@ -13,7 +14,7 @@ const ProfileForm = ({ userProfile, updateProfileFunction }) => {
     postal_code,
     country,
     address,
-  } = userProfile;
+  } = userProfile ?? {};
   const [formData, setFormData] = useState(userProfile);
   const [errors, setErrors] = useState({});
 

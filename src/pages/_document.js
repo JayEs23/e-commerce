@@ -35,8 +35,8 @@ export default function Document() {
           <NextScript />
         </div>
 
-        <script src="../../assets/js/bundle.js" defer></script>
-        <script src="../../assets/js/scripts.js" defer></script>
+        <script src="../../assets/js/bundle.js" ></script>
+        <script src="../../assets/js/scripts.js" ></script>
 
       </body>
     </Html>
