@@ -116,7 +116,51 @@ html {
 
 .hero-main{
   border-radius: 4px !important;
+  padding: 0 64px;
   background: linear-gradient(229deg, #6E0BEB 0%, #CD3434 100%) !important;
+}
+
+.hero-heading h1, p, button {
+  color: white ;
+}
+
+.hero-main-first {
+  background: linear-gradient(71deg, #7330C7 16.48%, #DD8EF9 98.89%) !important;
+}
+
+.hero-heading h1 {
+  color: #FFF;
+  font-family: "Montserrat";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 74px; /* 115.625% */  
+}
+
+.hero-main-last {
+  background: linear-gradient(62deg, #CA58EB 0%, #D737B3 48.03%, #9F2786 69.75%, #1B0219 94.79%, #1B0219 94.79%, #1B0219 94.79%, #1B0219 94.8%, #1B0219 115.39%) !important;
+
+}
+
+.hero-heading p {
+  color: #DADADA;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-bottom: 32px;
+}
+
+.hero-heading button {
+  color: #FFF;
+  text-align: justify;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  letter-spacing: -0.32px;
 }
 
 .btn-custom {

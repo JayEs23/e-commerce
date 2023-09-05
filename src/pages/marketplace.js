@@ -31,7 +31,7 @@ export default function Markeplace() {
     const fetchProducts = async () => {
       if (products) return;
       try {
-        alert("uwee");
+        // alert("uwee");
         const response = await api.get("product/all_products/");
         const data = await response.data;
         console.log("products", data);

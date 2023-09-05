@@ -1,22 +1,21 @@
-import React,{ useState, useEffect } from 'react';
-import api from '@/utils/api'; // Make sure this import is correct
-import productsData from '../../../public/products.json';
+import React, { useState, useEffect } from "react";
+import api from "@/utils/api"; // Make sure this import is correct
+import productsData from "../../../public/products.json";
 
 const ProductApi = () => {
-  const [products,setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    
     const fetchData = async () => {
-      if(products) return;
+      if (products) return;
       try {
-        alert("uwee");
-        const response = await api.get('product/all_products/');
+        // alert("uwee");
+        const response = await api.get("product/all_products/");
         const data = await response.data;
-        console.log("products",data);
+        console.log("products", data);
         setProducts(data);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -37,22 +36,20 @@ const ProductApi = () => {
 
   const getFeaturedProducts = () => {
     let result = productsData.filter((product) => product.featured);
-   return result;
-   };
+    return result;
+  };
   const getProductBySlug = (slug) => {
     return productsData.find((product) => product.slug === slug);
   };
 
-
-
   // Helper function to get all products
   const getAllProducts = async () => {
     try {
-      const response = await api.get('product/all_products/');
+      const response = await api.get("product/all_products/");
       const data = await response.data;
       return data;
     } catch (error) {
-      console.error('Error fetching all products:', error);
+      console.error("Error fetching all products:", error);
       return [];
     }
   };
