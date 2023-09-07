@@ -139,6 +139,31 @@ html {
 
 .hero-main-last {
   background: linear-gradient(62deg, #CA58EB 0%, #D737B3 48.03%, #9F2786 69.75%, #1B0219 94.79%, #1B0219 94.79%, #1B0219 94.79%, #1B0219 94.8%, #1B0219 115.39%) !important;
+}
+
+.slick-prev {
+  right: 0 !important;
+
+}
+
+.slick-next {
+  right: 12px !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  content: "" !important;
+}
+.next-slick-arrow,
+.prev-slick-arrow {
+  color: #FFFFFF;
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.20);
+  height: 60px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 

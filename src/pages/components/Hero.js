@@ -9,13 +9,25 @@ import "slick-carousel/slick/slick-theme.css";
 const Hero = () => {
   const settings = {
     dots: true,
+    fade: true,
     infinite: true,
     speed: 500,
     lazyLoad: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    initialSlide: 1,
     arrow: false,
     autoplay: true,
+    nextArrow: (
+      <div>
+        <div className="next-slick-arrow"> &gt; </div>
+      </div>
+    ),
+    prevArrow: (
+      <div>
+        <div className="prev-slick-arrow"> &lt; </div>
+      </div>
+    ),
   };
   return (
     <Slider {...settings}>
@@ -28,10 +40,17 @@ const Hero = () => {
             <p>The biggest sale of the year </p>
 
             <button
-              className="btn btn-transparent border-white rounded-0"
+              className="btn btn-transparent border-white rounded-0 d-flex"
               type="submit"
             >
-              Discover more
+              Discover more{" "}
+              <Image
+                src="/assets/images/arrow-right.svg"
+                width={24}
+                height={24}
+                className="ml-4"
+                alt=""
+              />
             </button>
           </div>
           <div>
@@ -103,3 +122,21 @@ const Hero = () => {
 };
 
 export default Hero;
+
+const productSlider = [
+  {
+    heading: "One Sale <br /> Many items",
+    subHeading: "The biggest sale of the year",
+    button: "Discover more",
+  },
+  {
+    heading: "Flash sale <br /> on all items",
+    subHeading: "Enjoy 50% Discount on all items",
+    button: "Get best offers now",
+  },
+  {
+    heading: "Check our <br /> weekly new <br /> deals",
+    subHeading: "Be the first to hear of our promos",
+    button: "Discover more",
+  },
+];
