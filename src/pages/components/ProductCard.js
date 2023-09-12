@@ -5,7 +5,7 @@ import WishlistButton from "./product/WishListButton";
 
 const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
   if (!product) {
-    return null; // 
+    return null; //
   }
 
   const { product_name, description, product_price, id, image_one } = product;

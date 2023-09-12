@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import api from '../utils/api';
+import { useState, useEffect, useCallback } from "react";
+import api from "../utils/api";
 import Cookies from "js-cookie";
 
 const useAuth = () => {
@@ -7,34 +7,31 @@ const useAuth = () => {
   const [userProfile, setUserProfile] = useState(null);
 
   const logout = useCallback(() => {
-    Cookies.remove('authToken');
+    Cookies.remove("authToken");
     setIsAuthenticated(false);
     setUserProfile(null);
   }, []); // No dependencies for logout
 
-
   const fetchUserProfile = useCallback(async () => {
     try {
-      const response = await api.get('authentication/user_profile/');
+      const response = await api.get("authentication/user_profile/");
       setUserProfile(response?.data);
       Cookies.set("profile", response?.data);
       return response.data;
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
       if (error?.response?.data?.details === "Invalid token.") {
         logout();
-      }else{
+      } else {
         setIsAuthenticated(false);
         logout();
       }
     }
   }, [logout]); // Include logout as a dependency
 
-  
-
   useEffect(() => {
     const checkAuthStatus = () => {
-      const storedAuthToken = Cookies.get('authToken');
+      const storedAuthToken = Cookies.get("authToken");
       if (storedAuthToken) {
         setIsAuthenticated(true);
         fetchUserProfile();
@@ -45,7 +42,7 @@ const useAuth = () => {
   }, []); // Include fetchUserProfile as a dependency
 
   const login = (token) => {
-    Cookies.set('authToken', token);
+    Cookies.set("authToken", token);
     setIsAuthenticated(true);
     fetchUserProfile();
   };
