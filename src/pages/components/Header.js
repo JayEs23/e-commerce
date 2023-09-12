@@ -78,11 +78,11 @@ const Header = () => {
         <div className="header-main is-sticky bg-white text-dark shadow ">
           <div className="container">
             <div className="header-wrap">
-              <div className="header-logo mx-4">
+              <div className="header-logo ">
                 <a href="/" className="logo-link">
                   <Image
-                    width={170}
-                    height={200}
+                    width={140}
+                    height={250}
                     className="img-fluid logo-dark logo-img"
                     src="/inshopperlogo-light.png"
                     alt="logo"

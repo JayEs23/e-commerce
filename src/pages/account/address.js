@@ -39,10 +39,9 @@ const AddressPage = () => {
 
     try {
       const response = await api.post("/customer/shipping-address/", formData);
-      onAdd(response.data); // Call the provided onAdd function to update the list
+      // onAdd(response.data); // Call the provided onAdd function to update the list
       handleEdit(false);
       fetchAddresses();
-      alert("Edited");
       setFormData({
         first_name: "",
         last_name: "",
@@ -148,7 +147,23 @@ const AddressPage = () => {
                     <div className="col-lg-8 bg-white">
                       <div className="row card bg-white">
                         <div className="card-body">
-                          <h3 className="card-title m-2 mb-4 ">Address Box</h3>
+                          
+                          <div className="row my-2">
+                            <div className="col-lg-8">
+                              <h3 className="card-title m-2 mb-4">Address Box</h3>
+
+                            </div>
+                            <div className="col-lg-2 mx-auto text-nowrap">
+                              <button
+                                className="btn btn-primary"
+                                onClick={() => handleEdit(true)}
+                              >
+                                <em className="ni ni-plus"></em>
+                                  &nbsp;
+                                 Add Address
+                              </button>
+                            </div>
+                          </div>
                           {userProfile ? (
                             <>
                               <section className="bg-gray card mb-4">
@@ -230,16 +245,7 @@ const AddressPage = () => {
                               </div>
                             </>
                           )}
-                          <div className="row">
-                            <div className="col-lg-6 mx-auto">
-                              <button
-                                className="btn btn-primary"
-                                onClick={() => handleEdit(true)}
-                              >
-                                Add New Address
-                              </button>
-                            </div>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -412,8 +418,8 @@ const AddressPage = () => {
                         </div>
                       </div>
                       <div className="col-md-12 text-center justify-content-end">
-                        <button type="submit" className="btn btn-primary">
-                          Add Address
+                        <button type="submit" className="btn btn-primary btn-lg p-4 mt-4 w-25">
+                          Save Address
                         </button>
                       </div>
                     </div>
