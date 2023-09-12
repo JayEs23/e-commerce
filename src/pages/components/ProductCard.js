@@ -40,12 +40,12 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
             onToggleWishlist={onToggleWishlist}
           />
 
-          <span className="text-dark p-0">
+          {/* <span className="text-dark p-0">
             {product_price.toLocaleString("en-NG", {
               style: "currency",
               currency: "NGN",
             })}
-          </span>
+          </span> */}
         </div>
       </div>
     </div>
