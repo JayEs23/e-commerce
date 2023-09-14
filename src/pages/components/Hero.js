@@ -24,14 +24,15 @@ const Hero = () => {
       </div>
     ),
     prevArrow: (
-      <div>
-        <div className="prev-slick-arrow"> &lt; </div>
+      <div className="row">
+        <div className="prev-slick-arrow" style={{marginLeft:"100px !important"}}> &lt; </div>
       </div>
     ),
   };
   return (
+    <div className="card row px-4">
     <Slider {...settings}>
-      <div className="d-flex hero-main hero-main-first h-500 py-5 align-items-center">
+      <div className="d-flex hero-main hero-main-first w-100 h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
             <h1>
@@ -64,7 +65,7 @@ const Hero = () => {
           </div>
         </article>
       </div>
-      <div className="d-flex hero-main h-500 py-5 align-items-center">
+      <div className="d-flex hero-main w-100 h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
             <h1>
@@ -90,7 +91,7 @@ const Hero = () => {
           </div>
         </article>
       </div>
-      <div className="d-flex hero-main hero-main-last h-500 py-5 align-items-center">
+      <div className="d-flex hero-main w-100 hero-main-last h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
             <h1>
@@ -118,6 +119,7 @@ const Hero = () => {
         </article>
       </div>
     </Slider>
+    </div>
   );
 };
 

@@ -13,6 +13,7 @@ const SearchPage = () => {
   const query = router.query.search;
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [searchResults, setSearchResults] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [cart,setCart]= useState([]);
   useEffect(() => {
@@ -20,6 +21,16 @@ const SearchPage = () => {
       try {
         const response = await api.get(`product/all_products/?product_name=${searchQuery}&description=${searchQuery}`);
         const data = await response.data.data;
+        console.log(data);
+        setSearchResults(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    const fetchCats = async () => {
+      try {
+        const response = await api.get(`product/categories/`);
+        const data = await response.data;
         console.log(data);
         setSearchResults(data);
       } catch (error) {
