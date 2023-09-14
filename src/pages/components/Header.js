@@ -63,8 +63,6 @@ const Header = () => {
     };
   });
 
-  console.log(data);
-
   // useEffect(() => {
   //   const fetchRegister = async () => {
   //     api

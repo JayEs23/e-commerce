@@ -12,6 +12,8 @@ import api from "@/utils/api";
 import ProductApi from "@/pages/api/products";
 import HeroSidebar from "./components/HeroSidebar";
 import Hero from "./components/Hero";
+import { useDispatch } from "react-redux";
+import { setCategories } from "./redux/reducers/categoriesReducer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,9 @@ export default function Home() {
   const productApi = ProductApi();
   const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
+  const [categories, setCategory] = useState([]);
+
+  const dispatch = useDispatch();
 
   const getWishlistFromApi = async () => {
     try {
@@ -55,6 +60,21 @@ export default function Home() {
     fetchWishlist();
   }, []);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("product/categories/");
+        const data = await response.data.data;
+        dispatch(setCategories(data));
+        setCategory(data);
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const toggleWishlist = async (productId) => {
     let updatedWishlist;
     if (wishlist.includes(productId)) {
@@ -80,7 +100,7 @@ export default function Home() {
             <div className="hero-content text-start py-0">
               <div className="row bg-gray">
                 <div className="col-xl-3 d-none d-xl-block">
-                  <HeroSidebar />
+                  <HeroSidebar categories={categories} />
                 </div>
                 <div className="col-xl-9 col-lg-12 h-500">
                   <Hero />
