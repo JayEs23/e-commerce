@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-title-in-document-head */
 /* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-css-tags */
-/* eslint-disable @next/next/no-document-title */
+
 import { Html, Head, Main, NextScript } from "next/document";
 import Footer from "./components/Footer";
 
