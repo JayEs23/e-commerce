@@ -34,6 +34,16 @@ const SearchPage = () => {
         console.error("Error fetching products:", error);
       }
     };
+    const fetchCats = async () => {
+      try {
+        const response = await api.get(`product/categories/`);
+        const data = await response.data;
+        console.log(data);
+        setSearchResults(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
     fetchData();
   }, [searchQuery]);

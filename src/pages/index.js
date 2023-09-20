@@ -91,6 +91,10 @@ export default function Home() {
       console.error("Error updating wishlist:", error);
     }
   };
+
+  const inWishList = (productId,wishlist) => {
+    return true;
+  }
   return (
     <>
       <div className="page-container">
@@ -102,7 +106,7 @@ export default function Home() {
                 <div className="col-xl-3 d-none d-xl-block">
                   <HeroSidebar categories={categories} />
                 </div>
-                <div className="col-xl-9 col-lg-12 h-500">
+                <div className="col-xl-9 col-lg-12 h-500 justify-content-between">
                   <Hero />
                 </div>
               </div>

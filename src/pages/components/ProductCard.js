@@ -8,9 +8,10 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
     return null; //
   }
 
-  const { product_name, description, product_price, id, image_one } = product;
+  const { product_name, description, product_price, id,image_one, images } = product;
   const slug = product.id;
-
+  const primary_image = images[0]?.image ?? "../product.png";
+  console.log("Images",images[0]?.image);
   return (
     <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
       <div className="card product-item border-0 mb-4 p-2">

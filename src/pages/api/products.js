@@ -12,7 +12,7 @@ const ProductApi = () => {
         // alert("uwee");
         const response = await api.get("product/all_products/");
         const data = await response.data;
-        console.log("products", data);
+        console.log("products nnn", data.results[0].data);
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
