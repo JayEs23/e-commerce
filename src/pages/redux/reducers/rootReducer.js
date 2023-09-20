@@ -6,4 +6,5 @@ import { wishlistReducer } from "./wishlistReducer";
 export const rootReducer = combineReducers({
   categories: categoriesReducer,
   cart: cartReducer,
+  wishlist: wishlistReducer,
 });
