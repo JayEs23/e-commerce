@@ -28,7 +28,7 @@ export default function Home() {
   const getWishlistFromApi = async () => {
     try {
       const response = await api.get("product/wishlist"); // Replace with your API endpoint
-      const wishlistData = await response.data;
+      const wishlistData = await response.data.data[0].products;
       return wishlistData;
     } catch (error) {
       console.error("Error fetching wishlist data:", error);
@@ -54,6 +54,7 @@ export default function Home() {
   useEffect(() => {
     const fetchWishlist = async () => {
       const initialWishlist = await getWishlistFromApi();
+      console.log("Initial Wishlist",initialWishlist);
       setWishlist(initialWishlist);
     };
 
@@ -82,18 +83,20 @@ export default function Home() {
     } else {
       updatedWishlist = [...wishlist, productId];
     }
-
+    
     try {
       // Send an API request to update the wishlist data
-      await api.post("product/wishlist", { wishlist: productId }); // Replace with your API endpoint and data structure
+      await api.post("product/wishlist/", { products: updatedWishlist }); // Replace with your API endpoint and data structure
       setWishlist(updatedWishlist);
     } catch (error) {
       console.error("Error updating wishlist:", error);
     }
   };
 
-  const inWishList = (productId,wishlist) => {
-    return true;
+  const inWishList = (productId) => {
+    let isPresent = wishlist.includes(productId);
+    console.log("Product ",productId," is Present ",isPresent);
+    return isPresent;
   }
   return (
     <>
@@ -112,7 +115,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <section className="explore-section bg-gray mb-4">
+          <section className="explore-section bg-gray mb-4" style={{minHeight:"700px"}}>
             <div className="container">
               <div className="filter-box">
                 <div className="mb-4">
@@ -129,7 +132,7 @@ export default function Home() {
                   </div>
                 ) : (
                   products?.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} inWishlist={inWishList} onToggleWishlist={toggleWishlist}  />
                   ))
                 )}
               </div>

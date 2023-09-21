@@ -407,22 +407,25 @@ const Header = () => {
                           <b>Push Notification</b>
                         </a>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Country</b>{" "}
-                          <span className="badge text-primary justify-content-end">
+                          
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
                             Nigeria
-                          </span>
-                        </p>
+                        </span>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Language</b>{" "}
-                          <span className="badge text-primary justify-content-end">
-                            English
-                          </span>
-                        </p>
+                          
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
+                        English
+                        </span>
                       </li>
+                      
                     </ul>
                   </div>
                   <p className="my-4">App version 1.0</p>

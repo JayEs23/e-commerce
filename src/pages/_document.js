@@ -31,7 +31,6 @@ export default function Document() {
         <link rel="stylesheet" href="../../assets/css/intro.css" />
         <link rel="stylesheet" href="../../assets/css/main.css" />
       </Head>
-      <Main>
        <body>
         <div className="page">
           <NextScript />
@@ -41,7 +40,6 @@ export default function Document() {
         <script src="../../assets/js/scripts.js" ></script>
 
       </body> 
-      </Main>
       
     </Html>
   );

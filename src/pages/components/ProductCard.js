@@ -8,10 +8,10 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
     return null; //
   }
 
-  const { product_name, description, product_price, id,image_one, images } = product;
+  const { product_name, description, images, variations } = product;
   const slug = product.id;
   const primary_image = images[0]?.image ?? "../product.png";
-  console.log("Images",images[0]?.image);
+  const main_price = variations[0]?.price ?? "";
   return (
     <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
       <div className="card product-item border-0 mb-4 p-2">
@@ -19,7 +19,7 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             <img
               className="img-fluid w-100 h-300"
-              src={`${image_one}`}
+              src={`${primary_image}`}
               width={100}
               height={100}
               alt=""
@@ -33,7 +33,7 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
             <p className="truncate-text">{description}</p>
           </div>
         </div>
-        <div className="card-footer d-flex justify-content-between bg-white">
+        <div className=" d-flex justify-content-between bg-white">
           {/* Add the WishlistButton component */}
           <WishlistButton
             product={product}
@@ -41,12 +41,12 @@ const ProductCard = ({ product, inWishlist, onToggleWishlist }) => {
             onToggleWishlist={onToggleWishlist}
           />
 
-          {/* <span className="text-dark p-0">
-            {product_price.toLocaleString("en-NG", {
+          <span className="text-dark p-0">
+            {main_price.toLocaleString("en-NG", {
               style: "currency",
               currency: "NGN",
             })}
-          </span> */}
+          </span>
         </div>
       </div>
     </div>

@@ -4,11 +4,26 @@ import { useRouter } from "next/router";
 import apiConfig from "@/utils/apiConfig";
 import axios from "axios";
 import Link from "next/link";
+import RegisterModal from "./RegisterModal";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 const LoginModal = () => {
   const { isAuthenticated, login } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
+
+
+  const handleRegistrationOpen = () => {
+    setShowRegistration(true);
+  };
+
+  const handleRegistrationClose = () => {
+    setShowRegistration(false);
+  };
+
+  const handleSwitchToRegistration = () => {
+    setShowRegistration(true);
+  };
 
   const data = useSession();
 
