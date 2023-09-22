@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import api from "@/utils/api";
 import AddToCartButton from '../cart/AddToCartButton';
-import { Toast } from 'react-bootstrap';
+import { Toast, Modal, Button } from 'react-bootstrap';
+import useAuth from '@/hooks/useAuth';
 
 const Bargain = ({ product, cart }) => {
+  const { isAuthenticated } = useAuth();
   const [bargainMode, setBargainMode] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [bargainAmount, setBargainAmount] = useState("");
-  const [totalPrice, setTotalPrice] = useState(product?.product_price);
+  const [totalPrice, setTotalPrice] = useState(product?.variations[0]?.price);
   const [showModal, setShowModal] = useState(false);
   const [showAmount, setShowAmount] = useState(null);
   const [cartData, setCartData] = useState(cart ?? []);
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState('success');
+  const [showAuthModal, setShowAuthModal] = useState(false); // State for authentication modal
+
 
   const handleBargainButtonClick = () => {
+    if(isAuthenticated) {
+      setShowAuthModal(true);
+      return false;
+    }
     setBargainMode(true);
     setShowAmount(false);
 
@@ -26,7 +34,7 @@ const Bargain = ({ product, cart }) => {
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     setQuantity(newQuantity);
-    setTotalPrice(product?.product_price * newQuantity);
+    setTotalPrice(product?.variations[0]?.price * newQuantity);
   };
 
   const handleBargainAmountChange = (event) => {
@@ -51,9 +59,9 @@ const Bargain = ({ product, cart }) => {
     // Replace with your actual API call logic
     const requestData = {
       quantity: quantity,
-      price: product?.product_price,
+      price: product?.variations[0]?.price,
       negotiated_price: bargainAmount,
-      negotiation_status: 'A',
+      negotiation_status: '',
       cart: cartData?.id, // Replace with actual cart ID
       product: product?.id, // Replace with actual product ID
     };
@@ -72,7 +80,8 @@ const Bargain = ({ product, cart }) => {
   };
 
   return (
-    <><div className="col-md-12">
+    <>
+    <div className="col-lg-12 mx-2">
       {bargainMode ? (
         <div className=" row justify-content-between">
           {showAmount == false ?(<>
@@ -96,16 +105,16 @@ const Bargain = ({ product, cart }) => {
               onChange={handleQuantityChange}
             />
           </div>
-          <div className="col-7 py-4 mx-2 justify-content-end">
+          <div className="col-7 py-1 mx-2 justify-content-end">
             <h4 className="text-primary my-2">{parseFloat(totalPrice).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</h4>
           </div>
-          <div className="col-11 mx-2">
+          <div className="col-11 py-2 mx-2">
             <button className="btn btn-primary w-100" onClick={() =>handleContinueClick(1)}>
               Continue
             </button>
           </div></>):(
             <>
-            <div className="col-11 mx-2">
+            <div className="col-11 mx-2 my-2">
               <input
                 type="number"
                 placeholder="Bargain amount"
@@ -115,7 +124,7 @@ const Bargain = ({ product, cart }) => {
 
               />
             </div>
-            <div className="col-11 mx-2">
+            <div className="col-11 mx-2 my-2">
               <button className="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#confirmModal"  onClick={() =>handleContinueClick(2)}>
                 Continue
               </button>
@@ -139,12 +148,12 @@ const Bargain = ({ product, cart }) => {
             <div class="modal-content">
               <div class="modal-body text-center">
                   <img src="images/thumb/exclamation-circle-solid.svg" alt="" class="mb-3" />
-                  <h4 class="modal-title mb-2">Bargain !</h4>
-                  <h6 class="modal-text text-danger">Are you sure you want bargain {parseFloat(bargainAmount).toLocaleString("en-NG", { style: "currency", currency: "NGN" })} for {quantity} of this product?</h6>
+                  <h4 class="modal-title mb-2 text-primary">Bargain !</h4>
+                  <h6 class="modal-text text-dark">Bargain {parseFloat(bargainAmount).toLocaleString("en-NG", { style: "currency", currency: "NGN" })} for {quantity} {product?.product_name}?</h6>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-info" onClick={handleCloseModal}>Cancel</button>
-                <button type="button" class="btn btn-sm btn-success" onClick={handleSendBargain}>Yes, Send Bargain</button></div>
+                <button type="button" class="btn btn-sm btn-danger" onClick={handleCloseModal}>Cancel</button>
+                <button type="button" class="btn btn-sm btn-primary text-light" onClick={handleSendBargain}>Yes, Send Bargain</button></div>
             </div>
           </div>
         </div>
@@ -158,12 +167,24 @@ const Bargain = ({ product, cart }) => {
     )}
     
     <Toast show={showToast} className="" onClose={() => setShowToast(false)} delay={3000} autohide>
-    <Toast.Header>
-      <strong className="me-auto">Bargain Placed</strong>
-      <button type="button" className="btn-close" onClick={() => setShowToast(false)}></button>
-    </Toast.Header>
+    
     <Toast.Body>Your bargain has been placed successfully.</Toast.Body>
   </Toast>
+
+  <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Authentication Required</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-primary">Please log in to continue the bargain process.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => setShowAuthModal(false)}>
+            Close
+          </Button>         
+        </Modal.Footer>
+      </Modal>
+
     </>
     
   );

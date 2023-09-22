@@ -6,24 +6,11 @@ import axios from "axios";
 import Link from "next/link";
 import RegisterModal from "./RegisterModal";
 import { useSession, signIn, signOut } from "next-auth/react";
-
 const LoginModal = () => {
-  const { isAuthenticated, login } = useAuth();
-  const [showModal, setShowModal] = useState(false);
   const [showRegistration, setShowRegistration] = useState(false);
 
-
-  const handleRegistrationOpen = () => {
-    setShowRegistration(true);
-  };
-
-  const handleRegistrationClose = () => {
-    setShowRegistration(false);
-  };
-
-  const handleSwitchToRegistration = () => {
-    setShowRegistration(true);
-  };
+  const { isAuthenticated, login } = useAuth();
+  const [showModal, setShowModal] = useState(false);
 
   const data = useSession();
 
@@ -87,6 +74,10 @@ const LoginModal = () => {
     signIn("facebook");
   };
 
+  const handleSwitchToRegistration = () => {
+    setShowRegistration(true);
+  };
+
   return (
     <>
       {/* Button to open the login modal */}
@@ -105,7 +96,9 @@ const LoginModal = () => {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h3 className="modal-title">Login to Inshopper</h3>
+                <h3 className="modal-title">
+                  {showRegistration ? "Register" : "Login"} to Inshopper
+                </h3>
                 <button
                   type="button"
                   className="btn-close icon-btn"
@@ -114,7 +107,11 @@ const LoginModal = () => {
                   <span>&times;</span>
                 </button>
               </div>
-              <div className="modal-body">
+
+              {showRegistration ? (
+                // Display the RegistrationModal component
+                <Regist onCancel={handleRegistrationClose} />
+              ) : (
                 <form onSubmit={handleSubmit}>
                   <div className="form-group form-floating mb-4">
                     <input
@@ -178,6 +175,19 @@ const LoginModal = () => {
                     </Link>
                   </p>
                 </form>
+              )}
+
+              <div className="modal-footer">
+                <p className="mt-3">
+                  {showRegistration ? "Already have an account?" : "Don't have an account?"}
+                  <button
+                    className="btn-link"
+                    onClick={showRegistration ? handleSwitchToLogin : handleSwitchToRegistration}
+                    type="button"
+                  >
+                    {showRegistration ? "Login" : "Register"}
+                  </button>
+                </p>
               </div>
             </div>
           </div>

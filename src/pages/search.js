@@ -27,8 +27,8 @@ const SearchPage = () => {
         const response = await api.get(
           `product/all_products/?product_name=${searchQuery}&description=${searchQuery}`
         );
-        const data = await response.data.data;
-        console.log(data);
+        const data = await response.data.results[0].data;
+        console.log("product",data);
         setSearchResults(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -347,7 +347,7 @@ const SearchPage = () => {
                 </div>
                 <div className="col-md-9 rounded d-block">
                   <div className="row ">
-                    {/* {searchResults.length > 0 ? (
+                    {searchResults.length > 0 ? (
                       searchResults.map((product) => (
                         <SearchItemCard
                           key={product.id}
@@ -357,7 +357,7 @@ const SearchPage = () => {
                       ))
                     ) : (
                       <p>No results found.</p>
-                    )} */}
+                    )}
                     {categories?.map((category) => {
                       <div className="form-check">
                         <input

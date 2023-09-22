@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, FormControl } from "react-bootstrap";
-import { useSession } from "next-auth/react";
+import { Form, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
 
-const RegisterModal = ({ show, onClose }) => {
+const RegisterModal = ({ onRegister }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -44,9 +43,14 @@ const RegisterModal = ({ show, onClose }) => {
       });
 
       // Registration successful, you can handle further actions here
+      onRegister(response.data); // Pass registration data to the parent component
 
-      // Close the registration modal
-      onClose();
+      // Clear the form fields
+      setFormData({
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (error) {
       console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");
@@ -62,46 +66,42 @@ const RegisterModal = ({ show, onClose }) => {
   };
 
   return (
-    <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Register</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleRegister}>
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <FormControl
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <FormControl
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <FormControl
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          {error && <p className="text-danger mb-4">{error}</p>}
-          <Button variant="primary" type="submit" disabled={isLoading}>
-            Register
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
+    <div>
+      <h2>Register</h2>
+      <Form onSubmit={handleRegister}>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <FormControl
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <FormControl
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <FormControl
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {error && <p className="text-danger mb-4">{error}</p>}
+        <Button variant="primary" type="submit" disabled={isLoading}>
+          Register
+        </Button>
+      </Form>
+    </div>
   );
 };
 
