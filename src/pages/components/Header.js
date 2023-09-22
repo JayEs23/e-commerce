@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
+import ForgotPawwordModal from "./ForgotPawwordModal";
+import PasswordResetOtp from "./PasswordResetOtp";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();

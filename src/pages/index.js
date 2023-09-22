@@ -14,6 +14,7 @@ import HeroSidebar from "./components/HeroSidebar";
 import Hero from "./components/Hero";
 import { useDispatch } from "react-redux";
 import { setCategories } from "./redux/reducers/categoriesReducer";
+import { setProduct } from "./redux/reducers/productReducers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,8 @@ export default function Home() {
   const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
   const [categories, setCategory] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [pageNo, setPageNo] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -40,9 +43,12 @@ export default function Home() {
     const fetchProducts = async () => {
       if (products) return;
       try {
-        const response = await api.get("product/all_products/");
+        const response = await api.get(
+          `product/all_products?page=${pageNo}&page_size=${limit}`
+        );
         const data = await response.data;
         setProducts(data?.results[0]?.data);
+        dispatch(setProduct(data?.results[0]?.data));
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -92,9 +98,9 @@ export default function Home() {
     }
   };
 
-  const inWishList = (productId,wishlist) => {
+  const inWishList = (productId, wishlist) => {
     return true;
-  }
+  };
   return (
     <>
       <div className="page-container">

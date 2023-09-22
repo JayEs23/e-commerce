@@ -13,7 +13,7 @@ const ProductApi = () => {
         const response = await api.get("product/all_products/");
         const data = await response.data;
         console.log("products nnn", data.results[0].data);
-        setProducts(data);
+        setProducts(data.results[0].data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -45,7 +45,9 @@ const ProductApi = () => {
   // Helper function to get all products
   const getAllProducts = async () => {
     try {
-      const response = await api.get("product/all_products/");
+      const response = await api.get(
+        `product/all_products/?page=${phrase}&page_size=${channel}`
+      );
       const data = await response.data;
       return data;
     } catch (error) {
@@ -54,26 +56,26 @@ const ProductApi = () => {
     }
   };
 
-  // const getProductById = async (id) => {
-  //   try {
-  //     const response = await api.get(`product/${id}/`);
-  //     const data = await response.data;
-  //     return data;
-  //   } catch (error) {
-  //     console.error('Error fetching product by ID:', error);
-  //     return null;
-  //   }
-  // };
-
-  const getProductById = (id) => {
-    let foundProduct = null;
-    productsData.forEach((product) => {
-      if (product.id === parseInt(id)) {
-        foundProduct = product;
-      }
-    });
-    return foundProduct;
+  const getProductById = async (id) => {
+    try {
+      const response = await api.get(`product/${id}/`);
+      const data = await response.data;
+      return data;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      return null;
+    }
   };
+
+  // const getProductById = (id) => {
+  //   let foundProduct = null;
+  //   productsData.forEach((product) => {
+  //     if (product.id === parseInt(id)) {
+  //       foundProduct = product;
+  //     }
+  //   });
+  //   return foundProduct;
+  // };
   return {
     getFeaturedProducts,
     getAllProducts,
