@@ -13,14 +13,17 @@ import ProductApi from "@/pages/api/products";
 import HeroSidebar from "./components/HeroSidebar";
 import Hero from "./components/Hero";
 import { useDispatch } from "react-redux";
-import { setCategories } from "./redux/reducers/categoriesReducer";
+import { setCategories } from "../hooks/redux/reducers/categoriesReducer";
 // import { setProduct } from "./redux/reducers/productReducers";
 import useAuth from "@/hooks/useAuth";
+import LoginModal from "./components/LoginModal";
+import { setCart } from "../hooks/redux/reducers/cartReducer";
+import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const productApi = ProductApi();
+  const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
   const [categories, setCategory] = useState([]);
@@ -28,12 +31,15 @@ export default function Home() {
   const [loading, setLoading] = useState(true); // Add loading state
   const itemsPerPage = 3; // Number of items to show per page
   const [totalProducts, setTotalProducts] = useState(0);
+
   const scrollToTop = () => {
     // Scroll to the top of the page
     window.scrollTo({ top: 4, behavior: "smooth" });
   };
 
+  const { isAuthenticated, logout } = useAuth();
   const dispatch = useDispatch();
+  const productApi = ProductApi();
 
   const getWishlistFromApi = async () => {
     try {
@@ -66,11 +72,27 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const fetchCart = async () => {
+      if (!Cookies.get("authToken")) return;
+      try {
+        const response = await api.get("order/cart/");
+        const data = await response.data.data;
+        console.log("VCart Data", data);
+        dispatch(setCart(data));
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    };
+
+    fetchCart();
+  }, []);
+
+  useEffect(() => {
     fetchProducts();
   }, [products]);
 
   useEffect(() => {
-    fetchProducts(); // Fetch NFTs on component mount
+    fetchProducts(); // Fetch ? on component mount
   }, [currentPage]);
 
   useEffect(() => {
@@ -135,10 +157,19 @@ export default function Home() {
     setCurrentPage(newPage);
   };
 
+  const handleLoginModalOpen = () => {
+    setShowModal(true);
+  };
+
   return (
     <>
       <div className="page-container">
         <Header />
+        <LoginModal
+          handleLoginModalOpen={handleLoginModalOpen}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
         <div className="content bg-gray">
           <div className="hero-wrap">
             <div className="hero-content text-start py-0">
@@ -177,6 +208,8 @@ export default function Home() {
                       product={product}
                       inWishlist={inWishList}
                       onToggleWishlist={toggleWishlist}
+                      handleLoginModalOpen={handleLoginModalOpen}
+                      isAuthenticated={isAuthenticated}
                     />
                   ))
                 )}

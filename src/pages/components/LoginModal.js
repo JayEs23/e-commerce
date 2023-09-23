@@ -7,11 +7,11 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import RegisterModal from "./RegisterModal";
 
-const LoginModal = () => {
+const LoginModal = ({ showModal, setShowModal }) => {
   const [showRegistration, setShowRegistration] = useState(false);
 
   const { isAuthenticated, login } = useAuth();
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState("login");
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [formData, setFormData] = useState({
@@ -128,10 +128,9 @@ const LoginModal = () => {
     }
   };
 
-  const handleModalOpen = () => {
-    setShowModal(true);
-    // setShowAuthModal("");
-  };
+  // const handleModalOpen = () => {
+  //   setShowModal(true);
+  // };
 
   const handleForgotPassword = () => {
     setShowAuthModal("forgot");
@@ -156,9 +155,9 @@ const LoginModal = () => {
   return (
     <>
       {/* Button to open the login modal */}
-      <button className="icon-btn mx-4" onClick={handleModalOpen}>
+      {/* <button className="icon-btn mx-4" onClick={handleModalOpen}>
         <em className="ni ni-user-c"></em>
-      </button>
+      </button> */}
 
       {/* Login Modal */}
       {showModal && (
@@ -199,7 +198,8 @@ const LoginModal = () => {
                 {showAuthModal === "resetOtp" && (
                   <p className="text-black mb-4">
                     Please enter the first digit code sent to <br />
-                    favour657@gmail.com
+                    {/* TODO:Refactor this to the person's mail */}
+                    your email
                   </p>
                 )}
                 {showAuthModal === "reset" && (
@@ -301,9 +301,9 @@ const LoginModal = () => {
                         </div>
                       )}
 
-                      <p className="text-black text-center">
+                      {/* <p className="text-black text-center">
                         OTP Entered - {otp.join("")}{" "}
-                      </p>
+                      </p> */}
 
                       {/* {showAuthModal === "reset" && (
                     <div className="form-group form-floating mb-2">

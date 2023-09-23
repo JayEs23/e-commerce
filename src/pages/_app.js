@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "../hooks/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 

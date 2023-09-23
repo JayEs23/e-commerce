@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button, InputGroup, FormControl, Tooltip } from 'react-bootstrap';
-import api from '@/utils/api';
+import React, { useState } from "react";
+import { Button, InputGroup, FormControl, Tooltip } from "react-bootstrap";
+import api from "@/utils/api";
 
 const AddToCartButton = ({ item }) => {
   const [showInput, setShowInput] = useState(false);
@@ -21,7 +21,7 @@ const AddToCartButton = ({ item }) => {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/order/cart", {
+      const response = await api.post("/order/cart/", {
         productId: item.id,
         quantity: quantity,
       });
@@ -60,7 +60,7 @@ const AddToCartButton = ({ item }) => {
               onClick={handleConfirm}
               variant="success"
             >
-              {isLoading ? 'Adding...' : 'Confirm'}
+              {isLoading ? "Adding..." : "Confirm"}
             </Button>
           </InputGroup>
         </div>
@@ -76,9 +76,9 @@ const AddToCartButton = ({ item }) => {
       <Tooltip show={showTooltip} placement="bottom">
         {showTooltip
           ? isLoading
-            ? 'Adding...'
-            : 'Error adding item to cart!'
-          : 'Item added to cart!'}
+            ? "Adding..."
+            : "Error adding item to cart!"
+          : "Item added to cart!"}
       </Tooltip>
     </div>
   );

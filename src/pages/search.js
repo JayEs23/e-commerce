@@ -19,7 +19,7 @@ const SearchPage = () => {
 
   const { categories } = useSelector((state) => state.categories);
 
-  console.log("Redux", categories);
+  // console.log("Redux", categories);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +28,7 @@ const SearchPage = () => {
           `product/all_products/?product_name=${searchQuery}&description=${searchQuery}`
         );
         const data = await response.data.results[0].data;
-        console.log("product",data);
+        console.log("product", data);
         setSearchResults(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -41,7 +41,7 @@ const SearchPage = () => {
         console.log(data);
         setSearchResults(data);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -142,7 +142,7 @@ const SearchPage = () => {
                   onChange={handleSearch}
                 /> */}
               <div className="row mt-3">
-              <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
+                <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
                   <div className="card">
                     <div className="accordion pt-4" id="sideAccordion">
                       <div className="accordion-item border-0">
@@ -173,7 +173,7 @@ const SearchPage = () => {
                                   id={`categoryChoice${category.id}`}
                                 />
                                 <label
-                                  className="form-check-label"
+                                  className="form-check-label text-black"
                                   htmlFor={`categoryChoice${category.id}`}
                                 >
                                   {category.name}
@@ -236,34 +236,7 @@ const SearchPage = () => {
                       </div>
 
                       {/* Continue with other accordion sections */}
-                      {/* Add the "Colors" section */}
-                      <div className="accordion-item border-0">
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button bg-white border-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#colors"
-                            aria-expanded="false"
-                            aria-controls="colors"
-                          >
-                            Colors
-                          </button>
-                        </h2>
-                        <div
-                          id="colors"
-                          className="accordion-collapse collapse show"
-                          data-bs-parent="#sideAccordion"
-                        >
-                          <div className="accordion-body">
-                            {/* Add color options on small cards */}
-                            {/* Example color cards: */}
-                            <div className="color-card">Red</div>
-                            <div className="color-card">Blue</div>
-                            {/* Add more color cards as needed */}
-                          </div>
-                        </div>
-                      </div>
+                      {/* Took out the "Colors" section */}
 
                       {/* Add the "Price" section */}
                       <div className="accordion-item border-0">
@@ -285,7 +258,13 @@ const SearchPage = () => {
                           data-bs-parent="#sideAccordion"
                         >
                           <div className="accordion-body">
-                            <input type="range" min="0" value={50} max="100"  className="w-100"/>
+                            <input
+                              type="range"
+                              min="0"
+                              value={50}
+                              max="100"
+                              className="w-100"
+                            />
                             <label>Max. $100.00</label>
                           </div>
                         </div>
