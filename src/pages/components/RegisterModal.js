@@ -67,7 +67,7 @@ const RegisterModal = ({ onRegister }) => {
 
   return (
     <div>
-      <h2>Register</h2>
+      {/* <h2>Register</h2> */}
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>

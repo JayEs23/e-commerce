@@ -410,22 +410,19 @@ const Header = () => {
                       <li className="history-panel">
                         <span className="history-panel-left text-dark">
                           <b>Country</b>{" "}
-                          
                         </span>
                         <span className=" history-panel-right badge text-primary">
-                            Nigeria
+                          Nigeria
                         </span>
                       </li>
                       <li className="history-panel">
                         <span className="history-panel-left text-dark">
                           <b>Language</b>{" "}
-                          
                         </span>
                         <span className=" history-panel-right badge text-primary">
-                        English
+                          English
                         </span>
                       </li>
-                      
                     </ul>
                   </div>
                   <p className="my-4">App version 1.0</p>
