@@ -7,11 +7,11 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import RegisterModal from "./RegisterModal";
 
-const LoginModal = ({ showModal, setShowModal }) => {
+const LoginModal = () => {
   const [showRegistration, setShowRegistration] = useState(false);
 
   const { isAuthenticated, login } = useAuth();
-  // const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState("login");
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [formData, setFormData] = useState({
@@ -128,9 +128,9 @@ const LoginModal = ({ showModal, setShowModal }) => {
     }
   };
 
-  // const handleModalOpen = () => {
-  //   setShowModal(true);
-  // };
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
 
   const handleForgotPassword = () => {
     setShowAuthModal("forgot");
@@ -158,6 +158,14 @@ const LoginModal = ({ showModal, setShowModal }) => {
       {/* <button className="icon-btn mx-4" onClick={handleModalOpen}>
         <em className="ni ni-user-c"></em>
       </button> */}
+      <li className="menu-item" onClick={handleModalOpen}>
+        <a
+          href="#"
+          className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
+        >
+          Login
+        </a>
+      </li>
 
       {/* Login Modal */}
       {showModal && (

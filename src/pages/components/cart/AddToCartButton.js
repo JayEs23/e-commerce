@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Button, InputGroup, FormControl, Tooltip } from "react-bootstrap";
 import api from "@/utils/api";
+import { useSelector } from "react-redux";
 
 const AddToCartButton = ({ item }) => {
   const [showInput, setShowInput] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [cart, setCart] = useState([]);
+  const [carts, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { cart } = useSelector((state) => state.cart);
+
+  // console.log();
 
   const handleAddToCart = () => {
     setShowInput(true);
@@ -21,15 +26,19 @@ const AddToCartButton = ({ item }) => {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/order/cart/", {
-        productId: item.id,
+      const response = await api.post("/order/cart_items/", {
         quantity: quantity,
+        price: item?.variations[0]?.price,
+        cart: cart.id,
+        product: item.id,
+        negotiated_price: 0,
+        negotiation_status: "",
       });
 
       if (response.status === 200) {
         setShowInput(false);
         setShowTooltip(true);
-        setCart([...cart, { ...item, quantity }]);
+        setCart([...carts, { ...item, quantity }]);
       } else {
         setShowTooltip(true);
       }

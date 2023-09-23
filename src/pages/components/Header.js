@@ -155,7 +155,7 @@ const Header = ({ handleLoginModalOpen }) => {
                     </form>
                   </div>
                 </div>
-                {isAuthenticated ? (
+                {isAuthenticated && (
                   <div className="header-mobile-user-menu dropdown me-2">
                     <button
                       type="button"
@@ -205,10 +205,6 @@ const Header = ({ handleLoginModalOpen }) => {
                       </li>
                     </ul>
                   </div>
-                ) : (
-                  <div className="header-mobile-user-menu dropdown me-2">
-                    <LoginModal />
-                  </div>
                 )}
                 <div className="header-toggle">
                   <button className="menu-toggler">
@@ -248,7 +244,7 @@ const Header = ({ handleLoginModalOpen }) => {
                     </a>
                   </li>
                 </ul>
-                {isAuthenticated ? (
+                {isAuthenticated && (
                   <ul className="menu-btns menu-btns-2">
                     <li className="d-none d-lg-inline-block dropdown">
                       <button
@@ -304,8 +300,6 @@ const Header = ({ handleLoginModalOpen }) => {
                       </ul>
                     </li>
                   </ul>
-                ) : (
-                  <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
                   {isAuthenticated ? (
@@ -337,14 +331,9 @@ const Header = ({ handleLoginModalOpen }) => {
                     </>
                   ) : (
                     <>
-                      <li className="menu-item" onClick={handleLoginModalOpen}>
-                        <a
-                          href="#"
-                          className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
-                        >
-                          Login
-                        </a>
-                      </li>
+                      <div className="header-mobile-user-menu dropdown me-2">
+                        <LoginModal />
+                      </div>
                       {/* <li className="menu-item" onClick={handleLoginModalOpen}>
                         <a
                           href="#"

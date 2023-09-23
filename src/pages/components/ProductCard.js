@@ -31,18 +31,7 @@ const ProductCard = ({
           />
           {/* TODO: Refactor this section */}
 
-          {isAuthenticated ? (
-            <Link href={`/products/${slug}`}>
-              <img
-                className="img-fluid w-100 h-300"
-                src={`${primary_image}`}
-                width={100}
-                height={100}
-                alt=""
-                loading="lazy"
-              />
-            </Link>
-          ) : (
+          <Link href={`/products/${slug}`}>
             <img
               className="img-fluid w-100 h-300"
               src={`${primary_image}`}
@@ -50,9 +39,8 @@ const ProductCard = ({
               height={100}
               alt=""
               loading="lazy"
-              onClick={handleLoginModalOpen}
             />
-          )}
+          </Link>
         </div>
 
         <div className="card-body border-left border-right text-left pl-1 pt-4 pb-1">
