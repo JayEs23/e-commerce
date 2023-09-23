@@ -56,27 +56,26 @@ const ProductDetailsPage = () => {
       <div className="page-container bg-gray">
         <Header />
         <div className="content row mt-4">
-          <div className=" card col-lg-10 mx-auto mt-4">
+          <div className=" card col-lg-10 bg-light mx-auto mt-4">
             {product && (
-              <div
+              <><div
                 className="row"
                 style={{ padding: "0px", backgroundColor: "#fafafa" }}
               >
                 <div className="col-xl-6 card bg-white pt-4">
                   <img
                     className="img-fluid h-400 mb-4 rounded-3"
+                    style={{ objectFit: "contain" }}
                     src={product?.images[0].image}
-                    alt={product?.product_name}
-                  />
+                    alt={product?.product_name} />
 
                   <div className="d-flex mb-5">
                     {product?.images?.slice(1).map((url, index) => (
                       <img
                         key={index}
                         src={url?.image}
-                        className="w-25 mx-3 rounded-3"
-                        alt={`image-${index + 1}`}
-                      />
+                        className="w-25 h-100 mx-3 rounded-3"
+                        alt={`image-${index + 1}`} />
                     ))}
                   </div>
                 </div>
@@ -113,8 +112,7 @@ const ProductDetailsPage = () => {
                             backgroundColor: "inherit",
                             border: "1px solid gray",
                             borderRadius: "4px",
-                          }}
-                        />
+                          }} />
                       </div>
 
                       <div className="col-sm-2 pt-2">
@@ -127,8 +125,7 @@ const ProductDetailsPage = () => {
                             backgroundColor: "inherit",
                             border: "1px solid gray",
                             borderRadius: "4px",
-                          }}
-                        />
+                          }} />
                       </div>
 
                       <div className="col-2 pt-2 justify-content-center d-flex">
@@ -157,7 +154,7 @@ const ProductDetailsPage = () => {
                           className="p-0"
                           style={{ color: "#fd5a33", fontWeight: "bold" }}
                         >
-                          {product?.variations[0]?.price.toLocaleString(
+                          {parseFloat(product?.variations[0]?.price).toLocaleString(
                             "en-NG",
                             {
                               style: "currency",
@@ -171,28 +168,63 @@ const ProductDetailsPage = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="pt-2">Seller information</p>
-                  <div
-                    className="row"
-                    style={{
-                      padding: "2px",
-                      marginLeft: "0px !important",
-                      backgroundColor: "#fafafa",
-                    }}
-                  >
-                    <div className="col-12 mx-auto">
-                      <h2
-                        className="ml-4 p-0"
-                        style={{ color: "#1B0C2E", fontWeight: "bold" }}
-                      >
-                        {product?.store_id}
-                      </h2>
+                  <div className="row">
+                    <div className="col-xl-12 col-lg-10">
+
+                      <p className="pt-2">Seller information</p>
+                      <div class="card-creator-v card-creator-v-wbg card-full">
+                        <div class="card-body">
+                          <div class="card-creator-info">
+                            <a href="#" class="avatar flex-shrink-0 bg-dark p-2 py-2">
+                              {/* <img src="" alt="avatar" /> */}
+                              <h5 className="text-white mx-1 py-1 text-nowrap">
+                                {product?.store_id.split(' ').slice(0, 2).map(word => word.charAt(0).toUpperCase()).join('')}
+                              </h5>
+                            </a>
+                            <div class="flex-grow-1">
+                              <a href="#" class="card-title">
+                                {product?.store_id}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-6"></div>
-                  </div>{" "}
-                  {/* <p className="pt-2">Seller information</p> */}
+                  </div>
+
                 </div>
               </div>
+              <div className="row bg-gray pt-4">
+                <div className="col-xl-9 ps-xl-4 mx-auto">
+                  <div className="author-items-wrap">
+                      <ul className="nav nav-tabs nav-tabs-s1" id="myTab" role="tablist">
+                          <li className="nav-item" role="presentation">
+                              <button className="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About Item</button>
+                          </li>
+                          <li className="nav-item" role="presentation">
+                              <button className="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                          </li>
+                          
+                      </ul>
+                      <div className="gap-2x"></div>
+                      <div className="tab-content" id="myTabContent">
+                        <div className="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                            <div className="row g-gs">
+                            
+                            </div>
+                        </div>
+                        <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div className="row g-gs">
+                            
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                  </div>
+              </div>
+              </div>
+              </>
             )}
           </div>
         </div>

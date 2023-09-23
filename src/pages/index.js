@@ -174,10 +174,10 @@ export default function Home() {
           <div className="hero-wrap">
             <div className="hero-content text-start py-0">
               <div className="row bg-gray">
-                <div className="col-xl-3 d-none d-xl-block">
+                {/* <div className="col-xl-3 d-none d-xl-block">
                   <HeroSidebar categories={categories} />
-                </div>
-                <div className="col-xl-9 col-lg-12 h-500 justify-content-between">
+                </div> */}
+                <div className="col-xl-12 col-lg-12 h-500 justify-content-between">
                   <Hero />
                 </div>
               </div>
@@ -189,12 +189,12 @@ export default function Home() {
           >
             <div className="container">
               <div className="filter-box">
-                <div className="mb-4">
-                  <h2 className="px-5"> Products</h2>
+                <div className="mb-4 mt-4">
+                <div class="section-head text-center py-4"><h2>Popular Products</h2></div>
                 </div>
               </div>
               <div className="gap-2x"></div>
-              <div className=" row g-gs">
+              <div className="row">
                 {products?.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">

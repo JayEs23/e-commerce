@@ -18,6 +18,31 @@ const ProductCard = ({
   const slug = product.id;
   const primary_image = images[0]?.image ?? "../product.png";
   const main_price = variations[0]?.price ?? "";
+  
+  const colors = variations.reduce((acc, variation) => {
+    if (!acc.includes(variation.color_name)) {
+      const red = parseInt(variation.color_name.slice(4, 6), 16);   // 03 in hexadecimal to decimal
+      const green = parseInt(variation.color_name.slice(6, 8), 16); // 2c in hexadecimal to decimal
+      const blue = parseInt(variation.color_name.slice(8, 10), 16); // 13 in hexadecimal to decimal
+
+      // Create an RGB color string
+      const rgbColor = `rgb(${red}, ${green}, ${blue})`;
+      acc.push(rgbColor);
+    }
+    return acc;
+  }, []);
+
+  const ColorCircles = ({ colors }) => {
+    return (
+      <svg width="75" height="24" viewBox="0 0 75 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="Group 1000001535">
+          {colors.map((color, index) => (
+            <circle key={index} cx={index * 17 + 12} cy="12" r="12" fill={color} />
+          ))}
+        </g>
+      </svg>
+    );
+  };
 
   return (
     <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
@@ -49,15 +74,15 @@ const ProductCard = ({
             <p className="truncate-text">{description}</p>
           </div>
         </div>
-        <div className=" d-flex justify-content-between bg-white">
-          {/* Add the WishlistButton component */}
-
-          <span className="text-dark p-0">
-            {parseFloat(main_price).toLocaleString("en-NG", {
-              style: "currency",
-              currency: "NGN",
-            })}
-          </span>
+        <div className=" d-flex justify-content-between bg-white mx-2 my-2">
+          <div class="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2">
+              <div class="me-5 me-sm-2">
+              <ColorCircles colors={colors} />
+              </div>
+              <div class="text-sm-end" style={{position:"absolute", left:"170px"}}>
+                <span class="card-price-number">{parseFloat(main_price).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</span>
+              </div>
+          </div>
         </div>
       </div>
     </div>

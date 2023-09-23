@@ -240,6 +240,13 @@ const Header = ({ handleLoginModalOpen }) => {
                     <a href="#" className="icon-btn" title="">
                       <span>
                         <em className="ni ni-cart icon"></em>
+                        <span 
+                          class="badge bg-primary"
+                          style={{
+                            position:"absolute",
+                            top:"20px",
+                          }}
+                        >0</span>
                       </span>
                     </a>
                   </li>

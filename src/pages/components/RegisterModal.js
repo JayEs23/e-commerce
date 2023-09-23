@@ -97,9 +97,12 @@ const RegisterModal = ({ onRegister }) => {
           />
         </Form.Group>
         {error && <p className="text-danger mb-4">{error}</p>}
-        <Button variant="primary" type="submit" disabled={isLoading}>
-          Register
-        </Button>
+        <div className="row mx-2 my-2">
+          <Button variant="primary" type="submit" disabled={isLoading}>
+            Register
+          </Button>
+        </div>
+        
       </Form>
     </div>
   );

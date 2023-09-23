@@ -16,10 +16,11 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [cart, setCart] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   const { categories } = useSelector((state) => state.categories);
 
-  // console.log("Redux", categories);
+  console.log("Redux", categories);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +29,12 @@ const SearchPage = () => {
           `product/all_products/?product_name=${searchQuery}&description=${searchQuery}`
         );
         const data = await response.data.results[0].data;
-        console.log("product", data);
         setSearchResults(data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
-    const fetchCats = async () => {
+    const fetchBrands = async () => {
       try {
         const response = await api.get(`product/categories/`);
         const data = await response.data;
@@ -44,6 +44,8 @@ const SearchPage = () => {
         console.error("Error fetching products:", error);
       }
     };
+
+
 
     fetchData();
   }, [searchQuery]);
@@ -80,6 +82,7 @@ const SearchPage = () => {
   };
 
   const handleSearch = (event) => {
+    console.log("Categories",categories);
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
 
@@ -164,19 +167,19 @@ const SearchPage = () => {
                           data-bs-parent="#sideAccordion"
                         >
                           <div className="accordion-body border-0">
-                            {categories.map((category) => (
-                              <div className="form-check" key={category.id}>
+                            {categories.map((category,index) => (
+                              <div className="form-check" key={index}>
                                 <input
                                   className="form-check-input"
                                   type="radio"
                                   name="categoryChoice"
-                                  id={`categoryChoice${category.id}`}
+                                  id={`categoryChoice${index}`}
                                 />
                                 <label
                                   className="form-check-label text-black"
-                                  htmlFor={`categoryChoice${category.id}`}
+                                  htmlFor={`categoryChoice${index}`}
                                 >
-                                  {category.name}
+                                  {category}
                                 </label>
                               </div>
                             ))}

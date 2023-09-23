@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import apiConfig from "@/utils/apiConfig";
+import api from "@/utils/api";
 import axios from "axios";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -9,6 +10,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 const NotificationModal = () => {
   const { isAuthenticated, login } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   const data = useSession();
 
@@ -25,7 +27,17 @@ const NotificationModal = () => {
     setShowModal(false);
   };
 
-  
+  const fetchNotification = async() => {
+    if(!isAuthenticated) return false;
+    try {
+      const response = await api.get(`notification/user_notifications/`);
+      const data = await response.data;
+      console.log("Notification", data);
+      setNotifications(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }
 
 
   return (
@@ -39,6 +51,14 @@ const NotificationModal = () => {
     >
         <span>
         <em className="ni ni-bell icon"></em>
+        <span 
+          class="badge bg-primary"
+          style={{
+            position:"absolute",
+            top:"20px",
+            borderRadius:"30%"
+          }}
+        >0</span>
         </span>
     </a>
 

@@ -69,7 +69,7 @@ const SearchItemCard = ({ product, cartData }) => {
               <div class="me-5 me-sm-2">
               <ColorCircles colors={colors} />
               </div>
-              <div class="text-sm-end">
+              <div class="text-sm-end" >
                 <span class="card-price-number">{parseFloat(main_price).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</span>
               </div>
           </div>
