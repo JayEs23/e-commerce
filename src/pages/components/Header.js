@@ -10,7 +10,7 @@ import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
 
-const Header = () => {
+const Header = ({ handleLoginModalOpen }) => {
   const { isAuthenticated, logout } = useAuth();
   const [userProfile, setUserProfile] = useState(null);
   const router = useRouter();
@@ -308,7 +308,7 @@ const Header = () => {
                   <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
-                  {isAuthenticated && (
+                  {isAuthenticated ? (
                     <>
                       <li className="menu-item has-sub">
                         <a
@@ -334,6 +334,25 @@ const Header = () => {
                           </ul>
                         </div>
                       </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="menu-item" onClick={handleLoginModalOpen}>
+                        <a
+                          href="#"
+                          className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
+                        >
+                          Login
+                        </a>
+                      </li>
+                      {/* <li className="menu-item" onClick={handleLoginModalOpen}>
+                        <a
+                          href="#"
+                          className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
+                        >
+                          Sign up
+                        </a>
+                      </li> */}
                     </>
                   )}
                   <li className="menu-item has-sub">
