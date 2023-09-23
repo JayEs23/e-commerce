@@ -5,8 +5,11 @@ import apiConfig from "@/utils/apiConfig";
 import axios from "axios";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import RegisterModal from "./RegisterModal";
 
 const LoginModal = () => {
+  const [showRegistration, setShowRegistration] = useState(false);
+
   const { isAuthenticated, login } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState("login");
@@ -150,8 +153,6 @@ const LoginModal = () => {
     signIn("facebook");
   };
 
-  console.log("Printing authModalState", otp);
-
   return (
     <>
       {/* Button to open the login modal */}
@@ -232,78 +233,79 @@ const LoginModal = () => {
                   </div>
                 )}
 
-                {showAuthModal !== "success" && (
-                  <form onSubmit={handleSubmit}>
-                    {showAuthModal !== "resetOtp" &&
-                      showAuthModal !== "reset" && (
-                        <div className="form-group form-floating mb-4">
+                {showAuthModal !== "success" &&
+                  showAuthModal !== "register" && (
+                    <form onSubmit={handleSubmit}>
+                      {showAuthModal !== "resetOtp" &&
+                        showAuthModal !== "reset" && (
+                          <div className="form-group form-floating mb-4">
+                            <input
+                              type="text"
+                              className="form-control"
+                              id={
+                                showAuthModal === "login" ? "username" : "email"
+                              }
+                              name={
+                                showAuthModal === "login" ? "username" : "email"
+                              }
+                              placeholder="Email"
+                              value={
+                                showAuthModal === "login"
+                                  ? formData.username
+                                  : formData.email
+                              }
+                              onChange={handleChange}
+                            />
+
+                            <label
+                              htmlFor={
+                                showAuthModal === "login" ? "username" : "email"
+                              }
+                            >
+                              Email
+                            </label>
+                          </div>
+                        )}
+                      {(showAuthModal === "login" ||
+                        showAuthModal === "reset") && (
+                        <div className="form-group form-floating mb-2">
                           <input
-                            type="text"
+                            type="password"
                             className="form-control"
-                            id={
-                              showAuthModal === "login" ? "username" : "email"
+                            id="password"
+                            name="password"
+                            placeholder={
+                              showAuthModal === "reset"
+                                ? "New Password"
+                                : "Password"
                             }
-                            name={
-                              showAuthModal === "login" ? "username" : "email"
-                            }
-                            placeholder="Email"
-                            value={
-                              showAuthModal === "login"
-                                ? formData.username
-                                : formData.email
-                            }
+                            value={formData.password}
                             onChange={handleChange}
                           />
-
-                          <label
-                            htmlFor={
-                              showAuthModal === "login" ? "username" : "email"
-                            }
-                          >
-                            Email
-                          </label>
+                          <label htmlFor="password">Password</label>
                         </div>
                       )}
-                    {(showAuthModal === "login" ||
-                      showAuthModal === "reset") && (
-                      <div className="form-group form-floating mb-2">
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="password"
-                          name="password"
-                          placeholder={
-                            showAuthModal === "reset"
-                              ? "New Password"
-                              : "Password"
-                          }
-                          value={formData.password}
-                          onChange={handleChange}
-                        />
-                        <label htmlFor="password">Password</label>
-                      </div>
-                    )}
 
-                    {showAuthModal === "resetOtp" && (
-                      <div className="form-floating mb-2 d-flex justify-content-center space-x-2">
-                        {otp.map((data, i) => (
-                          <input
-                            type="text"
-                            className="otp-field"
-                            key={i}
-                            value={data}
-                            onChange={(e) => handleOtpChange(e.target, i)}
-                            onFocus={(e) => e.target.select()}
-                          />
-                        ))}
-                      </div>
-                    )}
+                      {showAuthModal === "resetOtp" && (
+                        <div className="form-floating mb-2 d-flex justify-content-center space-x-2">
+                          {otp.map((data, i) => (
+                            <input
+                              type="text"
+                              className="otp-field"
+                              key={i}
+                              value={data}
+                              onChange={(e) => handleOtpChange(e.target, i)}
+                              onFocus={(e) => e.target.select()}
+                            />
+                          ))}
+                        </div>
+                      )}
 
-                    <p className="text-black text-center">
-                      OTP Entered - {otp.join("")}{" "}
-                    </p>
+                      <p className="text-black text-center">
+                        OTP Entered - {otp.join("")}{" "}
+                      </p>
 
-                    {/* {showAuthModal === "reset" && (
+                      {/* {showAuthModal === "reset" && (
                     <div className="form-group form-floating mb-2">
                       <input
                         type="password"
@@ -318,70 +320,99 @@ const LoginModal = () => {
                     </div>
                   )} */}
 
-                    {showAuthModal === "login" && (
-                      <p
-                        className="text-end text-black mb-4 pe-auto"
-                        onClick={handleForgotPassword}
+                      {showAuthModal === "login" && (
+                        <p
+                          className="text-end text-black mb-4 pe-auto"
+                          onClick={handleForgotPassword}
+                        >
+                          Forgot Password?
+                        </p>
+                      )}
+
+                      {error && <p className="text-danger mb-4">{error}</p>}
+
+                      <button
+                        className="btn btn-dark w-100"
+                        type="submit"
+                        disabled={isLoading}
                       >
-                        Forgot Password?
-                      </p>
-                    )}
+                        {showAuthModal === "login" ? loginText : contineText}
+                      </button>
+                    </form>
+                  )}
 
-                    {error && <p className="text-danger mb-4">{error}</p>}
+                {/* Registration */}
+                {showAuthModal === "register" && <RegisterModal />}
 
+                {(showAuthModal === "login" ||
+                  showAuthModal === "register") && (
+                  <>
+                    <div className="separator">OR</div>
                     <button
-                      className="btn btn-dark w-100"
-                      type="submit"
-                      disabled={isLoading}
+                      className="login-btn outline-btn btn w-100 login-google"
+                      onClick={handleGoogleLogin}
+                      type=""
                     >
-                      {showAuthModal === "login" ? loginText : contineText}
+                      <em className="ni ni-google"></em>{" "}
+                      {showAuthModal === "login"
+                        ? "Login with Google"
+                        : "Sign up with Google"}
                     </button>
 
-                    {showAuthModal === "login" && (
-                      <>
-                        <div className="separator">OR</div>
-                        <button
-                          className="login-btn outline-btn btn w-100 login-google"
-                          onClick={handleGoogleLogin}
-                          type=""
-                        >
-                          <em className="ni ni-google"></em>{" "}
-                          {showAuthModal === "login"
-                            ? "Login with Google"
-                            : "Sign up with Google"}
-                        </button>
+                    <button
+                      className="login-btn outline-btn btn mt-3 w-100 login-facebook "
+                      onClick={handleFacebookLogin}
+                      type=""
+                    >
+                      <em className="ni ni-facebook-f"></em>{" "}
+                      {showAuthModal === "login"
+                        ? "Login with Facebook"
+                        : "Sign up with Facebook"}
+                    </button>
 
-                        <button
-                          className="login-btn outline-btn btn mt-3 w-100 login-facebook "
-                          onClick={handleFacebookLogin}
-                          type=""
-                        >
-                          <em className="ni ni-facebook-f"></em>{" "}
-                          {showAuthModal === "login"
-                            ? "Login with Facebook"
-                            : "Sign up with Facebook"}
-                        </button>
-
-                        {/* <button
+                    {/* <button
                     className="outline-btn btn mt-5 w-100"
                     onClick={() => signOut()}
                   >
                     Logout
                   </button> */}
-                        <p className="mt-3 text-center login-text login-primary-text">
-                          Don&lsquo;t have an account?
-                          <Link
-                            href="/register"
-                            className="btn-link login-secondary-text"
-                          >
-                            Sign Up
-                          </Link>
-                        </p>
-                      </>
-                    )}
-                  </form>
+                  </>
                 )}
+
+                <p className="mt-3 text-center login-text login-primary-text">
+                  {showAuthModal === "login"
+                    ? "Don't have an account?"
+                    : "Already have an account?"}
+                  <button
+                    className="btn-link border-0 text-decoration-none bg-transparent login-secondary-text"
+                    onClick={
+                      showAuthModal === "login"
+                        ? () => setShowAuthModal("register")
+                        : () => setShowAuthModal("login")
+                    }
+                  >
+                    {showAuthModal === "login" ? "Sign Up" : "Login"}
+                  </button>
+                </p>
               </div>
+              {/* <div className="modal-footer">
+                <p className="mt-3">
+                  {showRegistration
+                    ? "Already have an account?"
+                    : "Don't have an account?"}
+                  <button
+                    className="btn-link"
+                    onClick={
+                      showRegistration
+                        ? handleSwitchToLogin
+                        : handleSwitchToRegistration
+                    }
+                    type="button"
+                  >
+                    {showRegistration ? "Login" : "Register"}
+                  </button>
+                </p>
+              </div> */}
             </div>
           </div>
         </div>

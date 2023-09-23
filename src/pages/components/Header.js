@@ -9,8 +9,6 @@ import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
-import ForgotPawwordModal from "./ForgotPawwordModal";
-import PasswordResetOtp from "./PasswordResetOtp";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -409,21 +407,21 @@ const Header = () => {
                           <b>Push Notification</b>
                         </a>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Country</b>{" "}
-                          <span className="badge text-primary justify-content-end">
-                            Nigeria
-                          </span>
-                        </p>
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
+                          Nigeria
+                        </span>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Language</b>{" "}
-                          <span className="badge text-primary justify-content-end">
-                            English
-                          </span>
-                        </p>
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
+                          English
+                        </span>
                       </li>
                     </ul>
                   </div>

@@ -14,7 +14,8 @@ import HeroSidebar from "./components/HeroSidebar";
 import Hero from "./components/Hero";
 import { useDispatch } from "react-redux";
 import { setCategories } from "./redux/reducers/categoriesReducer";
-import { setProduct } from "./redux/reducers/productReducers";
+// import { setProduct } from "./redux/reducers/productReducers";
+import useAuth from "@/hooks/useAuth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,15 +24,21 @@ export default function Home() {
   const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
   const [categories, setCategory] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [pageNo, setPageNo] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true); // Add loading state
+  const itemsPerPage = 3; // Number of items to show per page
+  const [totalProducts, setTotalProducts] = useState(0);
+  const scrollToTop = () => {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 4, behavior: "smooth" });
+  };
 
   const dispatch = useDispatch();
 
   const getWishlistFromApi = async () => {
     try {
       const response = await api.get("product/wishlist"); // Replace with your API endpoint
-      const wishlistData = await response.data;
+      const wishlistData = await response.data.data[0].products;
       return wishlistData;
     } catch (error) {
       console.error("Error fetching wishlist data:", error);
@@ -39,27 +46,37 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (products) return;
-      try {
-        const response = await api.get(
-          `product/all_products?page=${pageNo}&page_size=${limit}`
-        );
-        const data = await response.data;
-        setProducts(data?.results[0]?.data);
-        dispatch(setProduct(data?.results[0]?.data));
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+  const fetchProducts = async () => {
+    if (products) return;
 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    try {
+      const response = await api.get("product/all_products/");
+      const data = await response.data;
+      setTotalProducts(data.count);
+      let items = data?.results[0]?.data;
+      setProducts(items.slice(startIndex, endIndex));
+      setLoading(false);
+      scrollToTop();
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchProducts();
   }, [products]);
 
   useEffect(() => {
+    fetchProducts(); // Fetch NFTs on component mount
+  }, [currentPage]);
+
+  useEffect(() => {
     const fetchWishlist = async () => {
       const initialWishlist = await getWishlistFromApi();
+      console.log("Initial Wishlist", initialWishlist);
       setWishlist(initialWishlist);
     };
 
@@ -91,16 +108,33 @@ export default function Home() {
 
     try {
       // Send an API request to update the wishlist data
-      await api.post("product/wishlist", { wishlist: productId }); // Replace with your API endpoint and data structure
+      await api.post("product/wishlist/", { products: updatedWishlist }); // Replace with your API endpoint and data structure
       setWishlist(updatedWishlist);
     } catch (error) {
       console.error("Error updating wishlist:", error);
     }
   };
 
-  const inWishList = (productId, wishlist) => {
-    return true;
+  const inWishList = (productId) => {
+    let isPresent = wishlist.includes(productId);
+    console.log("Product ", productId, " is Present ", isPresent);
+    return isPresent;
   };
+
+  const totalPages = Math.ceil(totalProducts / itemsPerPage);
+
+  const generatePageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+    return pageNumbers;
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <>
       <div className="page-container">
@@ -118,7 +152,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <section className="explore-section bg-gray mb-4">
+          <section
+            className="explore-section bg-gray mb-4"
+            style={{ minHeight: "700px" }}
+          >
             <div className="container">
               <div className="filter-box">
                 <div className="mb-4">
@@ -135,12 +172,76 @@ export default function Home() {
                   </div>
                 ) : (
                   products?.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      inWishlist={inWishList}
+                      onToggleWishlist={toggleWishlist}
+                    />
                   ))
                 )}
               </div>
             </div>
           </section>
+          {!loading && products?.length > 0 && (
+            <div className="pagination-wrap">
+              <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center mt-5 pagination-s1">
+                  <li
+                    className={`page-item ${currentPage === 1 && "disabled"}`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      aria-disabled={currentPage === 1}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="ni ni-chevron-left"
+                      ></span>
+                    </button>
+                  </li>
+                  {generatePageNumbers().map((page) => (
+                    <li
+                      key={page}
+                      className={`page-item ${
+                        currentPage === page && "active"
+                      }`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => handlePageChange(page)}
+                      >
+                        {page}
+                      </button>
+                    </li>
+                  ))}
+                  <li
+                    className={`page-item ${
+                      currentPage === totalPages && "disabled"
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      aria-disabled={currentPage === totalPages}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="ni ni-chevron-right"
+                      ></span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+              <p className="text-center mt-3 text-primary text-bold page-result-text">
+                Showing{" "}
+                {Math.min((currentPage - 1) * itemsPerPage + 1, totalProducts)}{" "}
+                to {Math.min(currentPage * itemsPerPage, totalProducts)} of{" "}
+                {totalProducts} records
+              </p>
+            </div>
+          )}
           {/* <section className="explore-section bg-gray mb-4">
             <div className="container">
               <div className="filter-box">

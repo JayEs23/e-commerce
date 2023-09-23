@@ -27,8 +27,8 @@ const SearchPage = () => {
         const response = await api.get(
           `product/all_products/?product_name=${searchQuery}&description=${searchQuery}`
         );
-        const data = await response.data.data;
-        console.log(data);
+        const data = await response.data.results[0].data;
+        console.log("product",data);
         setSearchResults(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -142,7 +142,7 @@ const SearchPage = () => {
                   onChange={handleSearch}
                 /> */}
               <div className="row mt-3">
-                <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
+              <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
                   <div className="card">
                     <div className="accordion pt-4" id="sideAccordion">
                       <div className="accordion-item border-0">
@@ -164,61 +164,79 @@ const SearchPage = () => {
                           data-bs-parent="#sideAccordion"
                         >
                           <div className="accordion-body border-0">
-                            {categories?.map((category) => {
-                              <div className="form-check">
+                            {categories.map((category) => (
+                              <div className="form-check" key={category.id}>
                                 <input
                                   className="form-check-input"
                                   type="radio"
                                   name="categoryChoice"
-                                  id="categoryChoice1"
+                                  id={`categoryChoice${category.id}`}
                                 />
                                 <label
                                   className="form-check-label"
-                                  for="categoryChoice1"
+                                  htmlFor={`categoryChoice${category.id}`}
                                 >
-                                  {/* {category} */} Test
+                                  {category.name}
                                 </label>
-                              </div>;
-                            })}
+                              </div>
+                            ))}
                           </div>
-
-                          {/* <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="categoryChoice"
-                                id="categoryChoice2"
-                              />
-                              <label
-                                className="form-check-label"
-                                for="categoryChoice2"
-                              >
-                                Health and Beauty
-                              </label>
-                            </div> */}
                         </div>
                       </div>
+
+                      {/* Add the "Brand" section with checkboxes */}
                       <div className="accordion-item border-0">
                         <h2 className="accordion-header">
                           <button
                             className="accordion-button bg-white border-0"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo"
+                            data-bs-target="#brand"
                             aria-expanded="true"
-                            aria-controls="collapseTwo"
+                            aria-controls="brand"
                           >
                             Brand
                           </button>
                         </h2>
                         <div
-                          id="collapseTwo"
+                          id="brand"
                           className="accordion-collapse collapse show"
                           data-bs-parent="#sideAccordion"
                         >
-                          <div className="accordion-body"></div>
+                          <div className="accordion-body">
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="brand1"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="brand1"
+                              >
+                                Brand 1
+                              </label>
+                            </div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="brand2"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="brand2"
+                              >
+                                Brand 2
+                              </label>
+                            </div>
+                            {/* Add more brand options as needed */}
+                          </div>
                         </div>
                       </div>
+
+                      {/* Continue with other accordion sections */}
+                      {/* Add the "Colors" section */}
                       <div className="accordion-item border-0">
                         <h2 className="accordion-header">
                           <button
@@ -227,7 +245,7 @@ const SearchPage = () => {
                             data-bs-toggle="collapse"
                             data-bs-target="#colors"
                             aria-expanded="false"
-                            aria-controls="collapseThree"
+                            aria-controls="colors"
                           >
                             Colors
                           </button>
@@ -237,18 +255,26 @@ const SearchPage = () => {
                           className="accordion-collapse collapse show"
                           data-bs-parent="#sideAccordion"
                         >
-                          <div className="accordion-body"></div>
+                          <div className="accordion-body">
+                            {/* Add color options on small cards */}
+                            {/* Example color cards: */}
+                            <div className="color-card">Red</div>
+                            <div className="color-card">Blue</div>
+                            {/* Add more color cards as needed */}
+                          </div>
                         </div>
                       </div>
+
+                      {/* Add the "Price" section */}
                       <div className="accordion-item border-0">
                         <h2 className="accordion-header">
                           <button
-                            className="accordion-button collapsed"
+                            className="accordion-button bg-white border-0"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#price"
                             aria-expanded="false"
-                            aria-controls="collapseThree"
+                            aria-controls="price"
                           >
                             Price
                           </button>
@@ -258,9 +284,14 @@ const SearchPage = () => {
                           className="accordion-collapse collapse show"
                           data-bs-parent="#sideAccordion"
                         >
-                          <div className="accordion-body"></div>
+                          <div className="accordion-body">
+                            <input type="range" min="0" value={50} max="100"  className="w-100"/>
+                            <label>Max. $100.00</label>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Add the "Reviews" section */}
                       <div className="accordion-item border-0">
                         <h2 className="accordion-header">
                           <button
@@ -269,7 +300,7 @@ const SearchPage = () => {
                             data-bs-toggle="collapse"
                             data-bs-target="#reviews"
                             aria-expanded="false"
-                            aria-controls="collapseThree"
+                            aria-controls="reviews"
                           >
                             Reviews
                           </button>
@@ -279,7 +310,36 @@ const SearchPage = () => {
                           className="accordion-collapse collapse show"
                           data-bs-parent="#sideAccordion"
                         >
-                          <div className="accordion-body"></div>
+                          <div className="accordion-body">
+                            {/* Add review filters with checkboxes */}
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="review5"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="review5"
+                              >
+                                5 Stars
+                              </label>
+                            </div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="review4"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="review4"
+                              >
+                                4 Stars & Up
+                              </label>
+                            </div>
+                            {/* Add more review options as needed */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -287,7 +347,7 @@ const SearchPage = () => {
                 </div>
                 <div className="col-md-9 rounded d-block">
                   <div className="row ">
-                    {/* {searchResults.length > 0 ? (
+                    {searchResults.length > 0 ? (
                       searchResults.map((product) => (
                         <SearchItemCard
                           key={product.id}
@@ -297,7 +357,7 @@ const SearchPage = () => {
                       ))
                     ) : (
                       <p>No results found.</p>
-                    )} */}
+                    )}
                     {categories?.map((category) => {
                       <div className="form-check">
                         <input

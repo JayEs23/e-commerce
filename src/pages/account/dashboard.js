@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import useAuth from '@/hooks/useAuth';
-import api from '@/utils/api';
-import Cookies from 'js-cookie';
-import AccountDashboard from '../components/AccountDashboard';
-import Sidebar from '../components/user/SideBar';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import useAuth from "@/hooks/useAuth";
+import api from "@/utils/api";
+import Cookies from "js-cookie";
+import AccountDashboard from "../components/AccountDashboard";
+import Sidebar from "../components/user/SideBar";
 
 const DashboardPage = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -14,8 +14,8 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!Cookies.get('authToken')) {
-      window.location.href = '/login';
+    if (!Cookies.get("authToken")) {
+      window.location.href = "/login";
     } else {
       fetchUserProfile();
     }
@@ -23,10 +23,10 @@ const DashboardPage = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await api.get('authentication/user_profile');
+      const response = await api.get("authentication/user_profile/");
       setUserProfile(response.data);
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
     } finally {
       setIsLoading(false);
     }
