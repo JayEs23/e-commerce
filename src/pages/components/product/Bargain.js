@@ -3,8 +3,9 @@ import api from "@/utils/api";
 import AddToCartButton from "../cart/AddToCartButton";
 import { Toast, Modal, Button } from "react-bootstrap";
 import useAuth from "@/hooks/useAuth";
+import { useSelector } from "react-redux";
 
-const Bargain = ({ product, cart }) => {
+const Bargain = ({ product }) => {
   const { isAuthenticated } = useAuth();
   const [bargainMode, setBargainMode] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -12,10 +13,12 @@ const Bargain = ({ product, cart }) => {
   const [totalPrice, setTotalPrice] = useState(product?.variations[0]?.price);
   const [showModal, setShowModal] = useState(false);
   const [showAmount, setShowAmount] = useState(null);
-  const [cartData, setCartData] = useState(cart ?? []);
+  const [cartData, setCartData] = useState([]);
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("success");
   const [showAuthModal, setShowAuthModal] = useState(false); // State for authentication modal
+
+  const { cart } = useSelector((state) => state.cart);
 
   const handleBargainButtonClick = () => {
     if (!isAuthenticated) {
@@ -60,7 +63,7 @@ const Bargain = ({ product, cart }) => {
       price: product?.variations[0]?.price,
       negotiated_price: bargainAmount,
       negotiation_status: "",
-      cart: cartData?.id, // Replace with actual cart ID
+      cart: cart?.id, // Replace with actual cart ID
       product: product?.id, // Replace with actual product ID
     };
 

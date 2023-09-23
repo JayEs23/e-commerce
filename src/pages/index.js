@@ -165,11 +165,11 @@ export default function Home() {
     <>
       <div className="page-container">
         <Header handleLoginModalOpen={handleLoginModalOpen} />
-        <LoginModal
+        {/* <LoginModal
           handleLoginModalOpen={handleLoginModalOpen}
           showModal={showModal}
           setShowModal={setShowModal}
-        />
+        /> */}
         <div className="content bg-gray">
           <div className="hero-wrap">
             <div className="hero-content text-start py-0">
