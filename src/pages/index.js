@@ -29,7 +29,7 @@ export default function Home() {
   const [categories, setCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true); // Add loading state
-  const itemsPerPage = 3; // Number of items to show per page
+  const itemsPerPage = 24; // Number of items to show per page
   const [totalProducts, setTotalProducts] = useState(0);
 
   const scrollToTop = () => {
@@ -164,7 +164,7 @@ export default function Home() {
   return (
     <>
       <div className="page-container">
-        <Header />
+        <Header handleLoginModalOpen={handleLoginModalOpen} />
         <LoginModal
           handleLoginModalOpen={handleLoginModalOpen}
           showModal={showModal}
