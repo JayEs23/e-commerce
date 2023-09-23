@@ -81,8 +81,6 @@ const Bargain = ({ product }) => {
       });
   };
 
-  console.log(bargainAmount);
-
   return (
     <>
       <div className="col-lg-12 mx-2">
