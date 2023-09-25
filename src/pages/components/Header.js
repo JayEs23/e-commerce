@@ -10,7 +10,7 @@ import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
 
-const Header = () => {
+const Header = ({ handleLoginModalOpen }) => {
   const { isAuthenticated, logout } = useAuth();
   const [userProfile, setUserProfile] = useState(null);
   const router = useRouter();
@@ -155,7 +155,7 @@ const Header = () => {
                     </form>
                   </div>
                 </div>
-                {isAuthenticated ? (
+                {isAuthenticated && (
                   <div className="header-mobile-user-menu dropdown me-2">
                     <button
                       type="button"
@@ -205,10 +205,6 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-                ) : (
-                  <div className="header-mobile-user-menu dropdown me-2">
-                    <LoginModal />
-                  </div>
                 )}
                 <div className="header-toggle">
                   <button className="menu-toggler">
@@ -244,11 +240,18 @@ const Header = () => {
                     <a href="#" className="icon-btn" title="">
                       <span>
                         <em className="ni ni-cart icon"></em>
+                        <span 
+                          class="badge bg-primary"
+                          style={{
+                            position:"absolute",
+                            top:"20px",
+                          }}
+                        >0</span>
                       </span>
                     </a>
                   </li>
                 </ul>
-                {isAuthenticated ? (
+                {isAuthenticated && (
                   <ul className="menu-btns menu-btns-2">
                     <li className="d-none d-lg-inline-block dropdown">
                       <button
@@ -304,11 +307,9 @@ const Header = () => {
                       </ul>
                     </li>
                   </ul>
-                ) : (
-                  <LoginModal />
                 )}
                 <ul className="menu-list ms-lg-auto">
-                  {isAuthenticated && (
+                  {isAuthenticated ? (
                     <>
                       <li className="menu-item has-sub">
                         <a
@@ -334,6 +335,20 @@ const Header = () => {
                           </ul>
                         </div>
                       </li>
+                    </>
+                  ) : (
+                    <>
+                      <div className="header-mobile-user-menu dropdown me-2">
+                        <LoginModal />
+                      </div>
+                      {/* <li className="menu-item" onClick={handleLoginModalOpen}>
+                        <a
+                          href="#"
+                          className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
+                        >
+                          Sign up
+                        </a>
+                      </li> */}
                     </>
                   )}
                   <li className="menu-item has-sub">
@@ -407,21 +422,21 @@ const Header = () => {
                           <b>Push Notification</b>
                         </a>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Country</b>{" "}
-                          <span className="badge text-primary justify-content-end">
-                            Nigeria
-                          </span>
-                        </p>
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
+                          Nigeria
+                        </span>
                       </li>
-                      <li>
-                        <p className="text-dark">
+                      <li className="history-panel">
+                        <span className="history-panel-left text-dark">
                           <b>Language</b>{" "}
-                          <span className="badge text-primary justify-content-end">
-                            English
-                          </span>
-                        </p>
+                        </span>
+                        <span className=" history-panel-right badge text-primary">
+                          English
+                        </span>
                       </li>
                     </ul>
                   </div>

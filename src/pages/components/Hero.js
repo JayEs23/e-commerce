@@ -24,8 +24,8 @@ const Hero = () => {
       </div>
     ),
     prevArrow: (
-      <div className="row">
-        <div className="prev-slick-arrow" style={{marginLeft:"100px !important"}}> &lt; </div>
+      <div className="card">
+        <div className="prev-slick-arrow" > &lt; </div>
       </div>
     ),
   };
@@ -35,10 +35,10 @@ const Hero = () => {
       <div className="d-flex hero-main hero-main-first w-100 h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
-            <h1>
-              One Sale <br /> Many items
+            <h1 className="hero-title mb-4">
+              One Sale, many items.
             </h1>
-            <p>The biggest sale of the year </p>
+            <p className="hero-text mb-4 pb-1">The biggest sale of the year </p>
 
             <button
               className="btn btn-transparent border-white rounded-0 d-flex"
@@ -68,10 +68,10 @@ const Hero = () => {
       <div className="d-flex hero-main w-100 h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
-            <h1>
+            <h1 className="hero-title mb-4">
               Flash sale <br /> on all items
             </h1>
-            <p>Enjoy 50% Discount on all items </p>
+            <p className="hero-text mb-4 pb-1">Enjoy 50% Discount on all items </p>
 
             <button
               className="btn btn-transparent border-white rounded-0"
@@ -94,12 +94,12 @@ const Hero = () => {
       <div className="d-flex hero-main w-100 hero-main-last h-500 py-5 align-items-center">
         <article className="d-flex hero-heading w-full">
           <div>
-            <h1>
+            <h1 className="hero-title mb-4">
               Check our <br /> weekly new
               <br />
               deals
             </h1>
-            <p>Be the first to hear of our promos</p>
+            <p className="hero-text mb-4 pb-1">Be the first to hear of our promos</p>
 
             <button
               className="btn btn-transparent border-white rounded-0"

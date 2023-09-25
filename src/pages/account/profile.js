@@ -24,7 +24,7 @@ export default function Home() {
 
       try {
         const response = await api.get("authentication/user_profile");
-        console.log("userData",response);
+        console.log("userData", response);
         setUserData(response.data);
       } catch (error) {}
     };
@@ -32,21 +32,19 @@ export default function Home() {
     getUserData(); // Call the function to fetch data
   }, [storedAuthToken]);
 
-  const updateProfile = async (data) =>{
-    if(!profileData) return;
-
+  const updateProfile = async (data) => {
+    if (!profileData) return;
 
     return profileData;
-  }
+  };
 
-  const handleEdit = (status)=> {
-    if(status){
+  const handleEdit = (status) => {
+    if (status) {
       setEditing(true);
-    }else{
+    } else {
       setEditing(false);
     }
-    
-  }
+  };
   return (
     <>
       <Head>
@@ -56,19 +54,23 @@ export default function Home() {
         <Header />
         <section className="content section-space-b pt-4 mt-md-3">
           <section className="profile-section">
-            <div className="container"> 
+            <div className="container">
               <div className="row">
                 <div className="col-lg-3 bg-white mx-4 mb-4 border-rounded">
                   <Sidebar userProfile={userData} />
                 </div>
                 <div className="col-lg-8 bg-white">
-                  {!editing && userData ?(
-                    <AccountDashboard profile={userData} handleEdit={handleEdit} />
-                  ):(
-                    <ProfileForm userProfile={userData} updateProfileFunction={updateProfile}/>
+                  {!editing && userData ? (
+                    <AccountDashboard
+                      profile={userData}
+                      handleEdit={handleEdit}
+                    />
+                  ) : (
+                    <ProfileForm
+                      userProfile={userData}
+                      updateProfileFunction={updateProfile}
+                    />
                   )}
-                 
-
                 </div>
               </div>
             </div>

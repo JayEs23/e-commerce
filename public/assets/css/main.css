@@ -114,6 +114,145 @@ html {
   height: 500px !important;
 }
 
+.login-text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.login-primary-text {
+  color:#1B0C2E;
+}
+
+.login-secondary-text {
+  color: #9881B8;
+}
+
+.login-btn {
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none !important;
+  padding: 15px 0;
+}
+
+.login-google {
+  background: #F1EAF3;
+  color: #9881B8;
+}
+
+.login-facebook {
+  background: #E0E7F7;
+  color: #1877F2;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 0;
+  color: #8D8597;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #E8E7EA;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}
+
+.otp-field {
+  width: 50px;
+  padding: 10px 5px;
+  margin: 0 5px;
+border-radius: 10px;
+background: #F4F2F7;
+text-align: center;
+border: none;
+}
+
+.tick-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #7ED68E;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(1);
+  animation: expand 3s infinite;
+}
+
+.circle:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.circle:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.tick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: white;
+}
+
+.success-modal h4 {
+  margin-top: 32px;
+  color: #1B0C2E;
+text-align: center;
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.success-modal p {
+  color: #887F93;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@keyframes expand {
+  0% {
+      transform: scale(0.9);
+      opacity: 0.6;
+  }
+  70% {
+      transform: scale(1.2);
+      opacity: 0.2;
+  }
+  100% {
+      transform: scale(1.5);
+      opacity: 0;
+  }
+}
+
+
 .hero-main{
   border-radius: 4px !important;
   padding: 0 64px;
@@ -385,7 +524,7 @@ overflow: hidden;
 
 .outline-btn {
   border: 1px solid #b5b5b6;
-  border-radius: 4px !important;
+  border-radius: 10px !important;
 }
 .normal-text{
   font-size: 12px;
