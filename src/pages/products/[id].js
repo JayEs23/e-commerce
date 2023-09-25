@@ -12,34 +12,17 @@ import ProductApi from "@/pages/api/products";
 import AddToCartButton from "../components/cart/AddToCartButton";
 import Bargain from "../components/product/Bargain";
 import { useSelector } from "react-redux";
+import BargainMain from "../components/product/BargainMain";
 
-const ProductDetailsPage = () => {
-  const productApi = ProductApi();
+const ProductDetailsPage = ({product}) => {
   const router = useRouter();
   const { id } = router.query;
-  const [product, setProduct] = useState(null);
 
   const { cart } = useSelector((state) => state.cart);
 
   // console.log(cart);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        // Use the productApi module to get product by ID
-        const productData = await productApi.getProductById(id);
-        console.log("Data", productData.data);
-        setProduct(productData?.data);
-      } catch (error) {
-        console.error("Error fetching product by ID:", error);
-      }
-    };
-
-    if (id && !product) {
-      fetchProduct();
-    }
-  }, [id, product, productApi]);
-
+  
   const colors = product?.variations.reduce((acc, variation) => {
     if (!acc.includes(variation.color_name)) {
       const red = parseInt(variation.color_name.slice(4, 6), 16);   // 03 in hexadecimal to decimal
@@ -55,7 +38,7 @@ const ProductDetailsPage = () => {
 
   const ColorCircles = ({ colors }) => {
     return (
-      <svg width="75" height="24" viewBox="0 0 75 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="75" height="24" viewBox="0 0 75 24" className="avatar" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Group 1000001535">
           {colors.map((color, index) => (
             <circle key={index} cx={index * 17 + 12} cy="12" r="12" fill={color} />
@@ -73,10 +56,10 @@ const ProductDetailsPage = () => {
       <div className="page-container bg-gray">
         <Header />
         <div className="content row mt-4">
-          <div className=" card col-lg-10 bg-light mx-auto mt-4">
+          <div className=" card col-lg-11 border-rounded bg-light mx-auto mt-4">
             {product && (
               <><div
-                className="row shadow"
+                className="row shadow border-rounded"
                 style={{ padding: "0px", backgroundColor: "#fafafa" }}
               >
                 <div className="col-xl-6 card bg-white pt-4">
@@ -173,7 +156,7 @@ const ProductDetailsPage = () => {
                         </h2>
                       </div>
                       <div className="col-sm-6">
-                        <Bargain product={product} cart={cart} />
+                        <BargainMain product={product} cart={cart} />
                       </div>
                     </div>
                   </div>
@@ -181,7 +164,7 @@ const ProductDetailsPage = () => {
                     <div className="col-xl-12 col-lg-10">
 
                       <p className="pt-2">Seller information</p>
-                      <div class="card-creator-v card-creator-v-wbg card-full">
+                      <div class="card-creator-v card-creator-v-wbg">
                         <div class="card-body">
                           <div class="card-creator-info">
                             <a href="#" class="avatar flex-shrink-0 bg-dark py-4 px-3 align-content-center" style={{minHeight:"65px", minWidth:"65px"}}>
@@ -198,7 +181,12 @@ const ProductDetailsPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className=""></div>
+                      <div className="mt-4 ">
+                        <h6>About</h6>
+                        <p>The first step for this tool is to give it some code. You can do this in one of four ways. You can hit the BROWSE button to upload a file from your computer. Alternatively, you could drag and drop a file onto the code field or just paste some code you previously copied. Finally, you could also hit the LOAD URL button to select a web page to upload. However, for that to work, the page in question needs to support cross-origin requests.
+
+</p>
+                      </div>
                     </div>
                   </div>
 
@@ -208,10 +196,10 @@ const ProductDetailsPage = () => {
                 <div className="col-xl-11 ps-xl-4 mx-auto">
                   <div className="author-items-wrap">
                       <ul className="nav nav-tabs nav-tabs-s1" id="myTab" role="tablist">
-                          <li className="nav-item" role="presentation">
+                          <li className="nav-item mx-4" role="presentation">
                               <button className="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About Item</button>
                           </li>
-                          <li className="nav-item" role="presentation">
+                          <li className="nav-item mx-4" role="presentation">
                               <button className="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
                           </li>
                           
@@ -332,5 +320,27 @@ const ProductDetailsPage = () => {
     </>
   );
 };
+
+
+export async function getServerSideProps({ params }) {
+  const getProductById = async (id) => {
+    try {
+      const response = await api.get(`product/${id}/`);
+      const data = await response.data;
+      return data;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      return null;
+    }
+  };
+  const productData = await getProductById(params.id);
+
+  return {
+    props: {
+      product: productData?.data || null,
+    },
+  };
+}
+
 
 export default ProductDetailsPage;
