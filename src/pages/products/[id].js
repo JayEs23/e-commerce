@@ -13,39 +13,20 @@ import AddToCartButton from "../components/cart/AddToCartButton";
 import Bargain from "../components/product/Bargain";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "@/hooks/redux/reducers/product/productReducers";
+import BargainMain from "../components/product/BargainMain";
 
-const ProductDetailsPage = () => {
-  const productApi = ProductApi();
+const ProductDetailsPage = ({ product }) => {
   const router = useRouter();
-  const { id } = router.query;
+  // const { id } = router.query;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
-  // console.log(cart);
-
   // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     try {
-  //       // Use the productApi module to get product by ID
-  //       const productData = await productApi.getProductById(id);
-  //       console.log("Data", productData.data);
-  //       setProduct(productData?.data);
-  //     } catch (error) {
-  //       console.error("Error fetching product by ID:", error);
-  //     }
-  //   };
+  //   dispatch(fetchProductById(id));
+  // }, [dispatch, id]);
 
-  //   if (id && !product) {
-  //     fetchProduct();
-  //   }
-  // }, [id, product, productApi]);
-
-  useEffect(() => {
-    dispatch(fetchProductById(id));
-  }, [dispatch, id]);
-
-  const product = useSelector((state) => state.products?.singleProduct?.data);
+  // const product = useSelector((state) => state.products?.singleProduct?.data);
 
   console.log("Checking products", product);
 
@@ -68,6 +49,7 @@ const ProductDetailsPage = () => {
         width="75"
         height="24"
         viewBox="0 0 75 24"
+        className="avatar"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -94,18 +76,18 @@ const ProductDetailsPage = () => {
       <div className="page-container bg-gray">
         <Header />
         <div className="content row mt-4">
-          <div className=" card col-lg-10 bg-light mx-auto mt-4">
+          <div className=" card col-lg-11 border-rounded bg-light mx-auto mt-4">
             {product && (
               <>
                 <div
-                  className="row shadow"
+                  className="row shadow border-rounded"
                   style={{ padding: "0px", backgroundColor: "#fafafa" }}
                 >
                   <div className="col-xl-6 card bg-white pt-4">
                     <img
                       className="img-fluid h-400 mb-4 rounded-3"
                       style={{ objectFit: "contain" }}
-                      src={product?.images[0]?.image}
+                      src={product?.images[0].image}
                       alt={product?.product_name}
                     />
 
@@ -198,14 +180,14 @@ const ProductDetailsPage = () => {
                           </h2>
                         </div>
                         <div className="col-sm-6">
-                          <Bargain product={product} cart={cart} />
+                          <BargainMain product={product} cart={cart} />
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-xl-12 col-lg-10">
                         <p className="pt-2">Seller information</p>
-                        <div class="card-creator-v card-creator-v-wbg card-full">
+                        <div class="card-creator-v card-creator-v-wbg">
                           <div class="card-body">
                             <div class="card-creator-info">
                               <a
@@ -226,11 +208,30 @@ const ProductDetailsPage = () => {
                                 <a href="#" class="card-title">
                                   {product?.store_id}
                                 </a>
+                                <div class="flex-grow-1">
+                                  <a href="#" class="card-title">
+                                    {product?.store_id}
+                                  </a>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <div className=""></div>
                         </div>
-                        <div className=""></div>
+                        <div className="mt-4 ">
+                          <h6>About</h6>
+                          <p>
+                            The first step for this tool is to give it some
+                            code. You can do this in one of four ways. You can
+                            hit the BROWSE button to upload a file from your
+                            computer. Alternatively, you could drag and drop a
+                            file onto the code field or just paste some code you
+                            previously copied. Finally, you could also hit the
+                            LOAD URL button to select a web page to upload.
+                            However, for that to work, the page in question
+                            needs to support cross-origin requests.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -246,7 +247,7 @@ const ProductDetailsPage = () => {
                         id="myTab"
                         role="tablist"
                       >
-                        <li className="nav-item" role="presentation">
+                        <li className="nav-item mx-4" role="presentation">
                           <button
                             className="nav-link active"
                             id="about-tab"
@@ -260,7 +261,7 @@ const ProductDetailsPage = () => {
                             About Item
                           </button>
                         </li>
-                        <li className="nav-item" role="presentation">
+                        <li className="nav-item mx-4" role="presentation">
                           <button
                             className="nav-link"
                             id="reviews-tab"
@@ -512,5 +513,25 @@ const ProductDetailsPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps({ params }) {
+  const getProductById = async (id) => {
+    try {
+      const response = await api.get(`product/${id}/`);
+      const data = await response.data;
+      return data;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      return null;
+    }
+  };
+  const productData = await getProductById(params.id);
+
+  return {
+    props: {
+      product: productData?.data || null,
+    },
+  };
+}
 
 export default ProductDetailsPage;
