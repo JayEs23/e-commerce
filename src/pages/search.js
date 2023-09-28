@@ -6,7 +6,9 @@ import Footer from "./components/Footer";
 import api from "@/utils/api";
 import SearchItemCard from "./components/SearchItemCard";
 import { getAllProducts } from "@/pages/api/products";
-import { useSelector } from "react-redux";
+import { fetchProductsByFilter } from "@/hooks/redux/reducers/product/productReducers";
+import { categories } from "@/utils/categoriesEnum";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 
 const SearchPage = () => {
@@ -16,11 +18,18 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [cart, setCart] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [brands, setBrands] = useState("");
+  const [category, setCategory] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [minRating, setMinRating] = useState(0);
 
-  const { categories } = useSelector((state) => state.categories);
+  const dispatch = useDispatch();
 
-  console.log("Redux", categories);
+  const scrollToTop = () => {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 4, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,10 +54,27 @@ const SearchPage = () => {
       }
     };
 
-
-
     fetchData();
   }, [searchQuery]);
+
+  useEffect(() => {
+    let filter = "";
+    if (searchQuery)
+      filter += `product_name=${searchQuery}&description=${searchQuery}`;
+    if (category) filter += `category=${category}`;
+    // if (brand) endpoint += `brand=${brand}&`;
+    // if (minRating) endpoint += `min_rating=${minRating}&`;
+    // if (minPrice) endpoint += `min_price=${minPrice}&`;
+    // if (maxPrice) endpoint += `max_price=${maxPrice}&`;
+    dispatch(fetchProductsByFilter(filter));
+    scrollToTop();
+  }, [dispatch, searchQuery, category]);
+
+  const { filteredProducts } = useSelector((state) => state.products);
+
+  console.log(filteredProducts?.results, "ghjgbjkbnjksnbhjb");
+
+  const searchedProducts = filteredProducts?.results;
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -82,7 +108,6 @@ const SearchPage = () => {
   };
 
   const handleSearch = (event) => {
-    console.log("Categories",categories);
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
 
@@ -106,7 +131,7 @@ const SearchPage = () => {
         <title>Inshopper Ecommerce - Search</title>
       </Head>
       <div className="page">
-        <Header />
+        <Header searchQuery={searchQuery} handleSearch={handleSearch} />
         <main className="bg-main bg-light">
           <section className="product-area shop-sidebar shop section">
             {/* Sidebar code here */}
@@ -139,11 +164,11 @@ const SearchPage = () => {
                 </div>
               </div>
               {/* <input
-                  type="text"
-                  placeholder="Search for products..."
-                  value={searchQuery}
-                  onChange={handleSearch}
-                /> */}
+                type="text"
+                placeholder="Search for products..."
+                value={searchQuery}
+                onChange={handleSearch}
+              /> */}
               <div className="row mt-3">
                 <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
                   <div className="card">
@@ -167,19 +192,21 @@ const SearchPage = () => {
                           data-bs-parent="#sideAccordion"
                         >
                           <div className="accordion-body border-0">
-                            {categories.map((category,index) => (
+                            {categories.map((category, index) => (
                               <div className="form-check" key={index}>
                                 <input
                                   className="form-check-input"
                                   type="radio"
                                   name="categoryChoice"
+                                  value={category.slug}
+                                  onChange={(e) => setCategory(e.target.value)}
                                   id={`categoryChoice${index}`}
                                 />
                                 <label
                                   className="form-check-label text-black"
                                   htmlFor={`categoryChoice${index}`}
                                 >
-                                  {category}
+                                  {category.name}
                                 </label>
                               </div>
                             ))}
@@ -329,8 +356,8 @@ const SearchPage = () => {
                 </div>
                 <div className="col-md-9 rounded d-block">
                   <div className="row ">
-                    {searchResults.length > 0 ? (
-                      searchResults.map((product) => (
+                    {filteredProducts?.count > 0 ? (
+                      searchedProducts[0]?.data?.map((product) => (
                         <SearchItemCard
                           key={product.id}
                           product={product}
@@ -338,7 +365,7 @@ const SearchPage = () => {
                         />
                       ))
                     ) : (
-                      <p>No results found.</p>
+                      <p className="text-black">No results found.</p>
                     )}
                     {categories?.map((category) => {
                       <div className="form-check">

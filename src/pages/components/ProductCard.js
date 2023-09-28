@@ -87,15 +87,15 @@ const ProductCard = ({
           </div>
         </div>
         <div className=" d-flex justify-content-between bg-white mx-2 my-2">
-          <div class="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2">
-            <div class="me-5 me-sm-2">
+          <div className="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2">
+            <div className="me-5 me-sm-2">
               <ColorCircles colors={colors} />
             </div>
             <div
-              class="text-sm-end"
+              className="text-sm-end"
               style={{ position: "absolute", left: "170px" }}
             >
-              <span class="card-price-number">
+              <span className="card-price-number">
                 {parseFloat(main_price).toLocaleString("en-NG", {
                   style: "currency",
                   currency: "NGN",

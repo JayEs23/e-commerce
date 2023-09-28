@@ -48,11 +48,25 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+export const fetchProductsByFilter = createAsyncThunk(
+  "products/fetchProductsByFilter",
+  async (filter, thunkAPI) => {
+    try {
+      console.log("products fetched", filter);
+      return await productService.getProductsByFilter(filter);
+    } catch (err) {
+      console.log(err.response);
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const productSlice = createSlice({
   name: "products",
   initialState: {
     items: [],
     singleProduct: {},
+    filteredProducts: [],
     status: null,
     isFetching: false,
     isFetchingProductById: false,
@@ -75,18 +89,18 @@ export const productSlice = createSlice({
     [fetchProducts.rejected]: (state, action) => {
       state.status = "rejected";
     },
-    // [fetchProductsByCategory.pending]: (state, action) => {
-    //   state.status = "pending";
-    //   state.isFetching = true;
-    // },
-    // [fetchProductsByCategory.fulfilled]: (state, action) => {
-    //   state.items = action.payload;
-    //   state.status = "success";
-    //   state.isFetching = false;
-    // },
-    // [fetchProductsByCategory.rejected]: (state, action) => {
-    //   state.status = "rejected";
-    // },
+    [fetchProductsByFilter.pending]: (state, action) => {
+      state.status = "pending";
+      state.isFetching = true;
+    },
+    [fetchProductsByFilter.fulfilled]: (state, action) => {
+      state.filteredProducts = action.payload;
+      state.status = "success";
+      state.isFetching = false;
+    },
+    [fetchProductsByFilter.rejected]: (state, action) => {
+      state.status = "rejected";
+    },
     [fetchProductById.pending]: (state, action) => {
       state.status = "pending";
       state.isFetchingProductById = true;

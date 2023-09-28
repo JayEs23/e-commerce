@@ -5,10 +5,10 @@ import { Toast, Modal, Button } from "react-bootstrap";
 import useAuth from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 
-const BargainMain = ({ product }) => {
+const BargainMain = ({ product, quantity, setQuantity, price }) => {
   const { isAuthenticated } = useAuth();
   const [bargainMode, setBargainMode] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [bargainAmount, setBargainAmount] = useState("");
   const [totalPrice, setTotalPrice] = useState(product?.variations[0]?.price);
   const [showModal, setShowModal] = useState(false);
@@ -60,11 +60,12 @@ const BargainMain = ({ product }) => {
     // Replace with your actual API call logic
     const requestData = {
       quantity: quantity,
-      price: product?.variations[0]?.price,
+      price: price,
       negotiated_price: bargainAmount,
-      negotiation_status: "",
+      negotiation_status: parseInt(bargainAmount) > 0 ? "Pending" : "None",
       cart: cart?.id, // Replace with actual cart ID
       product: product?.id, // Replace with actual product ID
+      varient: product?.variations[0]?.id,
     };
 
     api
@@ -209,10 +210,16 @@ const BargainMain = ({ product }) => {
           </div>
         )}
         <div className="col-lg-6 mx-0">
-            {!bargainMode && <AddToCartButton item={product} />}
+          {!bargainMode && (
+            <AddToCartButton
+              item={product}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              price={price}
+            />
+          )}
         </div>
       </div>
-      
 
       <Toast
         show={showToast}

@@ -9,12 +9,15 @@ import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
+import { fetchCartItems } from "@/hooks/redux/reducers/cart/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
 
-const Header = ({ handleLoginModalOpen }) => {
+const Header = ({ handleSearch, searchQuery }) => {
   const { isAuthenticated, logout } = useAuth();
   const [userProfile, setUserProfile] = useState(null);
   const router = useRouter();
   const { data } = useSession();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchuserProfileData = async () => {
@@ -62,6 +65,12 @@ const Header = ({ handleLoginModalOpen }) => {
         });
     };
   });
+
+  useEffect(() => {
+    dispatch(fetchCartItems());
+  }, [dispatch]);
+
+  const cart = useSelector((state) => state.cart);
 
   // useEffect(() => {
   //   const fetchRegister = async () => {
@@ -214,20 +223,22 @@ const Header = ({ handleLoginModalOpen }) => {
                 </div>
               </div>
 
-              <div className="header-search-form border-2 mx-4 d-none d-lg-flex d-flex justify-content-end">
+              <div className="header-search-form border-2 d-none d-lg-flex d-flex">
                 <form
                   action="/search"
+                  value={searchQuery}
+                  onChange={handleSearch}
                   onSubmit={handleSearchSubmit}
-                  className="d-flex"
+                  className="d-flex w-100"
                 >
                   <input
                     type="search"
                     name="search"
-                    className="form-control-lg border-0"
-                    placeholder="Search Products here"
+                    className="form-control-lg border-0 w-100"
+                    placeholder="Search for a product here....."
                   />
                   <button type="submit" className="btn btn-sm ">
-                    <em className="ni ni-search font-sm"></em>
+                    <em className="ni ni-search font-lg text-white"></em>
                   </button>
                 </form>
               </div>
@@ -237,16 +248,18 @@ const Header = ({ handleLoginModalOpen }) => {
                     <NotificationModal />
                   </li>
                   <li>
-                    <a href="#" className="icon-btn" title="">
+                    <a href="/cart" className="icon-btn" title="">
                       <span>
                         <em className="ni ni-cart icon"></em>
-                        <span 
+                        <span
                           class="badge bg-primary"
                           style={{
-                            position:"absolute",
-                            top:"20px",
+                            position: "absolute",
+                            top: "20px",
                           }}
-                        >0</span>
+                        >
+                          {cart?.items?.length || 0}
+                        </span>
                       </span>
                     </a>
                   </li>

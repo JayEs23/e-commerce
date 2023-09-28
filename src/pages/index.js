@@ -17,7 +17,7 @@ import { setCategories } from "../hooks/redux/reducers/categoriesReducer";
 // import { setProduct } from "./redux/reducers/productReducers";
 import useAuth from "@/hooks/useAuth";
 import LoginModal from "./components/LoginModal";
-import { setCart } from "../hooks/redux/reducers/cartReducer";
+import { fetchCart } from "../hooks/redux/reducers/cart/cartReducer";
 import Cookies from "js-cookie";
 import { fetchProducts } from "@/hooks/redux/reducers/product/productReducers";
 import { productsSelector } from "@/hooks/redux/reducers/product/productReducers";
@@ -26,7 +26,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  // const [products, setProducts] = useState(null);
   const [wishlist, setWishlist] = useState([]);
   const [categories, setCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,20 +53,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const fetchCart = async () => {
-      if (!Cookies.get("authToken")) return;
-      try {
-        const response = await api.get("order/cart/");
-        const data = await response.data.data;
-        console.log("VCart Data", data);
-        dispatch(setCart(data));
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    };
-
-    fetchCart();
-  }, []);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -100,6 +87,9 @@ export default function Home() {
   }, [dispatch, currentPage]);
 
   const products = useSelector((state) => state.products);
+  // const cart = useSelector((state) => state.cart);
+
+  // console.log(cart, "fdfdd");
 
   const toggleWishlist = async (productId) => {
     let updatedWishlist;
@@ -120,7 +110,7 @@ export default function Home() {
 
   const inWishList = (productId) => {
     let isPresent = wishlist.includes(productId);
-    console.log("Product ", productId, " is Present ", isPresent);
+    // console.log("Product ", productId, " is Present ", isPresent);
     return isPresent;
   };
 
@@ -166,7 +156,7 @@ export default function Home() {
             <div className="container">
               <div className="filter-box">
                 <div className="mb-4 mt-4">
-                  <div class="section-head text-center py-4">
+                  <div className="section-head text-center py-4">
                     <h2>Popular Products</h2>
                   </div>
                 </div>

@@ -23,9 +23,21 @@ const getProductById = async (productId) => {
   }
 };
 
+// fetch products by filter
+const getProductsByFilter = async (filter) => {
+  try {
+    const response = await api.get(`/product/all_products/?${filter}`);
+    console.log("klsdklsdkldlklk", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const productService = {
   getProducts,
   getProductById,
+  getProductsByFilter,
 };
 
 export default productService;

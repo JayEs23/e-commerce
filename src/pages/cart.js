@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import CartItem from './components/cart/CartItem';
-import CartSummary from './components/cart/CartSummary';
-import api from '@/utils/api';
+import React from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CartItem from "./components/cart/CartItem";
+import CartSummary from "./components/cart/CartSummary";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCartItem } from "@/hooks/redux/reducers/cart/cartReducer";
+// import { fetchCartItems } from "@/hooks/redux/reducers/cart/cartReducer";
+
 const CartPage = () => {
-  const [cartData, setCartData] = useState([]);
-  const [cartId, setCartId] = useState(null);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   dispatch(fetchCartItems());
+  // }, [dispatch]);
 
-    const fetchCartData = async () => {
-      try {
-        const response = await api.get("order/cart");
-        setCartData(response.data.cartItems);
-        setCartId(response.data.id);
-      } catch (error) {
-        console.error("Error Fetching Cart Details",error);
-      }
-    }
-    // Fetch cart data from your API
-      fetchCartData();
-  }, []);
+  const cart = useSelector((state) => state.cart);
+
+  const handleDeleteItem = (item) => {
+    dispatch(removeCartItem(item));
+    // window.location.reload();
+  };
 
   return (
     <>
@@ -30,14 +28,21 @@ const CartPage = () => {
         <div className="content font-sm p-4">
           <div className="row mt-4 p-4">
             <div className="col-lg-9 card p-4">
-              <div className="card-title"><h3>Shopping Cart ({cartData.length}) </h3></div>
+              <div className="card-title">
+                <h3>Shopping Cart ({cart?.items?.length || 0}) </h3>
+              </div>
               {/* Display the list of products in the cart */}
-              {cartData.map((cartItem) => (
-                <CartItem key={cartId} product={cartItem.product} />
+              {cart?.items?.map((item) => (
+                <CartItem
+                  key={item.cart_item.id}
+                  product={item.cart_item.product}
+                  cart={item.cart_item}
+                  handleDeleteItem={handleDeleteItem}
+                />
               ))}
             </div>
             <div className="col-lg-3">
-              <CartSummary cartData={cartData} />
+              <CartSummary cartData={cart?.items} />
             </div>
           </div>
         </div>

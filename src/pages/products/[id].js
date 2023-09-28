@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Header from "@/components/Header";
@@ -14,12 +14,18 @@ import Bargain from "../components/product/Bargain";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "@/hooks/redux/reducers/product/productReducers";
 import BargainMain from "../components/product/BargainMain";
+import { fetchCart } from "@/hooks/redux/reducers/cart/cartReducer";
 
 const ProductDetailsPage = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+
   const router = useRouter();
   // const { id } = router.query;
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
   const { cart } = useSelector((state) => state.cart);
 
   // useEffect(() => {
@@ -28,7 +34,7 @@ const ProductDetailsPage = ({ product }) => {
 
   // const product = useSelector((state) => state.products?.singleProduct?.data);
 
-  console.log("Checking products", product);
+  // console.log("Checking products", cart);
 
   const colors = product?.variations?.reduce((acc, variation) => {
     if (!acc.includes(variation.color_name)) {
@@ -68,6 +74,8 @@ const ProductDetailsPage = ({ product }) => {
     );
   };
 
+  const price = product?.variations[0]?.price * quantity;
+
   return (
     <>
       <Head>
@@ -87,7 +95,7 @@ const ProductDetailsPage = ({ product }) => {
                     <img
                       className="img-fluid h-400 mb-4 rounded-3"
                       style={{ objectFit: "contain" }}
-                      src={product?.images[0].image}
+                      src={product?.images[0]?.image}
                       alt={product?.product_name}
                     />
 
@@ -171,16 +179,19 @@ const ProductDetailsPage = ({ product }) => {
                             className="p-0"
                             style={{ color: "#fd5a33", fontWeight: "bold" }}
                           >
-                            {parseFloat(
-                              product?.variations[0]?.price
-                            ).toLocaleString("en-NG", {
+                            {parseFloat(price).toLocaleString("en-NG", {
                               style: "currency",
                               currency: "NGN",
                             })}
                           </h2>
                         </div>
                         <div className="col-sm-6">
-                          <BargainMain product={product} cart={cart} />
+                          <BargainMain
+                            product={product}
+                            setQuantity={setQuantity}
+                            quantity={quantity}
+                            price={price}
+                          />
                         </div>
                       </div>
                     </div>
