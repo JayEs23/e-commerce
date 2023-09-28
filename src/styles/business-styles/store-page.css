@@ -1,0 +1,65 @@
+.create-store-container {
+  display: flex;
+}
+.create-store-container .required-inputs {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 40%;
+  border-radius: 10px;
+  margin-right: 2rem;
+}
+.create-store-container .required-inputs p {
+  color: #1b0c2e;
+}
+.create-store-container .required-inputs .drag-drop {
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  border-style: dashed;
+  padding: 10px;
+}
+.create-store-container .required-inputs .drag-drop .logo-image-container {
+  background-color: #d9d9d9;
+  width: 30%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-right: 1rem;
+}
+.create-store-container .required-inputs .input-container {
+  margin: 1.5rem 0;
+}
+.create-store-container .required-inputs .input-container input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+}
+.create-store-container .required-inputs .input-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+}
+.create-store-container .preview {
+  /* background-color: #d9d9d9; */
+  width: 30%;
+}
+.create-store-container .preview p {
+  color: #1b0c2e;
+}
+.create-store-container .preview .preview-container {
+  background-color: #d9d9d9;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* text-align: center; */
+}
+.create-store-container .preview .preview-container .text-container {
+  margin-top: 3rem;
+}

@@ -7,38 +7,36 @@ import {
 } from "react-icons/ri";
 import { MdOutlineDashboardCustomize, MdErrorOutline } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
-import { NavLink } from "react-bootstrap";
+import Link from "next/link";
 // import "./style.css";
-
 const BusinessSideBar = () => {
   return (
     <div className="sidebar-container">
       <div className="sidebar-container-inner">
         <div className="first-group-links">
-          <NavLink to="#" activeClassName="active">
+          <Link href="/business" activeClassName="active">
             <MdOutlineDashboardCustomize /> Dashboard
-          </NavLink>
-          <NavLink to="#" activeClassName="active">
+          </Link>
+          <Link href="/business/store" activeClassName="active">
             <RiHomeLine /> Store
-          </NavLink>
-          <NavLink to="#" activeClassName="active">
+          </Link>
+          <Link href="/business/product" activeClassName="active">
             <RiDatabase2Line /> Products
-          </NavLink>
-          <NavLink to="#" activeClassName="active">
-            {" "}
+          </Link>
+          <Link href="#" activeClassName="active">
             <RiTable2 /> Orders
-          </NavLink>
-          <NavLink to="#" activeClassName="active">
+          </Link>
+          <Link href="/business/chat" activeClassName="active">
             <RiMessage2Line /> Chats
-          </NavLink>
+          </Link>
         </div>
         <div className="bottom-group-links">
-          <NavLink to="#" activeClassName="active">
+          <Link href="#" activeClassName="active">
             <MdErrorOutline /> Get help
-          </NavLink>
-          <NavLink to="#" activeClassName="active">
+          </Link>
+          <Link href="#" activeClassName="active">
             <HiOutlineLogout /> Logout
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>
