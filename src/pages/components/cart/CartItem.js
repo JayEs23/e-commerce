@@ -9,12 +9,12 @@ const CartItem = ({
   quantity,
   showAddToCart,
 }) => {
-  const product = cart.product;
+  const product = cart?.product;
   if (!product) return <p>Loading</p>;
 
-  console.log(cart);
-  const negotiation = cart.negotiation_status;
-  const price = cart.price;
+  // console.log(cart);
+  const negotiation = cart?.negotiation_status;
+  const price = cart?.price;
 
   return (
     <div className="row cart-item bg-light mb-4 p-4">
@@ -22,8 +22,8 @@ const CartItem = ({
         <Image
           width={150}
           height={150}
-          src={product.images[0]?.image}
-          alt={product.product_name}
+          src={product?.images[0]?.image}
+          alt={product?.product_name}
           className="img-fluid cart-item-image"
         />
         <Toast
@@ -71,17 +71,17 @@ const CartItem = ({
       </div>
       <div className="col-md-5 d-flex flex-column justify-content-between cart-item-details">
         <div>
-          <h5 className="cart-item-title">{product.product_name}</h5>
+          <h5 className="cart-item-title">{product?.product_name}</h5>
           <p className="cart-item-description text-wrap">
-            {product.description}
+            {product?.description}
           </p>
         </div>
-        <p className="cart-item-amount">₦{cart.price}</p>
+        <p className="cart-item-amount">₦{cart?.price}</p>
       </div>
       <div className="col-md-2 d-flex align-items-center cart-item-quantity">
         <input
           type="number"
-          value={cart.quantity}
+          value={cart?.quantity}
           min="1"
           className="form-control"
         />
@@ -89,7 +89,7 @@ const CartItem = ({
       <div className="col-md-2 d-flex flex-column justify-content-right align-items-end cart-item-actions">
         <button
           className="btn text-nowrap mb-2"
-          onClick={() => handleDeleteItem(cart.id)}
+          onClick={() => handleDeleteItem(cart?.id)}
         >
           <i className="ni ni-trash-empty"></i> Remove
         </button>
