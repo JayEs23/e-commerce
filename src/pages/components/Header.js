@@ -9,12 +9,18 @@ import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
-import { fetchCartItems } from "@/hooks/redux/reducers/cart/cartReducer";
+import {
+  fetchCart,
+  fetchCartItems,
+} from "@/hooks/redux/reducers/cart/cartReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
+import CheckAuthModal from "./auth/CheckAuthModal";
 
 const Header = ({ handleSearch, searchQuery }) => {
   const { isAuthenticated, logout } = useAuth();
   const [userProfile, setUserProfile] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const router = useRouter();
   const { data } = useSession();
   const dispatch = useDispatch();
@@ -68,6 +74,7 @@ const Header = ({ handleSearch, searchQuery }) => {
 
   useEffect(() => {
     dispatch(fetchCartItems());
+    dispatch(fetchCart());
   }, [dispatch]);
 
   const cart = useSelector((state) => state.cart);
@@ -115,8 +122,17 @@ const Header = ({ handleSearch, searchQuery }) => {
     router.push(`/search?search=${searchQuery}`);
   };
 
+  const handleSeller = () => {
+    isAuthenticated ? router.push("") : setShowAuthModal(true);
+  };
+
   return (
     <>
+      <CheckAuthModal
+        setShowAuthModal={setShowAuthModal}
+        showAuthModal={showAuthModal}
+        message={"Please Log in to Sell on Inshopper"}
+      />
       <header className="header-section has-header-main mb-0">
         <div className="header-main is-sticky bg-white text-dark shadow ">
           <div className="container">
@@ -234,6 +250,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                   <input
                     type="search"
                     name="search"
+                    value={searchQuery}
                     className="form-control-lg border-0 w-100"
                     placeholder="Search for a product here....."
                   />
@@ -264,7 +281,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                     </a>
                   </li>
                 </ul>
-                {isAuthenticated && (
+                {/* {isAuthenticated && (
                   <ul className="menu-btns menu-btns-2">
                     <li className="d-none d-lg-inline-block dropdown">
                       <button
@@ -320,18 +337,19 @@ const Header = ({ handleSearch, searchQuery }) => {
                       </ul>
                     </li>
                   </ul>
-                )}
+                )} */}
                 <ul className="menu-list ms-lg-auto">
                   {isAuthenticated ? (
                     <>
                       <li className="menu-item has-sub">
                         <a
                           href="#"
-                          className="menu-link menu-toggle outline-btn py-1"
+                          className="menu-link gap-2 outline-btn py-1"
+                          data-bs-toggle="dropdown"
                         >
-                          My Account
+                          <em className="ni ni-user"></em> My Account
                         </a>
-                        <div className="menu-sub">
+                        {/* <div className="menu-sub">
                           <ul className="menu-list">
                             <li className="menu-item">
                               <a href="" className="menu-link">
@@ -346,7 +364,52 @@ const Header = ({ handleSearch, searchQuery }) => {
                               </a>
                             </li>
                           </ul>
-                        </div>
+                        </div> */}
+                        <ul className="dropdown-menu card-generic card-generic-s3 dropdown-menu-end mt-2">
+                          <li>
+                            <h6 className="dropdown-header">
+                              Hello {userProfile?.first_name || ""} !
+                            </h6>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              href="../account/profile"
+                            >
+                              <em className="ni ni-user me-2"></em> Profile
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              href="../../account/dashboard"
+                            >
+                              <em className="ni ni-dashboard me-2"></em>{" "}
+                              Dashboard
+                            </a>
+                          </li>
+
+                          <li>
+                            <a
+                              href="../../account/orders"
+                              className="dropdown-item card-generic-item"
+                              title="Orders"
+                            >
+                              <em className="ni ni-cart me-2"></em> Orders
+                            </a>
+                          </li>
+                          <li>
+                            <hr className="dropdown-divider" />
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              onClick={logout}
+                            >
+                              <em className="ni ni-power me-2"></em> logout
+                            </a>
+                          </li>
+                        </ul>
                       </li>
                     </>
                   ) : (
@@ -364,6 +427,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                       </li> */}
                     </>
                   )}
+
                   <li className="menu-item has-sub">
                     <a
                       href="#"
@@ -373,6 +437,11 @@ const Header = ({ handleSearch, searchQuery }) => {
                     >
                       More
                     </a>
+                  </li>
+                  <li className="menu-item has-sub">
+                    <button className="sell_btn" onClick={handleSeller}>
+                      Sell on Inshopper
+                    </button>
                   </li>
                 </ul>
               </nav>

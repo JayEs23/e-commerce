@@ -5,15 +5,15 @@ export const categories = [
   },
   {
     slug: "phones_tablets",
-    name: "Phones and Tablets",
+    name: "Phones and tablets",
   },
   {
     slug: "health_beauty",
-    name: "Health and Beauty",
+    name: "Health and beauty",
   },
   {
     slug: "home_office",
-    name: "Home and Office",
+    name: "Home and office",
   },
   {
     slug: "computing",

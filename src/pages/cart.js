@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CartItem from "./components/cart/CartItem";
@@ -8,6 +8,7 @@ import { removeCartItem } from "@/hooks/redux/reducers/cart/cartReducer";
 // import { fetchCartItems } from "@/hooks/redux/reducers/cart/cartReducer";
 
 const CartPage = () => {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -36,6 +37,8 @@ const CartPage = () => {
                 <CartItem
                   key={item.cart_item.id}
                   product={item.cart_item.product}
+                  setQuantity={setQuantity}
+                  quantity={quantity}
                   cart={item.cart_item}
                   handleDeleteItem={handleDeleteItem}
                 />

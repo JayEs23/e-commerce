@@ -1,16 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "../utils/api";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { fetchCart, fetchCartItems } from "./redux/reducers/cart/cartReducer";
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
 
+  const dispatch = useDispatch();
+
   const logout = useCallback(() => {
     Cookies.remove("authToken");
     setIsAuthenticated(false);
     setUserProfile(null);
-  }, []); // No dependencies for logout
+    dispatch(fetchCart());
+    dispatch(fetchCartItems());
+  }, [dispatch]); // No dependencies for logout
 
   const fetchUserProfile = useCallback(async () => {
     try {

@@ -191,6 +191,7 @@ const ProductDetailsPage = ({ product }) => {
                             setQuantity={setQuantity}
                             quantity={quantity}
                             price={price}
+                            showAddToCart={true}
                           />
                         </div>
                       </div>

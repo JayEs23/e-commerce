@@ -77,7 +77,7 @@ const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
   };
 
   return (
-    <div className="  add-to-cart-button p-4">
+    <div className="add-to-cart-button px-4">
       {showInput ? (
         <div className="d-flex">
           <InputGroup>

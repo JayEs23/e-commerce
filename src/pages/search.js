@@ -198,7 +198,7 @@ const SearchPage = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="categoryChoice"
-                                  value={category.slug}
+                                  value={category.name}
                                   onChange={(e) => setCategory(e.target.value)}
                                   id={`categoryChoice${index}`}
                                 />
