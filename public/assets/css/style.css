@@ -1562,16 +1562,38 @@ hr {
 @media (min-width: 1200px) {
     .header-search-form {
         display: block;
-        width: 120%;
-        padding-left: 30px;
-        margin-left: 130px;
+        width: 90%;
+        /* padding-left: 30px; */
+        /* margin-left: 130px; */
+        border-radius: 10px;
+        border: 1.5px solid #9881B8;
+        padding-left: 6px;
     }
+    .header-search-form input {
+        color: rgba(27, 12, 46, 0.50);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%; /* 24px */
+        letter-spacing: -0.32px;
+}
+
+    .header-search-form input:focus {
+        outline: none;
+    }
+
     .header-search-form-s2 {
         width: 70%;
     }
     .header-section.no-theme-switcher .header-search-form {
         width: 50%;
     }
+
+     .header-search-form button {
+        background:#9881B8;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+     }
 }
 .header {
     display: flex;

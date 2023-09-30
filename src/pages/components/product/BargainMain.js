@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import api from "@/utils/api";
 import AddToCartButton from "../cart/AddToCartButton";
-import { Toast, Modal, Button } from "react-bootstrap";
+import { Toast, ToastContainer, Modal, Button } from "react-bootstrap";
 import useAuth from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 
-const BargainMain = ({ product }) => {
+const BargainMain = ({
+  product,
+  quantity,
+  setQuantity,
+  price,
+  showAddToCart,
+  negotiation,
+}) => {
   const { isAuthenticated } = useAuth();
   const [bargainMode, setBargainMode] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [bargainAmount, setBargainAmount] = useState("");
   const [totalPrice, setTotalPrice] = useState(product?.variations[0]?.price);
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +25,9 @@ const BargainMain = ({ product }) => {
   const [toastType, setToastType] = useState("success");
   const [showAuthModal, setShowAuthModal] = useState(false); // State for authentication modal
 
-  const { cart } = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+
+  const cardId = cart?.cart?.id;
 
   const handleBargainButtonClick = () => {
     if (!isAuthenticated) {
@@ -60,11 +69,12 @@ const BargainMain = ({ product }) => {
     // Replace with your actual API call logic
     const requestData = {
       quantity: quantity,
-      price: product?.variations[0]?.price,
+      price: price,
       negotiated_price: bargainAmount,
-      negotiation_status: "",
-      cart: cart?.id, // Replace with actual cart ID
+      negotiation_status: parseInt(bargainAmount) > 0 ? "Pending" : "None",
+      cart: cardId, // Replace with actual cart ID
       product: product?.id, // Replace with actual product ID
+      varient: product?.variations[0]?.id,
     };
 
     api
@@ -74,7 +84,7 @@ const BargainMain = ({ product }) => {
         setShowModal(false);
         setQuantity(1);
         setBargainAmount("");
-        showToast(true);
+        setShowToast(true);
       })
       .catch((error) => {
         console.error("Error sending bargain request:", error);
@@ -139,8 +149,8 @@ const BargainMain = ({ product }) => {
                 <div className="col-11 mx-2 my-2">
                   <button
                     className="btn btn-primary w-100"
-                    data-bs-toggle="modal"
-                    data-bs-target="#confirmModal"
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#confirmModal"
                     onClick={() => handleContinueClick(2)}
                   >
                     Continue
@@ -150,11 +160,12 @@ const BargainMain = ({ product }) => {
             )}
           </div>
         ) : (
-          <div className="col-lg-6 mx-0">
+          <div className={`${showAddToCart && "col-lg-6"} mx-0`}>
             <button
               className="btn btn-secondary btn-lg w-100 px-4"
-              style={{ minWidth: "100%", margin: "4px" }}
+              style={{ minWidth: "100%" }}
               onClick={handleBargainButtonClick}
+              disabled={negotiation === "Pending" || negotiation === "Accepted"}
             >
               Bargain
             </button>
@@ -164,10 +175,10 @@ const BargainMain = ({ product }) => {
         {showModal && (
           <div
             className="modal d-block"
-            id="confirmModal"
-            tabIndex="-1"
-            role="dialog"
-            aria-hidden="true"
+            // id="confirmModal"
+            // tabIndex="-1"
+            // role="dialog"
+            // aria-hidden="true"
             style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           >
             <div className="modal-dialog">
@@ -208,21 +219,34 @@ const BargainMain = ({ product }) => {
             </div>
           </div>
         )}
-        <div className="col-lg-6 mx-0">
-            {!bargainMode && <AddToCartButton item={product} />}
-        </div>
+        {showAddToCart && !bargainMode && (
+          <div className={"col-lg-6 mx-0"}>
+            <AddToCartButton
+              item={product}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              price={price}
+              setShowToast={setShowToast}
+            />
+          </div>
+        )}
       </div>
-      
 
-      <Toast
-        show={showToast}
-        className=""
-        onClose={() => setShowToast(false)}
-        delay={3000}
-        autohide
-      >
-        <Toast.Body>Your bargain has been placed successfully.</Toast.Body>
-      </Toast>
+      <ToastContainer position={"middle-center"}>
+        <Toast
+          show={showToast}
+          className="success-bg"
+          onClose={() => setShowToast(false)}
+          delay={3000}
+          autohide
+        >
+          <Toast.Body className="text-white">
+            {!bargainMode
+              ? "Your cart has been successfully updated"
+              : "Your bargain has been placed successfully."}
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
 
       <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
         <Modal.Header closeButton>

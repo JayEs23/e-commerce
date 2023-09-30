@@ -9,12 +9,21 @@ import Cookies from "js-cookie";
 import LoginModal from "./LoginModal";
 import { useSession } from "next-auth/react";
 import NotificationModal from "./NotificationModal";
+import {
+  fetchCart,
+  fetchCartItems,
+} from "@/hooks/redux/reducers/cart/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
+import CheckAuthModal from "./auth/CheckAuthModal";
 
-const Header = ({ handleLoginModalOpen }) => {
+const Header = ({ handleSearch, searchQuery }) => {
   const { isAuthenticated, logout } = useAuth();
   const [userProfile, setUserProfile] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const router = useRouter();
   const { data } = useSession();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchuserProfileData = async () => {
@@ -63,6 +72,13 @@ const Header = ({ handleLoginModalOpen }) => {
     };
   });
 
+  useEffect(() => {
+    dispatch(fetchCartItems());
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  const cart = useSelector((state) => state.cart);
+
   // useEffect(() => {
   //   const fetchRegister = async () => {
   //     api
@@ -106,8 +122,17 @@ const Header = ({ handleLoginModalOpen }) => {
     router.push(`/search?search=${searchQuery}`);
   };
 
+  const handleSeller = () => {
+    isAuthenticated ? router.push("") : setShowAuthModal(true);
+  };
+
   return (
     <>
+      <CheckAuthModal
+        setShowAuthModal={setShowAuthModal}
+        showAuthModal={showAuthModal}
+        message={"Please Log in to Sell on Inshopper"}
+      />
       <header className="header-section has-header-main mb-0">
         <div className="header-main is-sticky bg-white text-dark shadow ">
           <div className="container">
@@ -214,20 +239,23 @@ const Header = ({ handleLoginModalOpen }) => {
                 </div>
               </div>
 
-              <div className="header-search-form border-2 mx-4 d-none d-lg-flex d-flex justify-content-end">
+              <div className="header-search-form border-2 d-none d-lg-flex d-flex">
                 <form
                   action="/search"
+                  value={searchQuery}
+                  onChange={handleSearch}
                   onSubmit={handleSearchSubmit}
-                  className="d-flex"
+                  className="d-flex w-100"
                 >
                   <input
                     type="search"
                     name="search"
-                    className="form-control-lg border-0"
-                    placeholder="Search Products here"
+                    value={searchQuery}
+                    className="form-control-lg border-0 w-100"
+                    placeholder="Search for a product here....."
                   />
                   <button type="submit" className="btn btn-sm ">
-                    <em className="ni ni-search font-sm"></em>
+                    <em className="ni ni-search font-lg text-white"></em>
                   </button>
                 </form>
               </div>
@@ -237,21 +265,23 @@ const Header = ({ handleLoginModalOpen }) => {
                     <NotificationModal />
                   </li>
                   <li>
-                    <a href="#" className="icon-btn" title="">
+                    <a href="/cart" className="icon-btn" title="">
                       <span>
                         <em className="ni ni-cart icon"></em>
-                        <span 
+                        <span
                           class="badge bg-primary"
                           style={{
-                            position:"absolute",
-                            top:"20px",
+                            position: "absolute",
+                            top: "20px",
                           }}
-                        >0</span>
+                        >
+                          {cart?.items?.length || 0}
+                        </span>
                       </span>
                     </a>
                   </li>
                 </ul>
-                {isAuthenticated && (
+                {/* {isAuthenticated && (
                   <ul className="menu-btns menu-btns-2">
                     <li className="d-none d-lg-inline-block dropdown">
                       <button
@@ -307,18 +337,19 @@ const Header = ({ handleLoginModalOpen }) => {
                       </ul>
                     </li>
                   </ul>
-                )}
+                )} */}
                 <ul className="menu-list ms-lg-auto">
                   {isAuthenticated ? (
                     <>
                       <li className="menu-item has-sub">
                         <a
                           href="#"
-                          className="menu-link menu-toggle outline-btn py-1"
+                          className="menu-link gap-2 outline-btn py-1"
+                          data-bs-toggle="dropdown"
                         >
-                          My Account
+                          <em className="ni ni-user"></em> My Account
                         </a>
-                        <div className="menu-sub">
+                        {/* <div className="menu-sub">
                           <ul className="menu-list">
                             <li className="menu-item">
                               <a href="" className="menu-link">
@@ -333,7 +364,52 @@ const Header = ({ handleLoginModalOpen }) => {
                               </a>
                             </li>
                           </ul>
-                        </div>
+                        </div> */}
+                        <ul className="dropdown-menu card-generic card-generic-s3 dropdown-menu-end mt-2">
+                          <li>
+                            <h6 className="dropdown-header">
+                              Hello {userProfile?.first_name || ""} !
+                            </h6>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              href="../account/profile"
+                            >
+                              <em className="ni ni-user me-2"></em> Profile
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              href="../../account/dashboard"
+                            >
+                              <em className="ni ni-dashboard me-2"></em>{" "}
+                              Dashboard
+                            </a>
+                          </li>
+
+                          <li>
+                            <a
+                              href="../../account/orders"
+                              className="dropdown-item card-generic-item"
+                              title="Orders"
+                            >
+                              <em className="ni ni-cart me-2"></em> Orders
+                            </a>
+                          </li>
+                          <li>
+                            <hr className="dropdown-divider" />
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item card-generic-item"
+                              onClick={logout}
+                            >
+                              <em className="ni ni-power me-2"></em> logout
+                            </a>
+                          </li>
+                        </ul>
                       </li>
                     </>
                   ) : (
@@ -351,6 +427,7 @@ const Header = ({ handleLoginModalOpen }) => {
                       </li> */}
                     </>
                   )}
+
                   <li className="menu-item has-sub">
                     <a
                       href="#"
@@ -360,6 +437,11 @@ const Header = ({ handleLoginModalOpen }) => {
                     >
                       More
                     </a>
+                  </li>
+                  <li className="menu-item has-sub">
+                    <button className="sell_btn" onClick={handleSeller}>
+                      Sell on Inshopper
+                    </button>
                   </li>
                 </ul>
               </nav>

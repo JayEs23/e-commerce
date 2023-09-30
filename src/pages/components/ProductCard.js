@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import WishlistButton from "./product/WishListButton";
+import WishlistButton from "../../component/WishListButton";
 
 const ProductCard = ({
   product,
@@ -18,10 +18,10 @@ const ProductCard = ({
   const slug = product.id;
   const primary_image = images[0]?.image ?? "../product.png";
   const main_price = variations[0]?.price ?? "";
-  
+
   const colors = variations.reduce((acc, variation) => {
     if (!acc.includes(variation.color_name)) {
-      const red = parseInt(variation.color_name.slice(4, 6), 16);   // 03 in hexadecimal to decimal
+      const red = parseInt(variation.color_name.slice(4, 6), 16); // 03 in hexadecimal to decimal
       const green = parseInt(variation.color_name.slice(6, 8), 16); // 2c in hexadecimal to decimal
       const blue = parseInt(variation.color_name.slice(8, 10), 16); // 13 in hexadecimal to decimal
 
@@ -34,10 +34,22 @@ const ProductCard = ({
 
   const ColorCircles = ({ colors }) => {
     return (
-      <svg width="75" height="24" viewBox="0 0 75 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="75"
+        height="24"
+        viewBox="0 0 75 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g id="Group 1000001535">
           {colors.map((color, index) => (
-            <circle key={index} cx={index * 17 + 12} cy="12" r="12" fill={color} />
+            <circle
+              key={index}
+              cx={index * 17 + 12}
+              cy="12"
+              r="12"
+              fill={color}
+            />
           ))}
         </g>
       </svg>
@@ -45,7 +57,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
+    <div className="product-card pb-1">
       <div className="card product-item border-0 mb-4 p-2">
         <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
           <WishlistButton
@@ -74,14 +86,19 @@ const ProductCard = ({
             <p className="truncate-text">{description}</p>
           </div>
         </div>
-        <div className=" d-flex justify-content-between bg-white mx-2 my-2">
-          <div class="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2">
-              <div class="me-5 me-sm-2">
+        <div className="d-flex justify-content-between bg-white mx-2 my-2">
+          <div className="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2 w-100">
+            <div className="me-5 me-sm-2">
               <ColorCircles colors={colors} />
-              </div>
-              <div class="text-sm-end" style={{position:"absolute", left:"170px"}}>
-                <span class="card-price-number">{parseFloat(main_price).toLocaleString("en-NG", { style: "currency", currency: "NGN" })}</span>
-              </div>
+            </div>
+            <div className="text-sm-end">
+              <span className="card-price-number">
+                {parseFloat(main_price).toLocaleString("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                })}
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -7,22 +7,34 @@ import {
   Modal,
 } from "react-bootstrap";
 import api from "@/utils/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "@/hooks/useAuth";
+import {
+  addCartItem,
+  fetchCartItems,
+} from "@/hooks/redux/reducers/cart/cartReducer";
 
-const AddToCartButton = ({ item }) => {
+const AddToCartButton = ({
+  item,
+  setQuantity,
+  quantity,
+  price,
+  setShowToast,
+}) => {
   const [showInput, setShowInput] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [carts, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const { isAuthenticated } = useAuth();
 
+  const dispatch = useDispatch();
+
   const { cart } = useSelector((state) => state.cart);
 
-  // console.log();
+  // console.log(cart);
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
@@ -40,22 +52,28 @@ const AddToCartButton = ({ item }) => {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/order/cart_items/", {
+      const data = {
         quantity: quantity,
-        price: item?.variations[0]?.price,
-        cart: cart.id,
-        product: item.id,
+        price: price,
+        cart: cart?.id,
+        product: item?.id,
         negotiated_price: 0,
-        negotiation_status: "",
-      });
+        negotiation_status: "None",
+        varient: item?.variations[0]?.id,
+      };
 
-      if (response.status === 200) {
-        setShowInput(false);
-        setShowTooltip(true);
-        setCart([...carts, { ...item, quantity }]);
-      } else {
-        setShowTooltip(true);
-      }
+      setShowInput(false);
+      dispatch(addCartItem(data));
+      setShowToast(true);
+
+      // setShowInput(false);
+      // setShowTooltip(true);
+
+      // window.location.reload();
+      // setCart([...carts, { ...item, quantity }]);
+      // } else {
+      //   setShowTooltip(true);
+      // }
     } catch (error) {
       setShowTooltip(true);
     }
@@ -68,7 +86,7 @@ const AddToCartButton = ({ item }) => {
   };
 
   return (
-    <div className="  add-to-cart-button p-4">
+    <div className="add-to-cart-button px-4">
       {showInput ? (
         <div className="d-flex">
           <InputGroup>
