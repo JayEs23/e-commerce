@@ -10,6 +10,7 @@ import { fetchProductsByFilter } from "@/hooks/redux/reducers/product/productRed
 import { categories } from "@/utils/categoriesEnum";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import LoadingSkeleton from "./components/loading/LoadingSkeleton";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const SearchPage = () => {
   const [sortBy, setSortBy] = useState("");
   const [cart, setCart] = useState([]);
   const [brands, setBrands] = useState("");
+  const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -32,47 +34,37 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get(
-          `product/all_products/?product_name=${searchQuery}&description=${searchQuery}`
-        );
-        const data = await response.data.results[0].data;
-        setSearchResults(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
     const fetchBrands = async () => {
       try {
-        const response = await api.get(`product/categories/`);
-        const data = await response.data;
-        console.log(data);
-        setSearchResults(data);
+        const response = await api.get(`product/brands/`);
+        const data = await response.data.data;
+        const uniqueData = [...new Set(data)];
+        const result = uniqueData.filter((item) => item !== "");
+        setBrands(result);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
-    fetchData();
-  }, [searchQuery]);
+    fetchBrands();
+  }, []);
 
   useEffect(() => {
     let filter = "";
     if (searchQuery)
       filter += `product_name=${searchQuery}&description=${searchQuery}`;
     if (category) filter += `category=${category}`;
-    // if (brand) endpoint += `brand=${brand}&`;
+    if (brand) filter += `brand=${brand}&`;
     // if (minRating) endpoint += `min_rating=${minRating}&`;
     // if (minPrice) endpoint += `min_price=${minPrice}&`;
     // if (maxPrice) endpoint += `max_price=${maxPrice}&`;
     dispatch(fetchProductsByFilter(filter));
     scrollToTop();
-  }, [dispatch, searchQuery, category]);
+  }, [dispatch, searchQuery, category, brand]);
 
-  const { filteredProducts } = useSelector((state) => state.products);
+  const { status, filteredProducts } = useSelector((state) => state.products);
 
-  console.log(filteredProducts?.results, "ghjgbjkbnjksnbhjb");
+  console.log(filteredProducts, "ghjgbjkbnjksnbhjb");
 
   const searchedProducts = filteredProducts?.results;
 
@@ -170,7 +162,10 @@ const SearchPage = () => {
                 onChange={handleSearch}
               /> */}
               <div className="row mt-3">
-                <div className="col-md-3 bg-white mx-0 vh-100 d-none d-md-block">
+                <div
+                  className="col-md-3 bg-white mx-0 d-none d-md-block"
+                  style={{ height: "auto" }}
+                >
                   <div className="card">
                     <div className="accordion pt-4" id="sideAccordion">
                       <div className="accordion-item border-0">
@@ -234,32 +229,26 @@ const SearchPage = () => {
                           data-bs-parent="#sideAccordion"
                         >
                           <div className="accordion-body">
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="brand1"
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="brand1"
-                              >
-                                Brand 1
-                              </label>
-                            </div>
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="brand2"
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="brand2"
-                              >
-                                Brand 2
-                              </label>
-                            </div>
+                            {brands &&
+                              brands?.map((category, index) => (
+                                <div className="form-check" key={index}>
+                                  <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="brandChoice"
+                                    value={category}
+                                    onChange={(e) => setBrand(e.target.value)}
+                                    id={`brandChoice${index}`}
+                                  />
+                                  <label
+                                    className="form-check-label text-black"
+                                    htmlFor={`brandChoice${index}`}
+                                  >
+                                    {category}
+                                  </label>
+                                </div>
+                              ))}
+
                             {/* Add more brand options as needed */}
                           </div>
                         </div>
@@ -269,7 +258,7 @@ const SearchPage = () => {
                       {/* Took out the "Colors" section */}
 
                       {/* Add the "Price" section */}
-                      <div className="accordion-item border-0">
+                      {/* <div className="accordion-item border-0">
                         <h2 className="accordion-header">
                           <button
                             className="accordion-button bg-white border-0"
@@ -298,7 +287,7 @@ const SearchPage = () => {
                             <label>Max. $100.00</label>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
 
                       {/* Add the "Reviews" section */}
                       <div className="accordion-item border-0">
@@ -355,8 +344,31 @@ const SearchPage = () => {
                   </div>
                 </div>
                 <div className="col-md-9 rounded d-block">
-                  <div className="row ">
-                    {filteredProducts?.count > 0 ? (
+                  <div className="row product-main mb-5 pb-5">
+                    {/* {products?.status === "pending" ? (
+                  <LoadingSkeleton type="product" />
+                ) : products?.items?.length === 0 ? (
+                  <div className="col-md-12">
+                    <h4 className="text-danger text-center">
+                      No Products available
+                    </h4>
+                  </div>
+                ) : (
+                  products?.items?.results[0]?.data.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      inWishlist={inWishList}
+                      onToggleWishlist={toggleWishlist}
+                      handleLoginModalOpen={handleLoginModalOpen}
+                      isAuthenticated={isAuthenticated}
+                    />
+                  ))
+                )} */}
+
+                    {status === "pending" ? (
+                      <LoadingSkeleton type="product" />
+                    ) : filteredProducts?.count > 0 ? (
                       searchedProducts[0]?.data?.map((product) => (
                         <SearchItemCard
                           key={product.id}
@@ -367,22 +379,6 @@ const SearchPage = () => {
                     ) : (
                       <p className="text-black">No results found.</p>
                     )}
-                    {categories?.map((category) => {
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="categoryChoice"
-                          id="categoryChoice1"
-                        />
-                        <label
-                          className="form-check-label"
-                          for="categoryChoice1"
-                        >
-                          {/* {category} */} Test
-                        </label>
-                      </div>;
-                    })}
                   </div>
                 </div>
               </div>

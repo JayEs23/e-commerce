@@ -21,13 +21,13 @@ import { fetchCart } from "../hooks/redux/reducers/cart/cartReducer";
 import Cookies from "js-cookie";
 import { fetchProducts } from "@/hooks/redux/reducers/product/productReducers";
 import { productsSelector } from "@/hooks/redux/reducers/product/productReducers";
+import LoadingSkeleton from "./components/loading/LoadingSkeleton";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [wishlist, setWishlist] = useState([]);
-  const [categories, setCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true); // Add loading state
   const [itemsPerPage] = useState(24); // Number of items to show per page
@@ -67,21 +67,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await api.get("product/categories/");
-        const data = await response.data.data;
-        dispatch(setCategories(data));
-        setCategory(data);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchProducts(currentPage));
     scrollToTop();
   }, [dispatch, currentPage]);
@@ -89,7 +74,7 @@ export default function Home() {
   const products = useSelector((state) => state.products);
   // const cart = useSelector((state) => state.cart);
 
-  // console.log(cart, "fdfdd");
+  // console.log(products.status, "fdfdd");
 
   const toggleWishlist = async (productId) => {
     let updatedWishlist;
@@ -162,8 +147,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="gap-2x"></div>
-              <div className="row">
-                {products?.items?.length === 0 ? (
+              <div className="row product-main">
+                {products?.status === "pending" ? (
+                  <LoadingSkeleton type="product" />
+                ) : products?.items?.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">
                       No Products available

@@ -14,7 +14,13 @@ import {
   fetchCartItems,
 } from "@/hooks/redux/reducers/cart/cartReducer";
 
-const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
+const AddToCartButton = ({
+  item,
+  setQuantity,
+  quantity,
+  price,
+  setShowToast,
+}) => {
   const [showInput, setShowInput] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -55,7 +61,10 @@ const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
         negotiation_status: "None",
         varient: item?.variations[0]?.id,
       };
+
+      setShowInput(false);
       dispatch(addCartItem(data));
+      setShowToast(true);
 
       // setShowInput(false);
       // setShowTooltip(true);

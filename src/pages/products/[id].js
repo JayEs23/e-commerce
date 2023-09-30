@@ -220,17 +220,17 @@ const ProductDetailsPage = ({ product }) => {
                                 <a href="#" class="card-title">
                                   {product?.store_id}
                                 </a>
-                                <div class="flex-grow-1">
+                                {/* <div class="flex-grow-1">
                                   <a href="#" class="card-title">
                                     {product?.store_id}
                                   </a>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>
                           <div className=""></div>
                         </div>
-                        <div className="mt-4 ">
+                        {/* <div className="mt-4 ">
                           <h6>About</h6>
                           <p>
                             The first step for this tool is to give it some
@@ -243,7 +243,7 @@ const ProductDetailsPage = ({ product }) => {
                             However, for that to work, the page in question
                             needs to support cross-origin requests.
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -296,7 +296,19 @@ const ProductDetailsPage = ({ product }) => {
                           role="tabpanel"
                           aria-labelledby="about-tab"
                         >
-                          <div className="row g-gs mb-4 pb-4"></div>
+                          <div className="row g-gs mb-4 pb-4">
+                            <p>
+                              The first step for this tool is to give it some
+                              code. You can do this in one of four ways. You can
+                              hit the BROWSE button to upload a file from your
+                              computer. Alternatively, you could drag and drop a
+                              file onto the code field or just paste some code
+                              you previously copied. Finally, you could also hit
+                              the LOAD URL button to select a web page to
+                              upload. However, for that to work, the page in
+                              question needs to support cross-origin requests.
+                            </p>
+                          </div>
                         </div>
                         <div
                           className="tab-pane fade"

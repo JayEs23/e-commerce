@@ -10,7 +10,7 @@ const HeroSidebar = ({ categories }) => {
       <ul className="list-group pt-4 px-4">
         {categories?.map((category, index) => (
           <li className="list-group-item p-2 py-2 px-2 border-0" key={index}>
-            <b style={{marginLeft:"20px !important"}}>{category}</b>
+            <b style={{ marginLeft: "20px !important" }}>{category.name}</b>
           </li>
         ))}
       </ul>

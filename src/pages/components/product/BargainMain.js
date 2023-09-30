@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "@/utils/api";
 import AddToCartButton from "../cart/AddToCartButton";
-import { Toast, Modal, Button } from "react-bootstrap";
+import { Toast, ToastContainer, Modal, Button } from "react-bootstrap";
 import useAuth from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 
@@ -219,29 +219,34 @@ const BargainMain = ({
             </div>
           </div>
         )}
-        {showAddToCart && (
-          <div className="col-lg-6 mx-0">
-            {!bargainMode && (
-              <AddToCartButton
-                item={product}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                price={price}
-              />
-            )}
+        {showAddToCart && !bargainMode && (
+          <div className={"col-lg-6 mx-0"}>
+            <AddToCartButton
+              item={product}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              price={price}
+              setShowToast={setShowToast}
+            />
           </div>
         )}
       </div>
 
-      <Toast
-        show={showToast}
-        className=""
-        onClose={() => setShowToast(false)}
-        delay={3000}
-        autohide
-      >
-        <Toast.Body>Your bargain has been placed successfully.</Toast.Body>
-      </Toast>
+      <ToastContainer position={"middle-center"}>
+        <Toast
+          show={showToast}
+          className="success-bg"
+          onClose={() => setShowToast(false)}
+          delay={3000}
+          autohide
+        >
+          <Toast.Body className="text-white">
+            {!bargainMode
+              ? "Your cart has been successfully updated"
+              : "Your bargain has been placed successfully."}
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
 
       <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
         <Modal.Header closeButton>

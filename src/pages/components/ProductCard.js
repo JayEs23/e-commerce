@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import WishlistButton from "./product/WishListButton";
+import WishlistButton from "../../component/WishListButton";
 
 const ProductCard = ({
   product,
@@ -57,7 +57,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="col-lg-3 col-md-2 col-sm-6 pb-1">
+    <div className="product-card pb-1">
       <div className="card product-item border-0 mb-4 p-2">
         <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
           <WishlistButton
@@ -86,15 +86,12 @@ const ProductCard = ({
             <p className="truncate-text">{description}</p>
           </div>
         </div>
-        <div className=" d-flex justify-content-between bg-white mx-2 my-2">
-          <div className="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2">
+        <div className="d-flex justify-content-between bg-white mx-2 my-2">
+          <div className="card-price-wrap d-flex align-items-center justify-content-sm-between mb-3 mt-2 w-100">
             <div className="me-5 me-sm-2">
               <ColorCircles colors={colors} />
             </div>
-            <div
-              className="text-sm-end"
-              style={{ position: "absolute", left: "170px" }}
-            >
+            <div className="text-sm-end">
               <span className="card-price-number">
                 {parseFloat(main_price).toLocaleString("en-NG", {
                   style: "currency",
