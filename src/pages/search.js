@@ -7,10 +7,11 @@ import api from "@/utils/api";
 import SearchItemCard from "./components/SearchItemCard";
 import { getAllProducts } from "@/pages/api/products";
 import { fetchProductsByFilter } from "@/hooks/redux/reducers/product/productReducers";
-import { categories } from "@/utils/categoriesEnum";
+import { categories, ratings } from "@/utils/categoriesEnum";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import LoadingSkeleton from "./components/loading/LoadingSkeleton";
+import { Rating } from "react-simple-star-rating";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -22,9 +23,7 @@ const SearchPage = () => {
   const [brands, setBrands] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(0);
-  const [minRating, setMinRating] = useState(0);
+  const [rating, setRating] = useState("");
 
   const dispatch = useDispatch();
 
@@ -55,12 +54,12 @@ const SearchPage = () => {
       filter += `product_name=${searchQuery}&description=${searchQuery}`;
     if (category) filter += `category=${category}`;
     if (brand) filter += `brand=${brand}&`;
-    // if (minRating) endpoint += `min_rating=${minRating}&`;
+    if (rating) filter += `min_rating=${rating}&`;
     // if (minPrice) endpoint += `min_price=${minPrice}&`;
     // if (maxPrice) endpoint += `max_price=${maxPrice}&`;
     dispatch(fetchProductsByFilter(filter));
     scrollToTop();
-  }, [dispatch, searchQuery, category, brand]);
+  }, [dispatch, searchQuery, category, brand, rating]);
 
   const { status, filteredProducts } = useSelector((state) => state.products);
 
@@ -310,32 +309,34 @@ const SearchPage = () => {
                         >
                           <div className="accordion-body">
                             {/* Add review filters with checkboxes */}
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="review5"
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="review5"
+                            {ratings.map((rating, index) => (
+                              <div
+                                className="form-check d-flex align-items-center gap-2"
+                                key={index}
                               >
-                                5 Stars
-                              </label>
-                            </div>
-                            <div className="form-check">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="review4"
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="review4"
-                              >
-                                4 Stars & Up
-                              </label>
-                            </div>
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="ratingChoice"
+                                  value={rating}
+                                  onChange={(e) => setRating(e.target.value)}
+                                  id={`ratingChoice${index}`}
+                                />
+                                <label
+                                  className="form-check-label text-black"
+                                  htmlFor={`ratingChoice${index}`}
+                                >
+                                  <div className="ratings">
+                                    <Rating
+                                      size={21}
+                                      readonly
+                                      initialValue={rating}
+                                    />
+                                  </div>
+                                </label>
+                              </div>
+                            ))}
+
                             {/* Add more review options as needed */}
                           </div>
                         </div>

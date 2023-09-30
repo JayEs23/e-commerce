@@ -36,3 +36,5 @@ export const categories = [
     name: "uncategorized",
   },
 ];
+
+export const ratings = [1, 2, 3, 4, 5];
