@@ -1,6 +1,7 @@
 import React from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { RiSendPlane2Fill } from "react-icons/ri";
+
 const ChatComp = () => {
   return (
     <div className="chat-container">
@@ -61,8 +62,12 @@ const ChatComp = () => {
                   />
                   <div className="image-description">
                     <h3>Cartier men wrist watch</h3>
-                    <p>proposed price: <span>₦ 900,000.00</span></p>
-                    <p>Selling price: <span>₦ 900,000.00</span></p>
+                    <p>
+                      proposed price: <span>₦ 900,000.00</span>
+                    </p>
+                    <p>
+                      Selling price: <span>₦ 900,000.00</span>
+                    </p>
                   </div>
                 </div>
                 {/* <div className="msg-text"> */}
