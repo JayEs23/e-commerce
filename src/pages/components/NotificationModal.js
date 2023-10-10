@@ -52,7 +52,7 @@ const NotificationModal = () => {
         <span>
         <em className="ni ni-bell icon"></em>
         <span 
-          class="badge bg-primary"
+          className="badge bg-primary"
           style={{
             position:"absolute",
             top:"20px",
@@ -83,29 +83,29 @@ const NotificationModal = () => {
                 </button>
               </div>
               <div className="modal-body">
-                <div class="card-follow d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <a href="#" class="avatar flex-shrink-0 me-2 bg-danger-light">
+                <div className="card-follow d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                        <a href="#" className="avatar flex-shrink-0 me-2 bg-danger-light">
                           <em className="ni ni-check-thick text-danger p-4"></em>
                         </a>
-                        <div class="flex-grow-1">
-                            <p class="fw-semibold fs-14 lh"><a href="#" class="text-black">Order Cancelled</a></p>
-                            <span class="d-block fw-medium fs-15">Order has been Cancelled</span>
+                        <div className="flex-grow-1">
+                            <p className="fw-semibold fs-14 lh"><a href="#" className="text-black">Order Cancelled</a></p>
+                            <span className="d-block fw-medium fs-15">Order has been Cancelled</span>
                         </div>
                     </div>
-                    <button type="button" class="btn ">Now</button>
+                    <button type="button" className="btn ">Now</button>
                 </div>
-                <div class="card-follow d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <a href="#" class="avatar flex-shrink-0 me-2 bg-success-light">
+                <div className="card-follow d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                        <a href="#" className="avatar flex-shrink-0 me-2 bg-success-light">
                           <em className="ni ni-check-thick text-success p-4"></em>
                         </a>
-                        <div class="flex-grow-1">
-                            <p class="fw-semibold fs-14 lh"><a href="#" class="text-black">Bargain Accepted</a></p>
-                            <span class="d-block fw-medium fs-15">Order has been Cancelled</span>
+                        <div className="flex-grow-1">
+                            <p className="fw-semibold fs-14 lh"><a href="#" className="text-black">Bargain Accepted</a></p>
+                            <span className="d-block fw-medium fs-15">Order has been Cancelled</span>
                         </div>
                     </div>
-                    <button type="button" class="btn ">Now</button>
+                    <button type="button" className="btn ">Now</button>
                 </div>
               </div>
             </div>

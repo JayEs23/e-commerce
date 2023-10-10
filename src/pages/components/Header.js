@@ -181,7 +181,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                   </div>
                 </div>
                 {isAuthenticated && (
-                  <div className="header-mobile-user-menu dropdown me-2">
+                  <div className="header-mobile-wallet dropdown me-2">
                     <button
                       type="button"
                       className="icon-btn"
@@ -259,7 +259,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                   </button>
                 </form>
               </div>
-              <nav className="header-menu menu nav mobile-menu">
+              <nav className="header-menu menu mobile-menu nav" id="header-menu">
                 <ul className="menu-btns">
                   <li>
                     <NotificationModal />
@@ -269,7 +269,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                       <span>
                         <em className="ni ni-cart icon"></em>
                         <span
-                          class="badge bg-primary"
+                          className="badge bg-primary"
                           style={{
                             position: "absolute",
                             top: "20px",
@@ -281,8 +281,8 @@ const Header = ({ handleSearch, searchQuery }) => {
                     </a>
                   </li>
                 </ul>
-                {/* {isAuthenticated && (
-                  <ul className="menu-btns menu-btns-2">
+                {isAuthenticated && (
+                  <ul className="menu-btns menu-btns-2 d-lg-none">
                     <li className="d-none d-lg-inline-block dropdown">
                       <button
                         type="button"
@@ -337,7 +337,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                       </ul>
                     </li>
                   </ul>
-                )} */}
+                )}
                 <ul className="menu-list ms-lg-auto">
                   {isAuthenticated ? (
                     <>
@@ -417,7 +417,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                       <div className="header-mobile-user-menu dropdown me-2">
                         <LoginModal />
                       </div>
-                      {/* <li className="menu-item" onClick={handleLoginModalOpen}>
+                      {/* <li className="menu-item" >
                         <a
                           href="#"
                           className="btn menu-link menu-toggle text-nowrap outline-btn py-2 mx-2"
@@ -439,7 +439,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                     </a>
                   </li>
                   <li className="menu-item has-sub">
-                    <button className="sell_btn" onClick={handleSeller}>
+                    <button className="btn btn-primary" onClick={handleSeller}>
                       Sell on Inshopper
                     </button>
                   </li>

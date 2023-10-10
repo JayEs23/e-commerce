@@ -27,6 +27,7 @@ function closeDropdownSiblings(e, t, n, o) {
   });
 }
 function menuDropdown(e, t, n) {
+  console.info("EEE",e.parentElement);
   e.forEach((e) => {
     e.addEventListener("click", function (o) {
       o.preventDefault();
@@ -38,10 +39,12 @@ function menuDropdown(e, t, n) {
   });
 }
 function mobileNavInit () {
+  navbar = document.querySelector(".header-menu");
+  console.log("ClassList",navbar);
   window.innerWidth <= 1201 && navbar.classList.add("mobile-menu");
 }
 function mobileNavResize() {
-  navbar = document.querySelector("." + _navbar),
+  navbar = document.querySelector(".header-menu"),
   navbar_toggle = document.querySelector(".menu-toggler"),
   menu_toggle = document.querySelectorAll(".menu-toggle");
   // console.log(navbar_toggle);
@@ -51,9 +54,16 @@ function mobileNavResize() {
       navbar_toggle.classList.remove("active"));
 }
 function mobileNavToggle() {
+
+  navbar = document.querySelector(".header-menu");
+  navbar_toggle = document.querySelector(".menu-toggler"),
+  menu_toggle = document.querySelectorAll(".menu-toggle");
   navbar_toggle.classList.toggle("active"), navbar.classList.toggle("active");
 }
 function navOutSideClick(e) {
+  navbar = document.querySelector(".header-menu");
+  navbar_toggle = document.querySelector(".menu-toggler"),
+  menu_toggle = document.querySelectorAll(".menu-toggle");
   if (
     e.target !== navbar &&
     e.target !== navbar_toggle &&

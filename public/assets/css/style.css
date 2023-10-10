@@ -1706,6 +1706,8 @@ hr {
 }
 .menu-item {
     position: relative;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 .menu-link {
     display: flex;

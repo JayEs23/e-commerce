@@ -149,7 +149,7 @@ export default function Home() {
               <div className="gap-2x"></div>
               <div className="row product-main">
                 {products?.status === "pending" ? (
-                  <LoadingSkeleton type="product" />
+                  <LoadingSkeleton type="product" key={12} />
                 ) : products?.items?.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">

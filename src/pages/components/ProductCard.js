@@ -57,7 +57,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="product-card pb-1">
+    <div className="col-xl-4 col-sm-6 col-md-4 pb-1">
       <div className="card product-item border-0 mb-4 p-2">
         <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
           <WishlistButton
