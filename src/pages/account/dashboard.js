@@ -24,7 +24,8 @@ const DashboardPage = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await api.get("authentication/user_profile/");
-      setUserProfile(response.data);
+      console.log("Auth Profile",response.data.data.profile);
+      setUserProfile(response.data.data.profile);
     } catch (error) {
       console.error("Error fetching user profile:", error);
     } finally {
@@ -73,10 +74,10 @@ const DashboardPage = () => {
             <div className="container">
               <div className="row">
                 <div className="col-lg-3 bg-white mx-4 mb-4 border-rounded">
-                  <Sidebar userProfile={userProfile} />
+                  <Sidebar userProfile={userProfile} key={userProfile?.id}/>
                 </div>
                 <div className="col-lg-8 bg-white">
-                  <AccountDashboard profile={userProfile} />
+                  <AccountDashboard profile={userProfile} key={userProfile?.id} />
                 </div>
               </div>
             </div>
