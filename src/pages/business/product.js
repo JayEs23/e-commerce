@@ -1,6 +1,6 @@
 import React from "react";
-import BusinessDashboardWrapper from "../components/business/dasboard-content-wrapper";
-import BusinessProductIndex from "../components/business/product";
+import BusinessDashboardWrapper from "../../components/business/dasboard-content-wrapper";
+import BusinessProductIndex from "../../components/business/product";
 
 const Product = () => {
   return (

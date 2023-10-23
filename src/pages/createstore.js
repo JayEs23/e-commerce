@@ -1,5 +1,5 @@
 import React from "react";
-import CreateStoreComponents from "./components/createStore/createStoreComponents";
+import CreateStoreComponents from "../components/createStore/createStoreComponents";
 
 const Createstore = () => {
   return (

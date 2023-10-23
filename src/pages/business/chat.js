@@ -1,6 +1,6 @@
 import React from "react";
-import BusinessDashboardWrapper from "../components/business/dasboard-content-wrapper";
-import BusinessChatIndex from "../components/business/chat";
+import BusinessDashboardWrapper from "../../components/business/dasboard-content-wrapper";
+import BusinessChatIndex from "../../components/business/chat";
 // import BusinessProductIndex from "../components/business/product";
 
 const Chat = () => {

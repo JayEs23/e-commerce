@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 import api from "@/utils/api";
 import ProductApi from "@/pages/api/products";
-import HeroSidebar from "./components/HeroSidebar";
-import Hero from "./components/Hero";
+import HeroSidebar from "../components/HeroSidebar";
+import Hero from "../components/Hero";
 
 const inter = Inter({ subsets: ["latin"] });
 

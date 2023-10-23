@@ -1,8 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 const CartItem = ({ product }) => {
-
-    if(!product) return <p>Loading</p>;
+  if (!product) return <p>Loading</p>;
   return (
     <div className="row cart-item bg-light mb-4 p-4">
       <div className="col-md-3">

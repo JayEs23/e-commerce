@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import useAuth from "@/hooks/useAuth";
 import api from "@/utils/api";
 import Cookies from "js-cookie";
-import AccountDashboard from "../components/AccountDashboard";
-import Sidebar from "../components/user/SideBar";
+import AccountDashboard from "../../components/AccountDashboard";
+import Sidebar from "../../components/user/SideBar";
 
 const DashboardPage = () => {
   const { isAuthenticated, logout } = useAuth();

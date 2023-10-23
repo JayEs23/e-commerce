@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-css-tags */
 
 import { Html, Head, Main, NextScript } from "next/document";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 
 export default function Document() {
   return (

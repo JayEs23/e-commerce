@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import useAuth from "@/hooks/useAuth";
 import api from "@/utils/api";
 import Cookies from "js-cookie";
-import Sidebar from "../components/user/SideBar";
-import AddressBox from "../components/user/AddressBox";
+import Sidebar from "../../components/user/SideBar";
+import AddressBox from "../../components/user/AddressBox";
 
 const AddressPage = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -147,11 +147,11 @@ const AddressPage = () => {
                     <div className="col-lg-8 bg-white">
                       <div className="row card bg-white">
                         <div className="card-body">
-                          
                           <div className="row my-2">
                             <div className="col-lg-8">
-                              <h3 className="card-title m-2 mb-4">Address Box</h3>
-
+                              <h3 className="card-title m-2 mb-4">
+                                Address Box
+                              </h3>
                             </div>
                             <div className="col-lg-2 mx-auto text-nowrap">
                               <button
@@ -159,8 +159,7 @@ const AddressPage = () => {
                                 onClick={() => handleEdit(true)}
                               >
                                 <em className="ni ni-plus"></em>
-                                  &nbsp;
-                                 Add Address
+                                &nbsp; Add Address
                               </button>
                             </div>
                           </div>
@@ -245,7 +244,6 @@ const AddressPage = () => {
                               </div>
                             </>
                           )}
-                          
                         </div>
                       </div>
                     </div>
@@ -418,7 +416,10 @@ const AddressPage = () => {
                         </div>
                       </div>
                       <div className="col-md-12 text-center justify-content-end">
-                        <button type="submit" className="btn btn-primary btn-lg p-4 mt-4 w-25">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg p-4 mt-4 w-25"
+                        >
                           Save Address
                         </button>
                       </div>

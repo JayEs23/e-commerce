@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import CartItem from "./components/cart/CartItem";
-import CartSummary from "./components/cart/CartSummary";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import CartItem from "../components/cart/CartItem";
+import CartSummary from "../components/cart/CartSummary";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItem } from "@/hooks/redux/reducers/cart/cartReducer";
 // import { fetchCartItems } from "@/hooks/redux/reducers/cart/cartReducer";
