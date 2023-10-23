@@ -1,0 +1,107 @@
+.product-main-container {
+  /* background: purple; */
+}
+.product-main-container h3 {
+  margin: 3rem auto;
+  /* background-color: #887f93; */
+  width: 95%;
+}
+.product-container {
+  background-color: #ffffff;
+  width: 95%;
+  margin: 1rem auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  /* color: #887f93 !important; */
+}
+.product-container .no-product-image-container {
+  width: 30%;
+  margin: 3rem 0;
+}
+.product-container .no-product-image-container img {
+  width: 100%;
+}
+.product-container p {
+  color: #887f93 !important;
+}
+.product-container button {
+  background-color: #9881b8;
+  border: none;
+  padding: 8px;
+  margin: 2rem 0;
+  width: 16%;
+}
+.product-search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: red; */
+  width: 95%;
+}
+.product-search-header input {
+  border: 2px solid #e7eef6;
+  outline: none;
+  padding: 15px;
+  width: 35%;
+  border-radius: 8px;
+}
+.product-search-header button {
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.product-table-container {
+  /* background-color: pink; */
+  width: 95%;
+}
+.product-table-container .product-table-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.product-table-container .product-table-tabs button {
+  background: transparent;
+  color: #887f93;
+  width: 7%;
+  margin: 0 0.5rem;
+  /* text-align: left; */
+  font-size: 16px;
+}
+.product-table-container .product-table-tabs button.active {
+  /* background: gray; */
+  border-bottom: 5px solid #9881b8;
+  color: #9881b8;
+  font-weight: 500;
+}
+.product-th tr {
+  background-color: #f4f2f7;
+  border-radius: 8px;
+}
+.product-table {
+  /* background: orange !important; */
+  /* padding: 20px; */
+  overflow-y: scroll;
+  height: 43vh;
+}
+.product-table-body {
+  /* overflow-y: scroll; */
+  /* height: 1vh !important; */
+  /* background-color: #9881b8; */
+}
+.tb-items-container {
+  display: flex;
+  /* background: red; */
+  align-items: center;
+}
+.tb-items-container input {
+  padding: 90px !important;
+  /* width: 20%; */
+  background: pink;
+}
+.tb-items-container img {
+  width: 10%;
+  margin: 0 0.3rem;
+}

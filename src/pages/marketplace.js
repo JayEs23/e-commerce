@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 import api from "@/utils/api";
 import ProductApi from "@/pages/api/products";
-import HeroSidebar from "./components/HeroSidebar";
-import Hero from "./components/Hero";
+import HeroSidebar from "../components/HeroSidebar";
+import Hero from "../components/Hero";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,8 +30,7 @@ export default function Markeplace() {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await productApi.getFeaturedProducts();
-      console.log(response, "product response");
-      setProducts(response.data);
+      setProducts(response);
     };
     fetchProducts(); // Fetch Products on component mount
   }, [productApi]);
@@ -62,7 +61,7 @@ export default function Markeplace() {
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-                {products?.length === 0 ? (
+                {products.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">
                       No Products available

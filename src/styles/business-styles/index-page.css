@@ -1,0 +1,91 @@
+.business-index-header {
+  display: flex;
+  margin: 2rem 0;
+  justify-content: space-between;
+  align-items: center;
+}
+.business-index-header .header-text {
+  font-size: 18px;
+}
+.business-index-header .store-link {
+  display: flex;
+  /* background-color: pink; */
+  color: #9881b8;
+  align-items: center;
+  width: 35%;
+  justify-content: space-between;
+}
+.business-index-header .store-link p {
+  color: #9881b8;
+}
+.business-index-header .store-link p span {
+  font-weight: bolder;
+  color: #1b0c2e;
+}
+.business-index-header .store-link button {
+  border: none;
+  padding: 8px;
+  width: 25%;
+  background-color: #eae6f1;
+  color: #1b0c2e;
+  border-radius: 5px;
+}
+.business-index-content-body {
+  /* background-color: orange; */
+  display: flex;
+  justify-content: space-between;
+}
+.business-index-content-body .left-content {
+  width: 23%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+}
+.business-index-content-body .left-content .card {
+  margin-bottom: 2rem;
+  padding: 20px;
+}
+.business-index-content-body .left-content .active-product-card {
+  background-color: #fff2f5;
+}
+.business-index-content-body .left-content .product-value-card {
+  background-color: #fffaf0;
+}
+.business-index-content-body .left-content .total-balance-card {
+  background-color: #f5f9fe;
+}
+.business-index-content-body .left-content .card h4 {
+  margin-top: 1.5rem;
+}
+.business-index-content-body .left-content .card button {
+  margin: 1.5rem auto 0 auto;
+  width: 80%;
+  border: 1px solid #9881b8;
+  color: #9881b8;
+  background-color: #eae6f1;
+  padding: 8px;
+  border-radius: 5px;
+}
+.business-index-content-body .right-content {
+  width: 74%;
+  /* background-color: blue; */
+  padding: 20px;
+  overflow-y: scroll;
+  height: 90vh;
+  /* height: auto; */
+}
+.recent-order-container {
+  margin-bottom: 6rem;
+}
+.recent-order-container .heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 1rem 0;
+}
+.recent-order-container .heading-container button {
+  border: none;
+  background-color: transparent;
+  color: #70308c;
+}

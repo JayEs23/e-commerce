@@ -53,6 +53,7 @@ const AddToCartButton = ({
 
     try {
       const data = {
+        productId: item.id,
         quantity: quantity,
         price: price,
         cart: cart?.id,
@@ -86,7 +87,7 @@ const AddToCartButton = ({
   };
 
   return (
-    <div className="add-to-cart-button px-4">
+    <div className="col-md-12 add-to-cart-button p-4">
       {showInput ? (
         <div className="d-flex">
           <InputGroup>
@@ -121,21 +122,6 @@ const AddToCartButton = ({
             : "Error adding item to cart!"
           : "Item added to cart!"}
       </Tooltip>
-      <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Authentication Required</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-primary">
-            Please log in to continue the bargain process.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={() => setShowAuthModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

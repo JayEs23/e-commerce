@@ -4,11 +4,9 @@ import axios from "axios";
 import { Inter } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import api from "@/utils/api";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Sidebar from "../components/user/SideBar";
-import AccountDashboard from "../components/AccountDashboard";
-import ProfileForm from "../components/user/ProfileForm";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+// import ProfileForm from "../components/ProfileForm";
 import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });

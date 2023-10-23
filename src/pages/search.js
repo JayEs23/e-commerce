@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import api from "@/utils/api";
-import SearchItemCard from "./components/SearchItemCard";
+import SearchItemCard from "../components/SearchItemCard";
 import { getAllProducts } from "@/pages/api/products";
 import { fetchProductsByFilter } from "@/hooks/redux/reducers/product/productReducers";
 import { categories, ratings } from "@/utils/categoriesEnum";

@@ -1,0 +1,18 @@
+.__create_store_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #f4f2f7;
+}
+
+.__create_store_wrapper_layerOne {
+  width: 40%;
+  height: 100%;
+}
+
+.__create_store_wrapper_layerTwo {
+  width: 55%;
+  height: 100%;
+}

@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-css-tags */
 
 import { Html, Head, Main, NextScript } from "next/document";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 
 export default function Document() {
   return (
@@ -12,7 +12,7 @@ export default function Document() {
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="Thurisa Labs" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        {/* <meta
+         {/* <meta
           name="viewport"
           content="width=device-width,  initial-scale=1.0"
         /> */}
@@ -31,8 +31,8 @@ export default function Document() {
           <NextScript />
         </div>
 
-        <script src="../../assets/js/bundle.js"></script>
-        <script src="../../assets/js/scripts.js"></script>
+        <script src="../../assets/js/bundle.js" defer></script>
+        <script src="../../assets/js/scripts.js" defer></script>
       </body>
     </Html>
   );

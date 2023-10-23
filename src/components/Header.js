@@ -25,6 +25,7 @@ const Header = ({ handleSearch, searchQuery }) => {
   const { data } = useSession();
   const dispatch = useDispatch();
 
+  console.log(data, "from session data");
   useEffect(() => {
     const fetchuserProfileData = async () => {
       try {
@@ -72,12 +73,7 @@ const Header = ({ handleSearch, searchQuery }) => {
     };
   });
 
-  useEffect(() => {
-    dispatch(fetchCartItems());
-    dispatch(fetchCart());
-  }, [dispatch]);
-
-  const cart = useSelector((state) => state.cart);
+  // console.log(data);
 
   // useEffect(() => {
   //   const fetchRegister = async () => {
@@ -110,10 +106,10 @@ const Header = ({ handleSearch, searchQuery }) => {
   //       });
   //   };
 
-  //   fetchRegister();
+    // fetchRegister();
   // }, [data]);
 
-  // console.log(isAuthenticated);
+  console.log(isAuthenticated);
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -275,7 +271,7 @@ const Header = ({ handleSearch, searchQuery }) => {
                             top: "20px",
                           }}
                         >
-                          {cart?.items?.length || 0}
+                          {/* {cart?.items?.length || 0} */}
                         </span>
                       </span>
                     </a>

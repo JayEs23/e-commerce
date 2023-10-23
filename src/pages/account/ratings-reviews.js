@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import useAuth from '@/hooks/useAuth';
-import api from '@/utils/api';
-import Cookies from 'js-cookie';
-import AccountDashboard from '../components/AccountDashboard';
-import Sidebar from '../components/user/SideBar';
-import Reviews from '../components/Reviews';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import useAuth from "@/hooks/useAuth";
+import api from "@/utils/api";
+import Cookies from "js-cookie";
+import AccountDashboard from "../../components/AccountDashboard";
+import Sidebar from "../../components/user/SideBar";
+import Reviews from "../../components/Reviews";
 
 const ReviewsPage = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -15,8 +15,8 @@ const ReviewsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!Cookies.get('authToken')) {
-      window.location.href = '/login';
+    if (!Cookies.get("authToken")) {
+      window.location.href = "/login";
     } else {
       fetchUserProfile();
     }
@@ -24,10 +24,10 @@ const ReviewsPage = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await api.get('authentication/user_profile');
+      const response = await api.get("authentication/user_profile");
       setUserProfile(response.data);
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
     } finally {
       setIsLoading(false);
     }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import ListCard from "../components/product/ListCard";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import ListCard from "../../components/product/ListCard";
 
 const SavedProducts = () => {
   const [savedData, setSavedData] = useState([]);
@@ -29,7 +29,7 @@ const SavedProducts = () => {
               <div className="card-title">
                 <h3>Saved Items</h3>
               </div>
-              {savedData?.map((cartItem) => (
+              {savedData.map((cartItem) => (
                 <ListCard
                   key={cartItem.id}
                   product={cartItem.product}

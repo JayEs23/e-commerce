@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import useAuth from "@/hooks/useAuth";
 import api from "@/utils/api";
 import Cookies from "js-cookie";
-import AccountDashboard from "../components/AccountDashboard";
-import Sidebar from "../components/user/SideBar";
+import AccountDashboard from "../../components/AccountDashboard";
+import Sidebar from "../../components/user/SideBar";
 
 const DashboardPage = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -23,7 +23,7 @@ const DashboardPage = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await api.get("authentication/user_profile/");
+      const response = await api.get("authentication/user_profile");
       setUserProfile(response.data);
     } catch (error) {
       console.error("Error fetching user profile:", error);
