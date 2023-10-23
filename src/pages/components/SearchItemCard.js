@@ -101,8 +101,12 @@ const SearchItemCard = ({ product, cartData }) => {
             </div>
           </div>
         </div>
-        <div className="row ">
-          <Bargain product={product} cart={cartData} />
+        <div className="row mt-4">
+          <Bargain product={product} />
+          <AddToCartButton item={product} />
+          {/* <div className="row mt-2 p-0 mx-auto">
+            <AddToCartButton item={product} />
+          </div> */}
         </div>
       </div>
     </div>

@@ -109,7 +109,7 @@ const Header = ({ handleSearch, searchQuery }) => {
   //   fetchRegister();
   // }, [data]);
 
-  // console.log(isAuthenticated);
+  console.log(isAuthenticated);
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
