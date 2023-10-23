@@ -29,7 +29,7 @@ const SavedProducts = () => {
               <div className="card-title">
                 <h3>Saved Items</h3>
               </div>
-              {savedData?.map((cartItem) => (
+              {savedData.map((cartItem) => (
                 <ListCard
                   key={cartItem.id}
                   product={cartItem.product}

@@ -30,8 +30,7 @@ export default function Markeplace() {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await productApi.getFeaturedProducts();
-      console.log(response, "product response");
-      setProducts(response.data);
+      setProducts(response);
     };
     fetchProducts(); // Fetch Products on component mount
   }, [productApi]);
@@ -62,7 +61,7 @@ export default function Markeplace() {
               </div>
               <div className="gap-2x"></div>
               <div className=" row g-gs">
-                {products?.length === 0 ? (
+                {products.length === 0 ? (
                   <div className="col-md-12">
                     <h4 className="text-danger text-center">
                       No Products available

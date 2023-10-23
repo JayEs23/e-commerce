@@ -46,25 +46,18 @@ const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
     setIsLoading(true);
 
     try {
-      const data = {
+      const response = await api.post(addToCartEndpoint, {
+        productId: item.id,
         quantity: quantity,
-        price: price,
-        cart: cart?.id,
-        product: item?.id,
-        negotiated_price: 0,
-        negotiation_status: "None",
-        varient: item?.variations[0]?.id,
-      };
-      dispatch(addCartItem(data));
+      });
 
-      // setShowInput(false);
-      // setShowTooltip(true);
-
-      // window.location.reload();
-      // setCart([...carts, { ...item, quantity }]);
-      // } else {
-      //   setShowTooltip(true);
-      // }
+      if (response.status === 200) {
+        setShowInput(false);
+        setShowTooltip(true);
+        setCart([...cart, { ...item, quantity }]);
+      } else {
+        setShowTooltip(true);
+      }
     } catch (error) {
       setShowTooltip(true);
     }
@@ -77,7 +70,7 @@ const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
   };
 
   return (
-    <div className="add-to-cart-button px-4">
+    <div className="col-md-12 add-to-cart-button p-4">
       {showInput ? (
         <div className="d-flex">
           <InputGroup>
@@ -112,21 +105,6 @@ const AddToCartButton = ({ item, setQuantity, quantity, price }) => {
             : "Error adding item to cart!"
           : "Item added to cart!"}
       </Tooltip>
-      <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Authentication Required</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-primary">
-            Please log in to continue the bargain process.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={() => setShowAuthModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

@@ -106,7 +106,7 @@ const Header = ({ handleSearch, searchQuery }) => {
   //       });
   //   };
 
-  // fetchRegister();
+    // fetchRegister();
   // }, [data]);
 
   console.log(isAuthenticated);
