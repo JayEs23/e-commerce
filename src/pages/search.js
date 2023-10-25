@@ -10,7 +10,7 @@ import { fetchProductsByFilter } from "@/hooks/redux/reducers/product/productRed
 import { categories, ratings } from "@/utils/categoriesEnum";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
-import LoadingSkeleton from "./components/loading/LoadingSkeleton";
+import LoadingSkeleton from "../components/loading/LoadingSkeleton";
 import { Rating } from "react-simple-star-rating";
 
 const SearchPage = () => {

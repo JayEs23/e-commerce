@@ -19,7 +19,10 @@ const AddToCartButton = ({
   setQuantity,
   quantity,
   price,
+  totalPrice,
   setShowToast,
+  isSearchBargain,
+  index,
 }) => {
   const [showInput, setShowInput] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -53,18 +56,18 @@ const AddToCartButton = ({
 
     try {
       const data = {
-        productId: item.id,
         quantity: quantity,
-        price: price,
+        price: totalPrice,
         cart: cart?.id,
         product: item?.id,
         negotiated_price: 0,
         negotiation_status: "None",
-        varient: item?.variations[0]?.id,
+        varient: item?.variations[index]?.id,
       };
 
       setShowInput(false);
       dispatch(addCartItem(data));
+      setQuantity(1);
       setShowToast(true);
 
       // setShowInput(false);
@@ -87,16 +90,10 @@ const AddToCartButton = ({
   };
 
   return (
-    <div className="col-md-12 add-to-cart-button p-4">
+    <div className={`add-to-cart-button ${isSearchBargain ? "py-4" : "px-4"}`}>
       {showInput ? (
         <div className="d-flex">
           <InputGroup>
-            <FormControl
-              type="number"
-              value={quantity}
-              onChange={handleQuantityChange}
-              min="1"
-            />
             <Button
               className="btn btn-success"
               onClick={handleConfirm}
@@ -122,6 +119,21 @@ const AddToCartButton = ({
             : "Error adding item to cart!"
           : "Item added to cart!"}
       </Tooltip>
+      <Modal show={showAuthModal} onHide={() => setShowAuthModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Authentication Required</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-primary">
+            Please log in to continue the bargain process.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => setShowAuthModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

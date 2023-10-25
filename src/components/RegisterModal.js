@@ -102,7 +102,6 @@ const RegisterModal = ({ onRegister }) => {
             Register
           </Button>
         </div>
-        
       </Form>
     </div>
   );

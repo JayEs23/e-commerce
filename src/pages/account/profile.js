@@ -6,7 +6,9 @@ import React, { useEffect, useState } from "react";
 import api from "@/utils/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-// import ProfileForm from "../components/ProfileForm";
+import Sidebar from "../../components/user/SideBar";
+import AccountDashboard from "../../components/AccountDashboard";
+import ProfileForm from "../../components/user/ProfileForm";
 import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });

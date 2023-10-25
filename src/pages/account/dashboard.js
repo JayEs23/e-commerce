@@ -23,7 +23,7 @@ const DashboardPage = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await api.get("authentication/user_profile");
+      const response = await api.get("authentication/user_profile/");
       setUserProfile(response.data);
     } catch (error) {
       console.error("Error fetching user profile:", error);

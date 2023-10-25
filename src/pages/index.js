@@ -5,23 +5,23 @@ import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ProductCard from "./components/ProductCard";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 import api from "@/utils/api";
 import ProductApi from "@/pages/api/products";
-import HeroSidebar from "./components/HeroSidebar";
-import Hero from "./components/Hero";
+import HeroSidebar from "../components/HeroSidebar";
+import Hero from "../components/Hero";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../hooks/redux/reducers/categoriesReducer";
 // import { setProduct } from "./redux/reducers/productReducers";
 import useAuth from "@/hooks/useAuth";
-import LoginModal from "./components/LoginModal";
+import LoginModal from "../components/LoginModal";
 import { fetchCart } from "../hooks/redux/reducers/cart/cartReducer";
 import Cookies from "js-cookie";
 import { fetchProducts } from "@/hooks/redux/reducers/product/productReducers";
 import { productsSelector } from "@/hooks/redux/reducers/product/productReducers";
-import LoadingSkeleton from "./components/loading/LoadingSkeleton";
+import LoadingSkeleton from "../components/loading/LoadingSkeleton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -119,70 +119,18 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <div className="hero-wrap hero-wrap-4">
-        <div className="container">
-          <div className="row align-items-center flex-lg-row-reverse justify-lg-content-center">
-            <div className="col-lg-6 col-sm-9">
-              <div className="row gx-4">
-                <div className="col-xl-8">
-                  <div className="card card-s2">
-                    <div className="card-image">
-                      <img
-                        src="../assets/images/thumb/nft-lg4.jpg"
-                        alt=""
-                        className="card-img-top"
-                      />
-                    </div>
-                    <div className="card-body"></div>
-                  </div>
+      <div className="page-container">
+        <Header handleLoginModalOpen={handleLoginModalOpen} />
+        <div className="content bg-gray">
+          <div className="hero-wrap">
+            <div className="hero-content text-start py-0">
+              <div className="row bg-gray">
+                {/* <div className="col-xl-3 d-none d-xl-block">
+                  <HeroSidebar categories={categories} />
+                </div> */}
+                <div className="col-xl-12 col-lg-12 h-500 justify-content-between">
+                  <Hero />
                 </div>
-                <div className="col-xl-4 d-xl-block d-none">
-                  <div className="card card-s2">
-                    <div className="card-image">
-                      <img
-                        src="../assets/images/thumb/nft20.jpg"
-                        alt=""
-                        className="card-img-top"
-                      />
-                    </div>
-                  </div>
-                  <div className="card card-s2">
-                    <div className="card-image">
-                      <img
-                        src="../assets/images/thumb/nft21.jpg"
-                        alt=""
-                        className="card-img-top"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-sm-9">
-              <div className="hero-content pt-lg-0 pb-0 mt-lg-n4">
-                {/* <h6 className="hero-meta text-uppercase text-primary mb-3">
-                  largest nft marketplace
-                </h6> */}
-                <h1 className="hero-title text-primary">
-                  The Online sales and shopping platform
-                </h1>
-                <p className="mb-4">
-                  Embrace the Joy of online shopping and indulge in our
-                  exclusive deals. Start your retail journey today.
-                </p>
-                <ul className="btns-group hero-btns">
-                  <li>
-                    <a href="../marketplace" className="btn btn-lg btn-primary">
-                      Get Started
-                    </a>
-                  </li>
-                  {/* <li>
-                    <a href="../create" className="btn btn-lg btn-outline-dark">
-                      Create
-                    </a>
-                  </li> */}
-                </ul>
               </div>
             </div>
           </div>

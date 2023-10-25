@@ -10,14 +10,19 @@ const BargainMain = ({
   quantity,
   setQuantity,
   price,
+  totalPrice,
   showAddToCart,
   negotiation,
+  isSearchBargain,
+  index,
 }) => {
   const { isAuthenticated } = useAuth();
   const [bargainMode, setBargainMode] = useState(false);
   // const [quantity, setQuantity] = useState(1);
   const [bargainAmount, setBargainAmount] = useState("");
-  const [totalPrice, setTotalPrice] = useState(product?.variations[0]?.price);
+  // const [totalPrice, setTotalPrice] = useState(
+  //   product?.variations[index]?.price
+  // );
   const [showModal, setShowModal] = useState(false);
   const [showAmount, setShowAmount] = useState(null);
   const [cartData, setCartData] = useState([]);
@@ -42,20 +47,16 @@ const BargainMain = ({
     }, 3000);
   };
 
-  const handleQuantityChange = (event) => {
-    const newQuantity = parseInt(event.target.value);
-    setQuantity(newQuantity);
-    setTotalPrice(product?.variations[0]?.price * newQuantity);
-  };
-
   const handleBargainAmountChange = (event) => {
     setBargainAmount(event.target.value);
   };
 
   const handleContinueClick = (id) => {
-    if (id == 1) {
-      setShowAmount(true);
-    } else if (id == 2) {
+    // if (id == 1) {
+    //   setShowAmount(true);
+    // } else
+
+    if (id == 2) {
       setShowModal(true);
     }
   };
@@ -69,12 +70,12 @@ const BargainMain = ({
     // Replace with your actual API call logic
     const requestData = {
       quantity: quantity,
-      price: price,
+      price: totalPrice,
       negotiated_price: bargainAmount,
       negotiation_status: parseInt(bargainAmount) > 0 ? "Pending" : "None",
       cart: cardId, // Replace with actual cart ID
       product: product?.id, // Replace with actual product ID
-      varient: product?.variations[0]?.id,
+      varient: product?.variations[index]?.id,
     };
 
     api
@@ -93,74 +94,35 @@ const BargainMain = ({
 
   return (
     <>
-      <div className="col-lg-12 mx-2 d-flex">
+      <div className={`col-lg-12 mx-2 ${isSearchBargain ? "" : "d-flex"}`}>
         {bargainMode ? (
           <div className=" row justify-content-between">
-            {showAmount == false ? (
-              <>
-                <div className="col-3 mx-2 ">
-                  <input
-                    type="number"
-                    placeholder="Enter quantity"
-                    className="form-control form-control-md"
-                    value={quantity}
-                    inputMode="numeric"
-                    style={{
-                      appearance: "textfield", // For Safari support
-                      MozAppearance: "textfield", // For Firefox support
-                      width: "100%",
-                      padding: "8px",
-                      background: "red !important", // Set the background color
-                      border: "1px solid #ccc", // Set the border style
-                      borderRadius: "4px", // Set the border radius
-                      fontSize: "14px", // Set the font size
-                    }}
-                    onChange={handleQuantityChange}
-                  />
-                </div>
-                <div className="col-7 py-1 mx-2 justify-content-end">
-                  <h4 className="text-primary my-2">
-                    {parseFloat(totalPrice)?.toLocaleString("en-NG", {
-                      style: "currency",
-                      currency: "NGN",
-                    })}
-                  </h4>
-                </div>
-                <div className="col-11 py-2 mx-2">
-                  <button
-                    className="btn btn-primary w-100"
-                    onClick={() => handleContinueClick(1)}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="col-11 mx-2 my-2">
-                  <input
-                    type="number"
-                    placeholder="Bargain amount"
-                    className="form-control form-control-md"
-                    value={bargainAmount}
-                    onChange={handleBargainAmountChange}
-                  />
-                </div>
-                <div className="col-11 mx-2 my-2">
-                  <button
-                    className="btn btn-primary w-100"
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#confirmModal"
-                    onClick={() => handleContinueClick(2)}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </>
-            )}
+            <div className="col-11 mx-2 my-2">
+              <input
+                type="number"
+                placeholder="Bargain amount"
+                className="form-control form-control-md"
+                value={bargainAmount}
+                onChange={handleBargainAmountChange}
+              />
+            </div>
+            <div className="col-11 mx-2 my-2">
+              <button
+                className="btn btn-primary w-100"
+                // data-bs-toggle="modal"
+                // data-bs-target="#confirmModal"
+                onClick={() => handleContinueClick(2)}
+              >
+                Continue
+              </button>
+            </div>
           </div>
         ) : (
-          <div className={`${showAddToCart && "col-lg-6"} mx-0`}>
+          <div
+            className={`${
+              isSearchBargain ? "col-lg-11" : showAddToCart && "col-lg-6"
+            } mx-0`}
+          >
             <button
               className="btn btn-secondary btn-lg w-100 px-4"
               style={{ minWidth: "100%" }}
@@ -220,13 +182,18 @@ const BargainMain = ({
           </div>
         )}
         {showAddToCart && !bargainMode && (
-          <div className={"col-lg-6 mx-0"}>
+          <div
+            className={`${isSearchBargain ? "col-lg-11" : "col-lg-6"}  mx-0`}
+          >
             <AddToCartButton
               item={product}
               quantity={quantity}
               setQuantity={setQuantity}
               price={price}
+              totalPrice={totalPrice}
               setShowToast={setShowToast}
+              isSearchBargain={isSearchBargain}
+              index={index}
             />
           </div>
         )}
